@@ -36,9 +36,10 @@ class UserController extends Controller {
     		$this->success('修改成功', U('home/index/index'));
     	} else {
     		//注册
-    		if (!$user->where(array('idcard'=>$idcard))->find()) {
+    		if (!$list = $user->where(array('idcard'=>$idcard))->find()) {
     			$data['create_time'] = time();
-    			$user->add($data);
+    			$id = $user->add($data);
+                D('User_session')->add(array('user_id'=>$id));
     			$this->success('注册成功', U('home/index/index'));
     		} else {
     			$this->error('身份证号已经注册，若不是您本人注册请联系管理员。');
@@ -61,13 +62,23 @@ class UserController extends Controller {
 
     	$user 	=	D('User');
     	if ($user_info = $user->where(array('idcard'=>$idcard, 'password'=>md5($password)))->find()) {
-    		$_SESSION['me'] = $user_info;
-    		$data['last_login_time'] = time();
-    		
-    		$user->where(array('id'=>$user_info['id']))->save($data);
+            $session_id = session_id();
+            $last_login_time = time();
+            $user_session = D('User_session')->where(array('user_id'=>$user_info['id']))->find();
+            handle_user_session($user_session);
+            D('User_session')->where(array('user_id'=>$user_info['id']))->save(array('last_login_time'=>$last_login_time, 'last_logout_time'=>0, 'session_id'=>$session_id));
+            $_SESSION['me'] = $user_info;
+    		$user->where(array('id'=>$user_info['id']))->save(array('last_login_time'=>$last_login_time));
     		$this->success('登录成功', U('home/index/index'));
     	} else {
     		$this->error('身份证号或密码错误，请核对后重新登录');
     	}
+    }
+
+    //用户退出登录
+    public function logout() {
+        D('User_session')->where(array('user_id'=>$_SESSION['me']['id']))->save(array('last_logout_time'=>time()));
+        session_destroy ();
+        $this->redirect('/');
     }
 }
