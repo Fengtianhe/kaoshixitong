@@ -2,6 +2,14 @@
 namespace Admin\Controller;
 use Think\Controller;
 class UserController extends CommonController {
+    public $user_status = array(
+        -1 => array('id'=>0, 'name'=>'开启中'),
+        1 => array('id'=>1, 'name'=>'关闭中'),
+    );
+    public $formal_status = array(
+        -1 => array('id'=>0, 'name'=>'未验证'),
+        1 => array('id'=>1, 'name'=>'已验证'),
+    );
 	public function lists(){
         if (I('request.realname')) {
             $where['realname'] = I('request.realname');
@@ -12,12 +20,20 @@ class UserController extends CommonController {
         if (I('request.idcard')) {
             $where['idcard'] = I('request.idcard');
         }
+        if (I('request.status')) {
+            $where['is_del'] = I('request.status');
+        }
+        if (I('request.fstatus')) {
+            $where['formal'] = I('request.fstatus');
+        }
         $model = M('user');
         $lists = $model->where($where)->select();
         foreach ($lists as $k => &$v) {
             $v['time_length'] = round($v['time_length']/3600,1); 
         }
         $this->assign('lists',$lists);
+        $this->assign('formal_status',$this->formal_status);
+        $this->assign('user_status',$this->user_status);
         $this->display();
     }
 
@@ -61,6 +77,7 @@ class UserController extends CommonController {
         }
         if (I('get.formal')) {
             $data['formal'] = I('get.formal');
+            $data['time_length'] = 50 *3600;
         }
         $data['update_time'] = time();
         $id = I('get.id');

@@ -22,7 +22,7 @@
 				身份证号：
 				<input type="text" name="nickname" value="<?php echo $_REQUEST['idcard']?>"/>
 			</li>
-			<!-- <li>
+			<li>
 				<p style="width:500px">
 					状　　态：
 					<select class="" name="status" id="status">
@@ -34,6 +34,17 @@
 				</p>
 			</li>
 			<li>
+				<p style="width:500px">
+					会员状态：
+					<select class="" name="fstatus" id="fstatus">
+							<option value="">所有用户</option>
+							<foreach name="formal_status" item="statu">
+							<option value="{$key}" <if condition="$key eq $_REQUEST['fstatus']">selected="selected"</if>>{$statu.name}</option>
+							</foreach>
+					</select>
+				</p>
+			</li>
+			<!--<li>
 				<p style="width:500px">
 					邮箱验证状态：
 					<select class="" name="is_verify_email" id="is_verify_email">

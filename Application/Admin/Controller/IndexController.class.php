@@ -36,9 +36,7 @@ class IndexController extends CommonController {
 		}
 		$result = $model->where(array('email' => $email, 'password' => $password))->find();
     	if ($result) {
-    		$_SESSION['admin']['me']['email'] = $result['email'];
-    		$_SESSION['admin']['me']['password'] = $result['password'];
-    		$_SESSION['admin']['me']['nickname'] = $result['nickname'];
+    		$_SESSION['admin']['me'] = $result;
     		$this->redirect('index');
     	}
     	 
