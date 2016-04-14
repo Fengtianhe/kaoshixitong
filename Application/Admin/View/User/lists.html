@@ -11,18 +11,18 @@
 	<div class="searchBar">
 		<ul class="searchContent" style="height:auto">
 			<li>
-				Id：
-				<input type="text" name="id" value="<?php echo $_REQUEST['id']?>"/>
+				姓名：
+				<input type="text" name="id" value="<?php echo $_REQUEST['realname']?>"/>
 			</li>
 			<li>
 				邮 箱：
 				<input type="text" name="email" value="<?php echo $_REQUEST['email']?>"/>
 			</li>
 			<li>
-				用  户  名：
-				<input type="text" name="nickname" value="<?php echo $_REQUEST['nickname']?>"/>
+				身份证号：
+				<input type="text" name="nickname" value="<?php echo $_REQUEST['idcard']?>"/>
 			</li>
-			<li>
+			<!-- <li>
 				<p style="width:500px">
 					状　　态：
 					<select class="" name="status" id="status">
@@ -58,44 +58,35 @@
 			<li>
 				注册时间：
 				<input type="text" class="date" name="start_time" value="<?php echo $_REQUEST['start_time']?>" style="width:75px"/>~<input type="text" class="date" name="end_time" value="<?php echo $_REQUEST['end_time']?>" style="width:75px"/>
-			</li>
+			</li> -->
 		</ul>
 		
 		<div class="subBar">
 			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-				<!-- <li><a class="button" href="demo_page6.html" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li> -->
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查找</button></div></div></li>
 			</ul>
 		</div>
 	</div>
 	</form>
 </div>
 <div class="pageContent">
-	<!-- <div class="panelBar">
-		<ul class="toolBar">
-			<li><a class="add" href="/admin/user/editor_user" target="dialog"><span>添加</span></a></li>
-			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="demo/common/ajaxDone.html" class="delete"><span>批量删除默认方式</span></a></li>
-			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" postType="string" href="demo/common/ajaxDone.html" class="delete"><span>批量删除逗号分隔</span></a></li>
-			<li><a class="edit" href="demo_page4.html?uid={sid_user}" target="navTab" warn="请选择一个用户"><span>修改</span></a></li>
-			<li class="line">line</li>
-			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
-		</ul>
-	</div> -->
 	<table class="table" width="100%" layoutH="135">
 		<thead>
 			<tr>
 				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="50" orderField="id" class="<?php if ($page['orderField'] == 'id') echo $page['orderDirection']?>">用户号</th>
-				<th width="120">用户名</th>
-				<th width="120">邮箱</th>
+				<th width="80">姓名</th>
+				<th width="120">身份证号</th>
 				<th width="130">电话</th>
-				<th width="80">学校</th>
-				<th width="60" align="center">邮箱验证</th>
+				<th width="80">邮箱</th>
+				<th width="60" align="center">正式学员</th>
 				<th width="60" align="center">状态</th>
+				<th width="50">剩余时长</th>
+				<th width="25">充值</th>
 				<th width="70">注册日期</th>
-				<th width="70">充值</th>
+				<th width="70">修改日期</th>
 				<th width="70" orderField="lastlogintime" class="<?php if ($page['orderField'] == 'lastlogintime') echo $page['orderDirection']?>">最后登陆</th>
-				<th width="70">操作</th>
+				<th width="20">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -103,23 +94,29 @@
 			<tr target="sid_user" rel="1">
 				<td><input name="ids" value="xxx" type="checkbox"></td>
 				<td>{$vo.id}</td>
-				<td>{$vo.nickname}</td>
-				<td>{$vo.email}</td>
+				<td>{$vo.realname}</td>
+				<td>{$vo.idcard}</td>
 				<td>{$vo.phone}</td>
-				<td>{$vo.school}</td>
-				<td>{$email_verify_status[$vo['is_verify_email']]['name']}</td>
+				<td>{$vo.email}</td>
 				<td>
-					<if condition="$vo['status'] eq 0">
-						未上线
-					<elseif condition="$vo['status'] eq 1" />
-						<a title="点击关闭用户" target="ajaxTodo" href="/admin/user/ajaxChangeStatus?id={$vo.id}&status=1" rel="usercontainer">正常</a>
+					<if condition="$vo['formal'] eq -1">
+						<a title="点击认证用户" href="/admin/user/ajaxChangeStatus?id={$vo.id}&formal=1" target="ajaxTodo">认证</a>
 					<else/>
-						<a title="点击开启用户" target="ajaxTodo" href="/admin/user/ajaxChangeStatus?id={$vo.id}&status=-1" rel="usercontainer">关闭</a>
+						已认证
 					</if>
 				</td>
-				<td><?php echo date('Y-m-d H:i:s',$vo['created']) ?></td>
+				<td>
+					<if condition="$vo['is_del'] eq 1">
+						<a title="点击开启用户" target="ajaxTodo" href="/admin/user/ajaxChangeStatus?id={$vo.id}&status=-1" rel="user">关闭中</a>
+					<else/>
+						<a title="点击关闭用户" target="ajaxTodo" href="/admin/user/ajaxChangeStatus?id={$vo.id}&status=1" rel="user">开启中</a>
+					</if>
+				</td>
+				<td>{$vo.time_length}小时</td>
 				<td><a href="/Admin/User/topUp?uid={$vo.id}" target="dialog" rel="user">充值</a></td>
-				<td><?php echo date('Y-m-d H:i:s',$vo['lastlogintime']) ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$vo['create_time']) ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$vo['update_time']) ?></td>
+				<td><?php echo date('Y-m-d H:i:s',$vo['last_login_time']) ?></td>
 				<td>
 					<!-- <a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a> -->
 					<a title="编辑" target="dialog" href="/admin/user/editor_user?id={$vo.id}" class="btnEdit">编辑</a>
