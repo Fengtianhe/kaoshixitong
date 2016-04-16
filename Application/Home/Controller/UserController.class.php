@@ -78,7 +78,7 @@ class UserController extends Controller {
     //用户退出登录
     public function logout() {
         D('User_session')->where(array('user_id'=>$_SESSION['me']['id']))->save(array('last_logout_time'=>time()));
-        session_destroy ();
+        $_SESSION = array();
         $this->redirect('/');
     }
 }

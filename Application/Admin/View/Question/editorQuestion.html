@@ -8,18 +8,18 @@
 			<p style="width:500px">
 				<label>题型：</label>
 				<select name="question_type" id="">
-					<option value="1">单选</option>
-					<option value="2">多选</option>
-					<option value="3">判断</option>
+					<option <?php if($question_info['question_type'] == 1) echo "selected"; ?> value="1">单选</option>
+					<option <?php if($question_info['question_type'] == 2) echo "selected"; ?> value="2">多选</option>
+					<option <?php if($question_info['question_type'] == 3) echo "selected"; ?> value="3">判断</option>
 				</select>
 			</p>
 			<p style="width:500px">
 				<label>分类：</label>
 				<select name="category" id="" class="category">
-					<option value="1">科目1</option>
-					<option value="2">科目2</option>
-					<option value="3">科目3</option>
-					<option value="4">科目4</option>
+					<option <?php if($question_info['category'] == 1) echo "selected"; ?> value="1">科目1</option>
+					<option <?php if($question_info['category'] == 2) echo "selected"; ?> value="2">科目2</option>
+					<option <?php if($question_info['category'] == 3) echo "selected"; ?> value="3">科目3</option>
+					<option <?php if($question_info['category'] == 4) echo "selected"; ?> value="4">科目4</option>
 				</select>
 			</p>
 			<p style="width:500px;display:none" class="province">
@@ -37,7 +37,7 @@
 			</p>
 			<p style="width:500px;height:160px">
 				<label>选项：</label>
-				<textarea class="" name="stem_content" rows="8" cols="50">{$question_info.content}</textarea>
+				<textarea class="" name="stem_content" rows="8" cols="50">{$question_info.question_stem_str}</textarea>
 			</p>
 			<p style="width:500px">
 				<label>正确答案：</label>
