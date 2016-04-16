@@ -2,6 +2,17 @@
 namespace Home\Controller;
 use Think\Controller;
 class UserController extends Controller {
+    public function verify_c(){  
+        $Verify = new \Think\Verify();  
+        $Verify->fontSize = 18;  
+        $Verify->length   = 4;  
+        $Verify->useNoise = false;  
+        $Verify->codeSet = '0123456789';  
+        $Verify->imageW = 130;  
+        $Verify->imageH = 50;  
+        //$Verify->expire = 600;    
+        $Verify->entry();  
+    }
     public function index(){
         
     }
@@ -56,6 +67,10 @@ class UserController extends Controller {
     public function handleLogin() {
     	$password 	= I('post.password');
     	$idcard 	= I('post.idcard','','/^\d{17}[0-9x]$/i');
+        $verify = I('param.verify','');
+        if(!check_verify($verify)){  
+            $this->error("亲，验证码输错了哦！",$this->site_url,3);  
+        }
     	if (!$password || !$idcard) {
     		$this->error('请正确填写信息。');
     	}
