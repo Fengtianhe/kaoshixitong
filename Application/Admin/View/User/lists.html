@@ -111,7 +111,7 @@
 				<td>{$vo.email}</td>
 				<td>
 					<if condition="$vo['formal'] eq -1">
-						<a title="点击认证用户" href="/admin/user/ajaxChangeStatus?id={$vo.id}&formal=1" target="ajaxTodo">认证</a>
+						<a title="点击认证用户" href="/admin/user/ajaxChangeStatus?id={$vo.id}&formal=1" target="ajaxTodo">未认证</a>
 					<else/>
 						已认证
 					</if>
@@ -130,7 +130,7 @@
 				<td><?php echo date('Y-m-d H:i:s',$vo['last_login_time']) ?></td>
 				<td>
 					<!-- <a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a> -->
-					<a title="编辑" target="dialog" href="/admin/user/editor_user?id={$vo.id}" class="btnEdit">编辑</a>
+					<a title="编辑" target="dialog" href="/admin/user/edit_user?id={$vo.id}" class="btnEdit">编辑</a>
 				</td>
 			</tr>
 			</volist>

@@ -97,4 +97,34 @@ class UserController extends CommonController {
             $this->error('修改失败');
         }
     }
+
+    public function edit_user(){
+        $id = I('get.id');
+        if ($id) {
+            $user_info = M('user')->where(array('id' => $id))->find();
+            $user_info['time_length'] = round($user_info['time_length']/3600,1); 
+            $this->assign('user_info',$user_info);
+        }
+        $this->display();
+    }
+
+    public function saveUser(){
+        $data = I('post.');
+        $id = I('post.id');
+        if (M('user')->where(array('id' => $id ))->save($data)) {
+            $result['message']   = "修改成功";
+            if (I('close_dialog') == 1) {
+                $result['callbackType'] = "closeCurrent";
+            }
+            $result['statusCode'] = "200";
+            $result['navTabId'] = "user";
+            $result['rel']   = "user";           
+            $result['forwardUrl']   = "";
+            $result['confirmMsg'] = "";
+        }else {
+            $result['message']   = "修改失败";
+        }
+            
+            $this->ajaxReturn($result);
+    }
 }

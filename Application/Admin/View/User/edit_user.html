@@ -1,0 +1,43 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/user/saveUser" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px">
+				<label>姓名：</label>
+				<input type="text" name="realname" value="{$user_info.realname}" class="required">
+			</p>
+			<p style="width:500px">
+				<label>电话：</label>
+				<input type="text" name="phone" value="{$user_info.phone}" class="required">
+			</p>
+			<p style="width:500px;">
+				<label>身份证号：</label>
+				<input type="text" name="idcard" value="{$user_info.idcard}" class="required" maxlength="18" minlength="18">
+			</p>
+			<p style="width:500px;">
+				<label>正式学员：</label>
+				<input type="radio" value="1" name="formal" <?php if($user_info['formal']==1) echo 'checked'; ?>>正式
+				<input type="radio" value="-1" name="formal" <?php if($user_info['formal']==-1) echo 'checked'; ?>>非正式
+			</p>
+			<p style="width:500px;">
+				<label>是否关闭：</label>
+				<input type="radio" value="1" name="is_del" <?php if($user_info['is_del']==1) echo 'checked'; ?>>关闭
+				<input type="radio" value="-1" name="is_del" <?php if($user_info['is_del']==-1) echo 'checked'; ?>>开启
+			</p>
+			<p style="width:500px">
+				<label>剩余时长：</label>
+				{$user_info.time_length}小时&nbsp;&nbsp;&nbsp;
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$user_info['id']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
