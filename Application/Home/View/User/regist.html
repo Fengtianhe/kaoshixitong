@@ -50,7 +50,7 @@
 			var $reg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			$(".login_btn").click(function(){
 				var $name = $(".name").val();
-				var $mun = $(".num").val();
+				var $num = $(".num").val();
 				var $phone = $(".phone").val();
 				var $email = $(".email").val();
 				var $pass = $(".pass").val();
@@ -69,7 +69,7 @@
 					alert("身份证号码不能为空");
 					return false;
 				}else{
-					if($reg.test($num) == false){
+					if($reg_num.test($num) == false){
 						alert("身份证号码输入错误");
 						return false;
 					}
