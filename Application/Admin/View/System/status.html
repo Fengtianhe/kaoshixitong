@@ -1,0 +1,59 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/system/ajaxChangeStatus" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px;" class="practice">
+				<label>章节练习：</label>
+				<input type="radio" value="1" name="practice" onclick="to_change()" <?php if($systemStatus['practice']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="practice" onclick="to_change()" <?php if($systemStatus['practice']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;" class="practice_child">
+				<label>科目一：</label>
+				<input type="radio" value="1" name="practice_child1" <?php if($systemStatus['practice_child1']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="practice_child1" <?php if($systemStatus['practice_child1']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;" class="practice_child">
+				<label>科目二：</label>
+				<input type="radio" value="1" name="practice_child2" <?php if($systemStatus['practice_child2']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="practice_child2" <?php if($systemStatus['practice_child2']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;" class="practice_child">
+				<label>科目三：</label>
+				<input type="radio" value="1" name="practice_child3" <?php if($systemStatus['practice_child3']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="practice_child3" <?php if($systemStatus['practice_child3']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;" class="practice_child">
+				<label>科目四：</label>
+				<input type="radio" value="1" name="practice_child4" <?php if($systemStatus['practice_child4']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="practice_child4" <?php if($systemStatus['practice_child4']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;">
+				<label>模拟考试：</label>
+				<input type="radio" value="1" name="simulation" <?php if($systemStatus['simulation']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="simulation" <?php if($systemStatus['simulation']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	<script>
+		function to_change(){
+			var obj = document.getElementsByName('practice');
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i].checked == true) {
+					if (obj[i].value == 1) {
+						$('.practice_child').show();
+					}else{
+						$('.practice_child').hide();
+					}
+				}
+			}
+		}
+	</script>
+</div>
