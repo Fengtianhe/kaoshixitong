@@ -1,0 +1,41 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/user/ajaxChangePermission" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px">
+				<label>姓名：</label>
+				{$user_info.realname}
+			</p>
+			<p style="width:500px;">
+				<label>科目一：</label>
+				<input type="radio" value="1" name="course_1" <?php if($user_info['course_1']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="course_1" <?php if($user_info['course_1']==-1) echo 'checked'; ?>>关闭
+			</p><p style="width:500px;">
+				<label>科目二：</label>
+				<input type="radio" value="1" name="course_2" <?php if($user_info['course_2']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="course_2" <?php if($user_info['course_2']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;">
+				<label>科目三：</label>
+				<input type="radio" value="1" name="course_3" <?php if($user_info['course_3']==1) echo 'checked'; ?>>开启
+				<input type="radio" value="-1" name="course_3" <?php if($user_info['course_3']==-1) echo 'checked'; ?>>关闭
+			</p>
+			<p style="width:500px;">
+				<label>科目四：</label>
+				<input type="radio" value="1" name="course_4" <?php if($user_info['course_4']==1) echo 'checked'; ?>>关闭
+				<input type="radio" value="-1" name="course_4" <?php if($user_info['course_4']==-1) echo 'checked'; ?>>开启
+			</p>
+			
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="uid" value="{$user_info['uid']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>

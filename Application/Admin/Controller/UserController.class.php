@@ -36,7 +36,18 @@ class UserController extends CommonController {
         $this->assign('user_status',$this->user_status);
         $this->display();
     }
-
+    public function edit_permission(){
+        $id = I('get.id');
+        if ($id) {
+            $user_info = M('user_permission')->where(array('uid' => $id))->find();
+            $this->assign('user_info',$user_info);
+            $uid = $user_info['uid'];
+            $user = M('user')->where(array('id'=>$uid))->find();
+            $user_info['realname'] = $user['realname'];
+            $this->assign('user_info',$user_info);
+        }
+        $this->display();
+    }
     /*
     充值功能
      */
@@ -126,5 +137,20 @@ class UserController extends CommonController {
         }
             
             $this->ajaxReturn($result);
+    }
+
+    public function ajaxChangePermission(){
+        $id = I('post.uid');
+        $data = I('post.');
+        if (M('user_permission')->where(array('uid'=>$id))->save($data)) {
+            $result['statusCode'] = "200";
+            $result['message']   = "操作成功";
+            $result['navTabId'] = "user";
+            $result['rel']   = "user";
+            $result['callbackType'] = "closeCurrent";
+            $result['forwardUrl']   = "";
+            $result['confirmMsg'] = "";
+            $this->ajaxReturn($result);
+        }
     }
 }
