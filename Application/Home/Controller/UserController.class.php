@@ -51,6 +51,7 @@ class UserController extends Controller {
     			$data['create_time'] = time();
     			$id = $user->add($data);
                 D('User_session')->add(array('user_id'=>$id));
+                M('user_permission')->add(array('uid'=>$id));
     			$this->success('注册成功', U('home/index/index'));
     		} else {
     			$this->error('身份证号已经注册，若不是您本人注册请联系管理员。');
