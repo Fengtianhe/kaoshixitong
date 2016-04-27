@@ -5,9 +5,10 @@ class QuestionModel extends Model {
 
 	function  getInfoById($id) {
 		$where['id'] = $id;
-		$quesion = $this->getQuestionByWhere($where);
-		$question_info = current($question['question']);
-		$question_info['question_stem'] = $quesion['stem'][$question_info['id']];
+		$question = $this->getQuestionByWhere($where);
+		$question_infos = $question['question'];
+		$question_info = current($question_infos);
+		$question_info['question_stem'] = $question['stem'][$question_info['id']];
 		return $question_info;
 	}
 	function getQuestionByWhere($where)
@@ -23,5 +24,9 @@ class QuestionModel extends Model {
 		}
 		$result = array('question'=>$question, 'stem'=>$stems);
 		return $result;
+	}
+	function getSimpleQuestionByWhere($where) {
+		$question = $this->where($where)->select();
+		return $question;
 	}
 }

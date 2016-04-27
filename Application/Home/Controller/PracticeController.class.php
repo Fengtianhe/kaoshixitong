@@ -8,6 +8,12 @@ class PracticeController extends CommonController {
     public function index(){
         $this->display();
     }
+    public function startPractice(){
+        $category = I('get.category');
+        $question = D('Question')->getSimpleQuestionByWhere(array('category'=>$category));
+        $this->assign('question', $question);
+        $this->display();
+    }
     public function ajaxGetQuestion(){
         $id = I('post.id');
         $question_info = D('Question')->getInfoById($id);

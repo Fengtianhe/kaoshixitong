@@ -2,6 +2,16 @@
 namespace Admin\Controller;
 use Think\Controller;
 class QuestionController extends CommonController {
+    public $question_type = array(
+        1 => array('name'=>'单选'),
+        2 => array('name'=>'多选'),
+        2 => array('name'=>'判断'),
+        );
+    public $question_category = array(
+        1 => array('name'=>'科目1'),
+        2 => array('name'=>'科目1'),
+        2 => array('name'=>'科目1'),
+        );
 	public function lists(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);
