@@ -14,7 +14,7 @@
 					<php>if(!$_SESSION['me'] || $_SESSION['me']==''){</php>
 						<a href="/Home/User/login">请登录</a>
 					<php>}else{</php>
-						<font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="" class="clearMargin">[个人中心]</a><a href="/Home/User/logout" class="clearMargin">[退出]</a>
+						<font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="/Home/User/center" class="clearMargin">[个人中心]</a><a href="/Home/User/logout" class="clearMargin">[退出]</a>
 					<php>}</php>
 				</span>
 				<span class="right"><a href="javascript:window.external.AddFavorite(location.href, '导游模拟考试系统')">加入收藏</a></span>
@@ -60,8 +60,18 @@
 							<p><b>名师题库：</b>顶级名师团队精心编写，题型全面，覆盖各类考点。</p>
 							<p><b>全新体验：</b>全面UI设计和交互体验，锻炼考生操作能力和速度。</p>
 							<div class="btns">
-								<a href="" class="btn"><div class="button">全真练习</div></a>
-								<a href="" class="btn"><div class="button">模拟考试</div></a>
+								<php>if($_SESSION['me']['formal']==1){</php>
+									<div class="button" >
+										<a href="">全真练习</a>
+									</div>
+									<div class="button">
+										<a href="">模拟考试</a>
+									</div>
+								<php>}else{</php>
+									<div class="button btn">
+										<a href="/Home/Question/free">免费体验</a>
+									</div>
+								<php>}</php>
 							</div>	
 						</div>
 

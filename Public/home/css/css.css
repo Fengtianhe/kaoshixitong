@@ -151,16 +151,20 @@ html,body,#all{
 	height: 45px;
 	background: #b4d200;
 	border-radius: 22.5px;
-	color:#fff;
 	line-height: 45px;
 	text-align: center;
 	font-weight: bolder;
-
-}
-.btn{
 	float: left;
 	margin-left: 5px;
 }
+.button a{
+	color: #fff;
+}
+.btn{
+	float: right;
+	margin-right: 10px;
+}
+
 .btns{
 	margin-top: 15px;
 	display: block;
