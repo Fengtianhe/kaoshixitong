@@ -1,48 +1,174 @@
-<html>
-	<head>
-		<style>
-			a {display:inline-block;padding:5px;}
-			a:hover {background: #ccc}
-		</style>
-		<script src="__PUBLIC__/common/js/jquery.js"></script>
-	</head>
-	<body>
-		<div class="questions">
-			<volist id="vo" name="question">
-			<a href="/home/practice/startPractice?category=1" rel="{$vo.id}">{$key+1}</a>
-			</volist>
-		</div>
-		<div class="question_info">
-			<h1>题干</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>答题界面</title>
+	<script src="__PUBLIC__/home/jquery.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/home/css/style.css">
+	<style>
+	
+	</style>
+</head>
+<body>
+	<div class="top">
+		<h2>导游考试答题系统</h2>
+	</div>
+	<div class="content clearfix">
+		<div class="content_left">
 			<ul>
-				<li>题干</li>
-				<li>题干</li>
-				<li>题干</li>
-				<li>题干</li>
+				<li><a href="">考试管理</a></li>
+				<li><a href="">模拟考试</a></li>
+				<li><a href="">在线考试</a></li>
+				<li><a href="">模拟考试</a></li>
+				<li><a href="">模拟考试</a></li>
+				<li><a href="">模拟考试</a></li>
 			</ul>
 		</div>
-		<script>
+		<div class="content_center">
+			<!-- 单选 -->
+			<!-- <div class="select_input_type">
+				<p><span>1</span><span>、</span>{$first_question.title}<span>(</span><span>单选</span><span>)</span></p>
+				<foreach name="first_question.question_stem" item="vo">
+				<p>
+					<label>
+						<input type="radio" name="answer" value="{$vo.sn}" rel="{$vo.is_true}">{$vo.stem_content}
+					</label>
+				</p>
+				</foreach>
+				<p><span>上一题</span><span>下一题</span><span>正确答案</span></p>
+			</div> -->
+			<!-- 多选 -->
+			<!-- <div class="select_input_type">
+				<p><span>1</span><span>、</span>你最应该介绍你的客户去哪里游玩</p>
+				<p>
+					<label>
+						<input type="checkbox">这是多选
+					</label>
+				</p>
+				<p>
+					<label>
+						<input type="checkbox">这是多选
+					</label>
+				</p>
+				<p><span>上一题</span><span>下一题</span><span>正确答案</span></p>
+			</div> -->
+		</div>
+		<div class="content_right">
+			<div class="all_num">
+				<volist id="vo" name="question">
+				<!-- <a href="/home/practice/startPractice?category=1" rel="{$vo.id}">{$key+1}</a> -->
+				<span class="num" rel="{$vo.id}">{$key+1}</span>
+				</volist>
+			</div>
+		</div>
+	</div>
+	<script>
+			//初始化获取第一题
+			ajaxGetQuestion({id:{$first_question.id}});
+			$('.num:eq(0)').addClass('current');
 			$(function(){
-				$('.questions a').click(function(){
+				//点击答题卡获取题
+				$('.num').click(function(){
+					$(this).addClass('current').siblings().removeClass('current');
+					var sn = $(this).html();
 					var id = $(this).attr('rel');
-					$.ajax({
-						type:"post",
-						url:"/home/Practice/ajaxGetQuestion",
-						data:{id:id},
-						datatype:"json",
-						success:function(data){
-							var str = '<h1>'+data.question_info.title+'</h1>';
-							str += '<ul>';
-							for(var i in data.question_info.question_stem){
-								str += '<li>'+data.question_info.question_stem[i].stem_content+'</li>';
-							}
-							str += '</ul>';
-							$('.question_info').html(str);
-						}
-					});
+					var data = {id:id,sn:sn};
+					ajaxGetQuestion(data);
 					return false;
 				});
-			})
-		</script>
-	</body>
+				$(document).on('click','.next',function(){
+					moveQuestion('next');
+				});
+				$(document).on('click','.prev',function(){
+					moveQuestion('prev');
+				});
+				//提交处理
+				$(document).on('click','.push',function(){
+					var input = $('input[rel="1"]');
+					var checked = $('input:checked');
+					var answer_true = false;
+					if (input.length == checked.length) {
+						answer_true = true;
+						for(var i =0;i<input.length;i++){
+							if ($(input[i]).val() != $(checked[i]).val()) {
+								answer_true = false;
+								break;
+							}	
+						}
+					} 
+					$('.explain').removeClass('hide');
+					if (answer_true) {
+						$('.result').html('回答正确');
+					} else {
+						$('.result').html('回答错误');
+					}
+				});
+			});
+/**
+ * 移动题目 主要用于上一题 下一题
+ * @param  string direction 方向 next prev
+ * @return 
+ */
+function moveQuestion(direction){
+	var current = $('.num.current');
+	switch (direction) {
+		case "prev":
+		var current_direction = current.prev();
+			break;
+		case "next":
+		var current_direction = current.next();
+			break;
+	}
+	if (!(current_direction.length > 0)) {
+		alert('没有啦');
+		return false;
+	}
+	current_direction.addClass('current');
+	current.removeClass('current');
+	var id = current_direction.attr('rel');
+	var sn = current_direction.html();
+	var data = {id:id,sn:sn};
+	ajaxGetQuestion(data);
+}
+/**
+ * ajax 获取题目 并显示在页面上
+ * @param  json data post数据
+ * @return 
+ */
+function ajaxGetQuestion(data){
+	$.ajax({
+		type:"post",
+		url:"/home/Practice/ajaxGetQuestion",
+		data:data,
+		datatype:"json",
+		success:function(data){
+			switch (data.question_info.question_type) {
+				case '1':
+					var type = '单选';
+					var input_name = 'answer';
+					var input_type = 'radio';
+					break;
+				case '2':
+					var type = '多选';
+					var input_name = 'answer[]';
+					var input_type = 'checkbox';
+					break;
+			}
+			var str = '<div class="select_input_type">';
+			str += '<p><span>'+data.question_info.sn+'</span><span>、</span>'+data.question_info.title+'<span>(</span><span>'+type+'</span><span>)</span></p>';
+			for(var i in data.question_info.question_stem){
+				str += '<p><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+data.question_info.question_stem[i].stem_content+'</label></p>';
+			}
+
+			str += '<p><span class="push btn">提交</span><span class="prev btn">上一题</span><span class="next btn">下一题</span></p>';
+			str += '<p class = "explain hide">分析：'+data.question_info.explain+'</p>';
+			str += '<p class = "result"></p>';
+			str += '</div>';
+
+			$('.content_center').html(str);
+		}
+	});
+}
+	</script>
+</body>
 </html>
