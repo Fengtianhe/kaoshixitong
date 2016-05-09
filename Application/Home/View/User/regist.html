@@ -24,7 +24,13 @@
 					手机号码：<input class="mr_26 phone" type="text" name="phone">
 				</p>
 				<p>
-					<span class="mar_25">邮</span>箱：<input class="mr_26 email" type="text" name="email">
+					<span class="mar_25">邮</span>箱：<input class="mr_26 email" type="text" name="email" style="width:120px;">
+					<span class="mar_25">省</span>份：
+					<select class="mr_26 email" name="province" style="width:120px;">
+						<volist name="province" id="vo">
+							<option value="{$vo.area_id}">{$vo.area_name}</option>
+						</volist>
+					</select>
 				</p>
 				<p>
 					<span class="mar_25">密</span>码：<input class="mr_26 pass" type="password" name="password">

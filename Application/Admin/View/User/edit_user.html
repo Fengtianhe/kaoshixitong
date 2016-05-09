@@ -15,6 +15,14 @@
 				<input type="text" name="idcard" value="{$user_info.idcard}" class="required" maxlength="18" minlength="18">
 			</p>
 			<p style="width:500px;">
+				<label>省份：</label>
+				<select type="text" name="province" value="{$user_info.province}" class="required">
+					<volist name="areas" id="vo">
+					<option value="{$vo.area_id}" <if condition="$vo['area_id'] eq $user_info['province']">selected="selected"</if>>{$vo.area_name}</option>
+					</volist>
+				</select>
+			</p>
+			<p style="width:500px;">
 				<label>正式学员：</label>
 				<input type="radio" value="1" name="formal" <?php if($user_info['formal']==1) echo 'checked'; ?>>正式
 				<input type="radio" value="-1" name="formal" <?php if($user_info['formal']==-1) echo 'checked'; ?>>非正式

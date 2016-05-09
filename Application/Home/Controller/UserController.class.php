@@ -19,6 +19,8 @@ class UserController extends Controller {
 
     //注册页面
     public function regist() {
+        $province = M('areas')->where(array('area_type' => 1 ))->select();
+        $this->assign('province',$province);
     	$this->display();
     }
 
@@ -30,6 +32,7 @@ class UserController extends Controller {
     	$phone 		= I('post.phone','','/^\d{11}$/');
     	$idcard 	= I('post.idcard','','/^\d{17}[0-9x]$/i');
     	$user_id 	= I('post.user_id','','int');
+        $province   = I('post.province','','int');
     	if (!$name || !$email || !$password || !$phone || !$idcard) {
     		$this->error('请正确填写信息。');
     	}
@@ -39,6 +42,7 @@ class UserController extends Controller {
     	$data['phone'] = $phone;
     	$data['idcard'] = $idcard;
     	$data['email'] = $email;
+        $data['province'] = $province;
     	$data['password'] = md5($password);
 
     	//修改 

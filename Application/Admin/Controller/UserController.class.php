@@ -26,11 +26,20 @@ class UserController extends CommonController {
         if (I('request.fstatus')) {
             $where['formal'] = I('request.fstatus');
         }
+        if (I('request.province')) {
+            $where['province'] = I('request.province');;
+        }
+
         $model = M('user');
         $lists = $model->where($where)->select();
         foreach ($lists as $k => &$v) {
-            $v['time_length'] = round($v['time_length']/3600,1); 
+            $v['time_length'] = round($v['time_length']/3600,1);
+            // $area_id = I('request.province');
+            // $province =  M('areas')->where(array('area_id'=>$area_id))->find();
+            // $v['province_name'] =  $province['area_name'];
         }
+        $areas = M('areas')->where(array('area_type'=>1))->select();
+        $this->assign('areas',$areas);
         $this->assign('lists',$lists);
         $this->assign('formal_status',$this->formal_status);
         $this->assign('user_status',$this->user_status);
@@ -116,6 +125,8 @@ class UserController extends CommonController {
             $user_info['time_length'] = round($user_info['time_length']/3600,1); 
             $this->assign('user_info',$user_info);
         }
+        $areas = M('areas')->where(array('area_type'=>1))->select();
+        $this->assign('areas',$areas);
         $this->display();
     }
 
