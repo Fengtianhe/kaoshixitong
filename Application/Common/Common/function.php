@@ -39,3 +39,21 @@ function handle_user_session($user_session) {
 	}
 	return true;
 }
+
+/**
+ * 设置cookie
+ * @return bool
+ */
+function scookie($name,$value){
+	$value = json_encode($value);
+	cookie($name,$value);
+	return true;
+}
+/**
+ * 获取cookie
+ * @return array value
+ */
+function gcookie($name){
+	$value = cookie($name);
+	return json_decode($value, true);
+}
