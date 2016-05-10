@@ -56,12 +56,12 @@
 		<div class="content_right">
 			<div class="all_num">
 				<volist id="vo" name="question['radio']">
-				<span class="num" rel="{$vo.id}">{$key+1}</span>
+				<span class="num radio" rel="{$vo.id}">{$key+1}</span>
 				</volist>
 			</div>
 			<div class="all_num">
 				<volist id="vo" name="question['checkbox']">
-				<span class="num" rel="{$vo.id}">{$key+1}</span>
+				<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
 				</volist>
 			</div>
 		</div>
@@ -87,45 +87,49 @@
 					moveQuestion('prev');
 				});
 				$(document).on('click','.finish',function(){
+					submitQuestion();
 					window.location.href = "{:U('home/test/finishtest')}";
 				});
 				//提交处理
 				$(document).on('click','.push',function(){
-					var id = $('.question').attr('rel');
-					var type = $('.question').attr('type');
-					var input = $('.question input[rel="1"]');
-					var checked = $('.question input:checked');
-					console.log(input);console.log(checked);
-					var answer_true = false;
-					if (input.length == checked.length) {
-						answer_true = true;
-						for(var i =0;i<input.length;i++){
-							if ($(input[i]).val() != $(checked[i]).val()) {
-								answer_true = false;
-								break;
-							}	
-						}
-					} 
-					$('.explain').removeClass('hide');
-					if (answer_true) {
-						$('.result').html('回答正确');
-						var select = 'ok';
-					} else {
-						$('.result').html('回答错误');
-						var select = 'error';
-					}
-					var	selected = '';
-					checked.each(function(){
-						selected +=  $(this).val() + ',';
-					});
-					$.ajax({
-						type:'post',
-						url:'/home/test/handletest',
-						dataType:'json',
-						data:{'id':id,'select':select,'type':type,'selected':selected}
-					});
+					submitQuestion();
+					moveQuestion('next');
 				});
 			});
+function submitQuestion(){
+	var id = $('.question').attr('rel');
+	var type = $('.question').attr('type');
+	var input = $('.question input[rel="1"]');
+	var checked = $('.question input:checked');
+	var answer_true = false;
+	if (input.length == checked.length) {
+		answer_true = true;
+		for(var i =0;i<input.length;i++){
+			if ($(input[i]).val() != $(checked[i]).val()) {
+				answer_true = false;
+				break;
+			}	
+		}
+	} 
+	$('.explain').removeClass('hide');
+	if (answer_true) {
+		$('.result').html('回答正确');
+		var select = 'ok';
+	} else {
+		$('.result').html('回答错误');
+		var select = 'error';
+	}
+	var	selected = '';
+	checked.each(function(){
+		selected +=  $(this).val() + ',';
+	});
+	$.ajax({
+		type:'post',
+		url:'/home/test/handletest',
+		dataType:'json',
+		data:{'id':id,'select':select,'type':type,'selected':selected}
+	});
+}
 /**
  * 移动题目 主要用于上一题 下一题
  * @param  string direction 方向 next prev
@@ -142,8 +146,14 @@ function moveQuestion(direction){
 			break;
 	}
 	if (!(current_direction.length > 0)) {
-		alert('没有啦');
-		return false;
+		if (current.hasClass('radio') &&　direction == 'next') {
+			var current_direction = $('.num.checkbox:first');
+		} else if (current.hasClass('checkbox') &&　direction == 'prev') {
+			var current_direction = $('.num.radio:last');
+		} else {
+			alert('没有啦');
+			return false;
+		}
 	}
 	current_direction.addClass('current');
 	current.removeClass('current');
@@ -190,7 +200,6 @@ function ajaxGetQuestion(data){
 			var selected = data.question_answer.selected;
 
 			for (var i in selected) {
-				console.log(selected[i]);
 				$('.question input[value="'+selected[i]+'"]').prop('checked',true);
 			}
 		}
