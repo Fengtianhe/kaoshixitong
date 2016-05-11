@@ -54,9 +54,13 @@ class TestController extends CommonController {
                 $grade += $value['type'] * 0.5;
             }
         }
+        if (is_array($errors) && !empty($errors)) {
+            $where['id'] = array('in',$errors);
+            $error_question = M("question")->where($where)->select();
+            var_dump($error_question);
+        }
         echo 'grade:'.$grade;
-        $where['id'] = array('in',$errors);
-        $error_question = M("question")->where($where)->select();
+        
     }
     function test(){
         $a = gcookie('person_test_result');

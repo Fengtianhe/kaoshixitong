@@ -73,7 +73,8 @@
 			$(function(){
 				//点击答题卡获取题
 				$('.num').click(function(){
-					$(this).addClass('current').siblings().removeClass('current');
+					$(this).closest('.content_right').find('.current').removeClass('current');
+					$(this).addClass('current');
 					var sn = $(this).html();
 					var id = $(this).attr('rel');
 					var data = {id:id,sn:sn};
@@ -96,6 +97,10 @@
 					moveQuestion('next');
 				});
 			});
+/**
+ * 答题
+ * @return 
+ */
 function submitQuestion(){
 	var id = $('.question').attr('rel');
 	var type = $('.question').attr('type');
@@ -111,14 +116,12 @@ function submitQuestion(){
 			}	
 		}
 	} 
-	$('.explain').removeClass('hide');
 	if (answer_true) {
-		$('.result').html('回答正确');
 		var select = 'ok';
 	} else {
-		$('.result').html('回答错误');
 		var select = 'error';
 	}
+	//获取 用户选择答案
 	var	selected = '';
 	checked.each(function(){
 		selected +=  $(this).val() + ',';
@@ -127,6 +130,7 @@ function submitQuestion(){
 		type:'post',
 		url:'/home/test/handletest',
 		dataType:'json',
+		async: false,
 		data:{'id':id,'select':select,'type':type,'selected':selected}
 	});
 }
@@ -193,8 +197,8 @@ function ajaxGetQuestion(data){
 			}
 
 			str += '<p><span class="push btn">提交</span><span class="prev btn">上一题</span><span class="next btn">下一题</span><span class="finish btn">交卷</span></p>';
-			str += '<p class = "explain hide">分析：'+data.question_info.explain+'</p>';
-			str += '<p class = "result"></p>';
+			//str += '<p class = "explain hide">分析：'+data.question_info.explain+'</p>';
+			//str += '<p class = "result"></p>';
 			str += '</div>';
 			$('.content_center').html(str);
 			var selected = data.question_answer.selected;
