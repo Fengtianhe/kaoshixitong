@@ -35,6 +35,17 @@ class QuestionModel extends Model {
 		$question = $this->where($where)->limit($offset, $limit)->select();
 		return $question;
 	}
+	/**
+	 * 单选 多选 各10道
+	 * @return array()
+	 */
+	function getFreeQuestion(){
+		$where['question_type'] = 1;
+		$radio_question = $this->getSimpleQuestionByWhere($where,0,10);
+		$where['question_type'] = 2;
+		$checkbox_question = $this->getSimpleQuestionByWhere($where,0,10);
+		return  array_merge($radio_question, $checkbox_question);
+	}
 
 	function getTestQuestion($no, $province = 0){
 		$offset = 0;

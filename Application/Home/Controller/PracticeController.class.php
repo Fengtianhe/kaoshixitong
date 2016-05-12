@@ -28,4 +28,16 @@ class PracticeController extends CommonController {
     	$user_id 		= $_SESSION['me']['id'];
     	$question_id 	= I('post.id');
     }
+
+    /**
+     * 免费体验
+     * @return [type] [description]
+     */
+    public function free(){
+        $question = D('Question')->getFreeQuestion();
+        $first_question = D('Question')->getInfoById($question[0]['id']);
+        $this->assign('question', $question);
+        $this->assign('first_question', $first_question);
+        $this->display('startPractice');
+    }
 }
