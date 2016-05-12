@@ -4,7 +4,7 @@ use Think\Controller;
 class CommonController extends Controller {
     public function _initialize(){
     	if (is_mobile_request()) {
-    		C('DEFAULT_THEME')  = 'mobile';
+    		C('DEFAULT_THEME','mobile');
     	}
     	if (check_replay_login()) {
     		unset($_SESSION['me']);
