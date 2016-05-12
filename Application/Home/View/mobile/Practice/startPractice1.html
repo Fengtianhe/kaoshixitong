@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<style>
+			a {display:inline-block;padding:5px;}
+			a:hover {background: #ccc}
+		</style>
+		<script src="__PUBLIC__/common/js/jquery.js"></script>
+	</head>
+	<body>
+		<div class="questions">
+			<volist id="vo" name="question">
+			<a href="/home/practice/startPractice?category=1" rel="{$vo.id}">{$key+1}</a>
+			</volist>
+		</div>
+		<div class="question_info">
+			<h1>{$first_question.title}</h1>
+			<ul>
+				<foreach name="first_question.question_stem" item="vo">
+				<li>{$vo.stem_content}</li>
+				</foreach>
+			</ul>
+		</div>
+		<script>
+			$(function(){
+				$('.questions a').click(function(){
+					var id = $(this).attr('rel');
+					$.ajax({
+						type:"post",
+						url:"/home/Practice/ajaxGetQuestion",
+						data:{id:id},
+						datatype:"json",
+						success:function(data){
+							var str = '<h1>'+data.question_info.title+'</h1>';
+							str += '<ul>';
+							for(var i in data.question_info.question_stem){
+								str += '<li>'+data.question_info.question_stem[i].stem_content+'</li>';
+							}
+							str += '</ul>';
+							$('.question_info').html(str);
+						}
+					});
+					return false;
+				});
+			})
+		</script>
+	</body>
+</html>
