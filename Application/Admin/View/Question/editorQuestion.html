@@ -25,10 +25,9 @@
 			<p style="width:500px;display:none" class="province">
 				<label>地区：</label>
 				<select name="province" id="">
-					<option value="">吉林四平</option>
-					<option value="">科目2</option>
-					<option value="">科目3</option>
-					<option value="">科目4</option>
+					<foreach name="area" item="vo">
+					<option value="{$vo.area_id}">{$vo.area_name}</option>
+					</foreach>
 				</select>
 			</p>
 			<p style="width:500px;height:60px">
@@ -62,6 +61,9 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+		if ( {$question_info['category']}  == 4) {
+			$('.province').show();
+		}
 		$('.category').change(function(){
 			if ($(this).val() == 4) {
 				$('.province').show();

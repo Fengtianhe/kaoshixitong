@@ -61,6 +61,8 @@ class QuestionController extends CommonController {
             $question_info['question_stem_str'] = $question_stem_str;
             $this->assign('question_info',$question_info);
         }
+        $area = M('areas')->where(array('area_type'=>1))->select();
+        $this->assign('area',$area);
         $this->display();
     }
     public function saveQuestion(){
@@ -69,7 +71,7 @@ class QuestionController extends CommonController {
         $data['title']              = I('request.title','');
         $data['question_type']      = I('request.question_type',0);
         $data['category']           = I('request.category',0);
-        $data['province']           = I('request.province',0);
+        $data['province_id']        = I('request.province',0);
         $data['explain']            = I('request.explain',0);
         $data['stem_content']       = I('request.stem_content',0);
         $data['answer']             = I('request.answer',0);
