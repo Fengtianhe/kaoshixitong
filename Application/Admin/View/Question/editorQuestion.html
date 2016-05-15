@@ -26,7 +26,7 @@
 				<label>地区：</label>
 				<select name="province" id="">
 					<foreach name="area" item="vo">
-					<option value="{$vo.area_id}">{$vo.area_name}</option>
+					<option <?php if($question_info['province_id'] == $vo['area_id']) echo "selected"; ?> value="{$vo.area_id}">{$vo.area_name}</option>
 					</foreach>
 				</select>
 			</p>
