@@ -46,6 +46,7 @@ class QuestionController extends CommonController {
      */
     public function editorQuestion(){
         $id = I('get.id');
+        $question_type=0;
         if ($id) {
             $question_info = M('Question')->where(array('id' => $id))->find();
             $question_stem = M('question_stem')->where(array('question_id'=>$id))->order('sn')->select();
@@ -59,10 +60,13 @@ class QuestionController extends CommonController {
             }
             $question_info['answer'] = trim($answer,',');
             $question_info['question_stem_str'] = $question_stem_str;
+            $question_type =$question_info['category'];
             $this->assign('question_info',$question_info);
         }
+        echo $question_type;
         $area = M('areas')->where(array('area_type'=>1))->select();
         $this->assign('area',$area);
+        $this->assign('question_type',$question_type);
         $this->display();
     }
     public function saveQuestion(){
