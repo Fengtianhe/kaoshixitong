@@ -63,7 +63,6 @@ class QuestionController extends CommonController {
             $question_type =$question_info['category'];
             $this->assign('question_info',$question_info);
         }
-        echo $question_type;
         $area = M('areas')->where(array('area_type'=>1))->select();
         $this->assign('area',$area);
         $this->assign('question_type',$question_type);
