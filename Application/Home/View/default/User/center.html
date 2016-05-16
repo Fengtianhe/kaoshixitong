@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>个人中心</title>
+	<link rel="stylesheet" href="__PUBLIC__/home/css/user.css">
+</head>
+<body>
+	<div id="all">
+		<div class="header">
+			<div class="h_content">
+				<span class="left">
+					您好，
+					<php>if(!$_SESSION['me'] || $_SESSION['me']==''){</php>
+						<a href="/Home/User/login">请登录</a>
+					<php>}else{</php>
+						<font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="/Home/User/center" class="clearMargin">[个人中心]</a><a href="/Home/User/logout" class="clearMargin">[退出]</a>
+					<php>}</php>
+				</span>
+				<span class="right"><a href="javascript:window.external.AddFavorite(location.href, '导游模拟考试系统')">加入收藏</a></span>
+			</div>
+			<div class="main">
+				<div class="title_bg person">
+					<div class="big_title person">
+						考试系统-个人中心
+					</div>
+				</div>
+
+				<div class="clearWidth person"></div>
+
+				<div class="userinfo">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+			Copyright © 2016 导游在线模拟考试系统
+		</div>
+	</div>
+</body>
+</html>

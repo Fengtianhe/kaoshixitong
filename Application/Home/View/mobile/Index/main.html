@@ -1,99 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>导游考试系统</title>
-	<link rel="stylesheet" href="__PUBLIC__/home/css/css.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<title>考试系统</title>
 </head>
+<style type="text/css">
+*{
+	margin: 0px;
+	padding: 0px;
+}
+html,body{
+	width: 100%;height:100%;overflow: hidden;
+}
+.index-all{
+	width: 100%;
+	height: 100%;
+}
+.index-top{
+	height: 30%;
+	width: 100%;
+	text-align: center;
+	background: #f5f5f5;
+}
+.index-bootom{
+	height: 70%;
+	width: 100%;
+}
+.title{
+	display: inline-block;
+	font-weight: bolder;
+	width: 100%;
+	color: #999;
+	text-align: center;
+	margin-top: 10%;
+}
+.index-bottom form{
+	height: 200px;
+	width: 100%;
+	text-align: center;
+	margin-top: 10%;
+}
+.index-bottom form div{
+	height:40px;
+	line-height: 40px;
+	margin-top: 10px;
+}
+.index-bottom form div input{
+	border-radius: 5px;
+	height: 30px; 
+}
+.verify{
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+.verify span{
+	float: left;
+	margin-left: 15%;
+}
+.code{
+	width: 90px;
+}
+.verify img{
+	margin-top: 7px;
+	border-radius: 5px;
+	float: left;
+}
+</style>
+
 <body>
-	<div id="all">
-		<div class="header">
-			<div class="h_content">
-				<span class="left">
-					您好，
-					<php>if(!$_SESSION['me'] || $_SESSION['me']==''){</php>
-						<a href="/Home/User/login">请登录</a>
-					<php>}else{</php>
-						<font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="/Home/User/center" class="clearMargin">[个人中心]</a><a href="/Home/User/logout" class="clearMargin">[退出]</a>
-					<php>}</php>
-				</span>
-				<span class="right"><a href="javascript:window.external.AddFavorite(location.href, '导游模拟考试系统')">加入收藏</a></span>
-			</div>
-		</div>
-
-		<div class="main">
-			<div class="title_bg">
-				<div class="big_title">
-					导游考试网站模拟考试系统
-				</div>
-			</div>
-
-			<div class="clearWidth"></div>
-
-			<div class="content">
-				<div class="list">
-					
-					<div class="list_t">
-						<div class="input">
-							<select name="" id="">
-							
-							</select>
-						</div>
-						<ul>
-							<li><div class="list_style"></div><a href="">强化训练</a></li>
-							<li><div class="list_style"></div><a href="">模拟考试答题</a></li>
-							<li><div class="list_style"></div><a href="">错题记录</a></li>
-							<li><div class="list_style"></div><a href="">我的收藏</a></li>
-							<li><div class="list_style"></div><a href="">答题记录</a></li>
-						</ul>
-					</div>
-					<div class="list_b"></div>
-				</div>
-
-				<div class="info">
-					<div class="info_tit">
-						导游考试网站模拟考试系统
-					</div>
-					<div class="info_box">
-						<div class="text">
-							<p><b>全真模拟：</b>全面模拟机考流程，给考生最贴近实际的机考体验。</p>
-							<p><b>名师题库：</b>顶级名师团队精心编写，题型全面，覆盖各类考点。</p>
-							<p><b>全新体验：</b>全面UI设计和交互体验，锻炼考生操作能力和速度。</p>
-							<div class="btns">
-								<php>if($_SESSION['me']['formal']==1){</php>
-									<div class="button" >
-										<a href="">全真练习</a>
-									</div>
-									<div class="button">
-										<a href="">模拟考试</a>
-									</div>
-								<php>}else{</php>
-									<div class="button btn">
-										<a href="/Home/Question/free">免费体验</a>
-									</div>
-								<php>}</php>
-							</div>	
-						</div>
-
-						<div class="msg">
-							<div id="text_box">
-								<div id="t_b_t">
-									友情提示
-								</div>
-								<div id="t_b_b">
-									<p>今天是<font><php>echo date('Y');</php></font>年<font><php>echo date('m');</php></font>月<font><php>echo date('d');</php></font>日<font>&nbsp;<php>echo date('l');</php></font></p>
-									<p>请您合理安排工作学习时间，祝您考试顺利</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="footer">
-			Copyright © 2016 导游在线模拟考试系统
-		</div>
+<div class="index-all">
+	<div class="index-top">
+		<p style="color: #18b4ed;display: inline-block;margin-top: 30px;"><b>导游第一步，选对试题库</b></p>
+		<p style="color: #999;display: inline-block;margin-top: 10px;"><img src="__PUBLIC__/home/images/index_dui.gif" style="height: 20px;width: 20px;float: left;"><b style="float: left;">已更新至：<?php echo date('Y/m/d',$maxtime);?></b></p>
+		<p style="color: #9b9b9b;display: inline-block;margin-top: 10px;">单选一共{}题，多选一共{}题</p>
 	</div>
+	<div class="index-bottom">
+	<?php
+		if($_SESSION['me']=='' || !$_SESSION['me']){
+	?>
+		<p class="title">请登录</p>
+		<form action="/Home/User/handleLogin" method="post" class="form">
+			<div>
+				账号：<input class="mr_26 num" type="number" placeholder="身份账号" name="idcard"/>
+			</div>
+			<div>
+			    密码：<input class="mr_26 pass" type="password" name="password"/>
+			</div>
+			<div class="verify" >
+				<span>验证码：<input class="code" type="text" name="verify"></span>
+				<img width="80px" class="verify_img" height="30px" alt="验证码" src="{:U('Home/User/verify_c',array())}" title="点击刷新" onclick="">
+			</div>
+			<div class="login_btn"><input type="submit" value="登陆"></input></div>
+		</form>
+	<?php
+		}
+	?>
+	</div>
+</div>
 </body>
 </html>
