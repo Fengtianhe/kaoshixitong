@@ -66,11 +66,17 @@
 			</div>
 		</div>
 	</div>
+	<div class="time">
+		<span class="i">90</span>:
+		<span class="s">0</span>
+	</div>
 	<script>
 			//初始化获取第一题
 			ajaxGetQuestion({id:{$first_question.id}});
 			$('.num:eq(0)').addClass('current');
 			$(function(){
+				//倒计时 自动交卷
+				var stop = window.setInterval("autoFinishTest()",1000);
 				//点击答题卡获取题
 				$('.num').click(function(){
 					$(this).closest('.content_right').find('.current').removeClass('current');
@@ -97,6 +103,26 @@
 					moveQuestion('next');
 				});
 			});
+/**
+ * 倒计时自动交卷
+ * @return 
+ */
+function autoFinishTest(){
+	var i = $('.i').text();
+	var s = $('.s').text();
+	if (i == 10 && s == 0) {
+		window.location.href = '{:U("home/test/finishTest")}';
+		window.clearInterval();
+		return false;
+	}
+	if (s == 0) {
+		s = 59;
+		$('.i').text(i-1);
+	} else {
+		s = s-1;
+	}
+	$('.s').text(s);
+}
 /**
  * 答题
  * @return 
