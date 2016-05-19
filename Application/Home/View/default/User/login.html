@@ -32,7 +32,7 @@
 	<script type="text/javascript">
 	$(function(){
 		$('.verify_img').click(function(){
-			var src = '{:U('Home/User/verify_c',array())}';
+			var src = '{:U('Home/User/verify_c','','')}?'+Math.random();
 			$(this).attr('src',src);
 		});
 	})

@@ -1,6 +1,6 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
+use Home\Controller;
 class PracticeController extends CommonController {
     public function _initialize (){
         parent::_initialize();
