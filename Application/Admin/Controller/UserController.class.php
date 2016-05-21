@@ -11,6 +11,13 @@ class UserController extends CommonController {
         1 => array('id'=>1, 'name'=>'已验证'),
     );
 	public function lists(){
+        $limit = 20;
+        $pageNum        = I('pageNum', 1);
+        $orderField     = I('orderField', 'id');
+        $orderDirection = I('orderDirection', 'desc');
+        $numPerPage     = I('numPerPage', $limit);
+        
+        $offset = ($pageNum -1) * $numPerPage;
         if (I('request.realname')) {
             $where['realname'] = I('request.realname');
         }
@@ -29,9 +36,8 @@ class UserController extends CommonController {
         if (I('request.province')) {
             $where['province'] = I('request.province');;
         }
-
-        $model = M('user');
-        $lists = $model->where($where)->select();
+        $totalCount  = M('User')->where($where)->count('id');
+        $lists = M('User')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         foreach ($lists as $k => &$v) {
             $v['time_length'] = round($v['time_length']/3600,1);
             // $area_id = I('request.province');
@@ -39,6 +45,8 @@ class UserController extends CommonController {
             // $v['province_name'] =  $province['area_name'];
         }
         $areas = M('areas')->where(array('area_type'=>1))->select();
+        $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
+        $this->assign('page', $page);
         $this->assign('areas',$areas);
         $this->assign('lists',$lists);
         $this->assign('formal_status',$this->formal_status);
@@ -163,5 +171,44 @@ class UserController extends CommonController {
             $result['confirmMsg'] = "";
             $this->ajaxReturn($result);
         }
+    }
+
+    public function online(){
+        $limit = 20;
+        $pageNum        = I('pageNum', 1);
+        $orderField     = I('orderField', 'user_id');
+        $orderDirection = I('orderDirection', 'desc');
+        $numPerPage     = I('numPerPage', $limit);
+        
+        $offset = ($pageNum -1) * $numPerPage;
+        /*if (I('request.realname')) {
+            $where['realname'] = I('request.realname');
+        }
+        if (I('request.email')) {
+            $where['email'] = I('request.email');
+        }
+        if (I('request.idcard')) {
+            $where['idcard'] = I('request.idcard');
+        }
+        if (I('request.status')) {
+            $where['is_del'] = I('request.status');
+        }
+        if (I('request.fstatus')) {
+            $where['formal'] = I('request.fstatus');
+        }
+        if (I('request.province')) {
+            $where['province'] = I('request.province');;
+        }*/
+        $where['last_login_time'] = array('gt',0);
+        $totalCount  = M('User_session')->where($where)->count('user_id');
+        $lists = M('User_session')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        foreach ($lists as $key => $value) {
+            $user_info = M('User')->where(array('id'=>$value['user_id']))->find();
+            $lists[$key]['realname'] = $user_info['realname'];
+        }
+        $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
+        $this->assign('page', $page);
+        $this->assign('lists',$lists);
+        $this->display();
     }
 }

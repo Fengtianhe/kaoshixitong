@@ -1,0 +1,1 @@
+ALTER TABLE `kaoshi`.`ks_user_session` ADD COLUMN `ip` VARCHAR(20) DEFAULT '' NOT NULL AFTER `last_logout_time`;

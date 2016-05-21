@@ -84,9 +84,10 @@ class UserController extends Controller {
     	if ($user_info = $user->where(array('idcard'=>$idcard, 'password'=>md5($password)))->find()) {
             $session_id = session_id();
             $last_login_time = time();
+            $ip = $_SERVER['REMOTE_ADDR'];
             $user_session = D('User_session')->where(array('user_id'=>$user_info['id']))->find();
             handle_user_session($user_session);
-            D('User_session')->where(array('user_id'=>$user_info['id']))->save(array('last_login_time'=>$last_login_time, 'last_logout_time'=>0, 'session_id'=>$session_id));
+            D('User_session')->where(array('user_id'=>$user_info['id']))->save(array('last_login_time'=>$last_login_time, 'last_logout_time'=>0, 'session_id'=>$session_id, 'ip'=>$ip));
             $_SESSION['me'] = $user_info;
     		$user->where(array('id'=>$user_info['id']))->save(array('last_login_time'=>$last_login_time));
     		$this->success('登录成功', U('home/index/index'));
