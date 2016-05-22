@@ -199,7 +199,7 @@ class UserController extends CommonController {
         if (I('request.province')) {
             $where['province'] = I('request.province');;
         }*/
-        $where['last_login_time'] = array('gt',0);
+        $where = 'last_logout_time < last_login_time';
         $totalCount  = M('User_session')->where($where)->count('user_id');
         $lists = M('User_session')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         foreach ($lists as $key => $value) {
