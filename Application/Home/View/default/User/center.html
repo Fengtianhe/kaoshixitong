@@ -5,6 +5,14 @@
 	<title>个人中心</title>
 	<link rel="stylesheet" href="__PUBLIC__/home/css/user.css">
 </head>
+<style type="text/css">
+/*.l{
+	float: right;
+}
+.r{
+	float: left;
+}*/
+</style>
 <body>
 	<div id="all">
 		<div class="header">
@@ -16,6 +24,7 @@
 					<php>}else{</php>
 						<font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="/Home/User/center" class="clearMargin">[个人中心]</a><a href="/Home/User/logout" class="clearMargin">[退出]</a>
 					<php>}</php>
+					<a href="__ROOT__/" class="clearMargin">首页</a>
 				</span>
 				<span class="right"><a href="javascript:window.external.AddFavorite(location.href, '导游模拟考试系统')">加入收藏</a></span>
 			</div>
@@ -29,7 +38,50 @@
 				<div class="clearWidth person"></div>
 
 				<div class="userinfo">
-					
+					<table>
+						<tr>
+							<td class="l">真实姓名：</td>
+							<td class="r">{$info.realname}</td>
+						</tr>
+						<tr>
+							<td class="l">联系电话：</td>
+							<td class="r">{$info.phone}</td>
+						</tr>
+						<tr>
+							<td class="l">身份证号：</td>
+							<td class="r">{$info.idcard}</td>
+						</tr>
+						<tr>
+							<td class="l">邮箱：</td>
+							<td class="r">{$info.email}</td>
+						</tr>
+						<tr>
+							<td class="l">所在省份：</td>
+							<td class="r">{$info.province_name}</td>
+						</tr>
+						<tr>
+							<td class="l">是否是正式学员：</td>
+							<td class="r">
+								<if condition="$info['formal'] eq 1">
+								是
+								<else/>
+								否
+								</if>
+							</td>
+						</tr>
+						<tr>
+							<td class="l">剩余时间：</td>
+							<td class="r">{$info.time_length}</td>
+						</tr>
+						<tr>
+							<td class="l">上次登录时间：</td>
+							<td class="r"><?php echo date('Y-m-d H:i:s',$info['last_login_time']) ?></td>
+						</tr>
+						<tr>
+							<td class="l">用户创建时间：</td>
+							<td class="r"><?php echo date('Y-m-d H:i:s',$info['create_time']) ?></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>

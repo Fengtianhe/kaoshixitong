@@ -1,35 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>登录</title>
-	<link rel="stylesheet" href="__PUBLIC__/home/style.css">
-	<script type="text/javascript" src="__PUBLIC__/home/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    -->
+    <link rel="stylesheet" href="__MOBILE__/css/normalize.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.offcanvas.min.css">
+
+    <link rel="stylesheet" href="__MOBILE__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="__MOBILE__/css/style.css">
+    <title>考试系统</title>
 </head>
-<body>
-	<div class="container">
-		<div class="box">
-			<div class="login">
-				<span class="user_login">用户登录</span><span class="regist_new"><a href="/Home/User/regist">注册新用户》</a></span>
-				<!-- <span class="forget_pass"><a href="">忘记密码？</a></span> -->
-			</div>
-			<div class="login_box" style="line-height: 40px;">
-			<form action="{:U('home/user/handleLogin')}" method="post" class="form">
-				<p>
-					账号：<input class="mr_26 num" type="text" placeholder="身份账号" name="idcard"/>
-				</p>
-				<p>
-					密码：<input class="mr_26 pass" type="password" name="password"/>
-				</p>
-				<p class="verify" >
-					<font>验证码：</font><input class="code" type="text" name="verify"><img width="50%" class="left15 verify_img" height="50" alt="验证码" src="{:U('Home/User/verify_c',array())}" title="点击刷新" onclick=""><span>看不清楚？点击图片</span>
-				</p>
-				<p class="login_btn login_btn_mar_65">登录</p>
-			</form>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
+<body style="background:#fff !important;">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">您正在使用一个 <strong>老旧的</strong> 浏览器. 为了您能获取更好的互联网体验，请 <a href="http://browsehappy.com.cn/" target="_blank">升级</a> 您的浏览器.</p>
+            <![endif]-->
+
+    <!-- =========================================== mycode =====================================- -->
+<div class="container-fluid" style="padding: 0;">
+    <div class="row clearfix center-block maxw">
+        <div class="col-md-12 column nopadding">
+
+            <div class="guanggao">
+                <h2 class="title1 text-center">导游第一步,选对试题库</h2>
+                <p class="info text-center">
+                    <span class="icon1"><i class="fa fa-check"></i></span>
+                    已更新至:<?php echo date('Y/m/d',$maxtime);?></p>
+                <p class="info2 text-center">单选一共{$dan_count}题,多选一共{$duo_count}题</p>
+            </div>
+            <div class="sign">
+
+                <div class="title-left">
+                    <h3 class="text-right">请登录</h3>
+                </div>
+
+                <form class="form-horizontal " role="form" action="{:U('home/user/handleLogin')}" method="post">
+                    <div class="form-group input3">
+                        <label for="name" class="col-sm-2 control-label">账<span class="px20">空</span>号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control num" id="name" placeholder="身份证号" name="idcard"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group input3">
+                        <label for="password" class="col-sm-2 control-label">密<span class="px20">空</span>码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control pass" id="password" placeholder="密码" name="password"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group input3 yzm">
+                        <label for="password" class="col-sm-2 control-label">验证码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" placeholder="请输入验证码" name="verify"/>
+                            <img width="50%" class="left15 verify_img" height="50" alt="验证码" src="{:U('Home/User/verify_c',array())}" title="点击刷新" onclick="">
+                        </div>
+                    </div>
+
+                    <div class="input2">
+                        <button type="submit" class="btn btn-submit">登录</button>
+                    </div>
+                    <p class="text-right goregister"><a href="sign.html">注册新账号</a></p>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- ============================================ end =======================================- -->
+
+
+
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+    <script src="__MOBILE__/js/jquery-1.9.1.min.js" ></script>
+    <script src="__MOBILE__/js/bootstrap.min.js"></script>
+    <script src="__MOBILE__/js/bootstrap.offcanvas.min.js"></script>
+    <script src="__MOBILE__/js/jquery.cookie.js"></script>
+    <script>
+
+    </script>
+    <script type="text/javascript">
 	$(function(){
 		$('.verify_img').click(function(){
 			var src = '{:U('Home/User/verify_c',array())}';
@@ -37,9 +119,10 @@
 		});
 	})
 	</script>
+
 	<script>
 		$(function(){
-			var $btn = $(".login_btn");
+			var $btn = $(".btn-submit");
 			var $reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
 			$btn.click(function(){
 				var $num = $(".num").val();

@@ -12,7 +12,12 @@ class IndexController extends CommonController {
 		$maxtime= $res[0]['max'];
 
 		$question = M('question');
-		// $dan_list = $question->where(array(''))->find();
+		$dan_list = $question->where(array('question_type'=>1))->select();
+		$dan_count = count($dan_list);
+		$duo_list = $question->where(array('question_type'=>2))->select();
+		$duo_count = count($duo_list);
+		$this->assign("dan_count",$dan_count);
+		$this->assign("duo_count",$duo_count);
 		$this->assign("maxtime",$maxtime);
      	$this->display('main');
     }

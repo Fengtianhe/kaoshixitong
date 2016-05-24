@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class UserController extends Controller {
+class UserController extends CommonController {
     public function verify_c(){  
         $Verify = new \Think\Verify();  
         $Verify->fontSize = 18;  
@@ -56,7 +56,12 @@ class UserController extends Controller {
     			$id = $user->add($data);
                 D('User_session')->add(array('user_id'=>$id));
                 M('user_permission')->add(array('uid'=>$id));
-    			$this->success('注册成功', U('home/index/index'));
+                if (is_mobile_request()) {
+                    $this->success('注册成功', U('home/user/index'));
+                }else{
+                    $this->success('注册成功', U('home/index/index'));
+                }
+    			
     		} else {
     			$this->error('身份证号已经注册，若不是您本人注册请联系管理员。');
     		}
@@ -65,6 +70,19 @@ class UserController extends Controller {
 
     //登录页面
     public function login() {
+        $program=M();
+        $strSql="select max(create_time) as max from ks_question ";
+        $res=$program->query($strSql);
+        $maxtime= $res[0]['max'];
+
+        $question = M('question');
+        $dan_list = $question->where(array('question_type'=>1))->select();
+        $dan_count = count($dan_list);
+        $duo_list = $question->where(array('question_type'=>2))->select();
+        $duo_count = count($duo_list);
+        $this->assign("dan_count",$dan_count);
+        $this->assign("duo_count",$duo_count);
+        $this->assign("maxtime",$maxtime);
     	$this->display();
     }
 
@@ -101,5 +119,17 @@ class UserController extends Controller {
         D('User_session')->where(array('user_id'=>$_SESSION['me']['id']))->save(array('last_logout_time'=>time()));
         $_SESSION = array();
         $this->redirect('/');
+    }
+
+    //个人中心
+    public function center(){
+        $info = M('user')->where(array('id'=>$_SESSION['me']['id']))->find();
+        $province_id = $info['province'];
+        $province = M('areas')->where(array('area_id'=>$province_id))->find();
+        $province_name = $province['area_name'];
+        $info['province_name'] = $province_name;
+        $info['time_length'] = $info['time_length']/3600;
+        $this->assign('info',$info);
+        $this->display();
     }
 }

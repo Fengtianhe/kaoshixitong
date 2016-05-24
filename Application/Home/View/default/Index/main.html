@@ -62,14 +62,14 @@
 							<div class="btns">
 								<php>if($_SESSION['me']['formal']==1){</php>
 									<div class="button" >
-										<a href="">全真练习</a>
+										<a href="/home/practice/index">全真练习</a>
 									</div>
 									<div class="button">
-										<a href="">模拟考试</a>
+										<a href="{:U('home/test/index')}">模拟考试</a>
 									</div>
 								<php>}else{</php>
 									<div class="button btn">
-										<a href="/Home/practice/free">免费体验</a>
+										<a href="/Home/Practice/free">免费体验</a>
 									</div>
 								<php>}</php>
 							</div>	
