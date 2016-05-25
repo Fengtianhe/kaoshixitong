@@ -113,9 +113,21 @@ function readExcel($name,$page=0){
 	$sheetsinfo["rows"] = $sheet->getHighestRow(); 
 
 	for($row=1;$row<=$sheetsinfo["rows"];$row++){ 
-		for($column=0;$column<9;$column++){ 
+		for($column=0;$column<12;$column++){ 
 			$sheetData[$row][$column] = $sheet->getCellByColumnAndRow($column, $row)->getValue(); 
 		} 
 	} 
 	return $sheetData;
+}
+
+function uploadFile($pic){
+	$upload = new \Think\Upload();// 实例化上传类
+    $upload->maxSize   =     3145728 ;// 设置附件上传大小
+    $upload->exts      =     array('jpg', 'gif', 'png', 'jpeg', 'xls');// 设置附件上传类型
+    $upload->rootPath  =     './Public/'; // 设置附件上传根目录
+    $upload->savePath  =     'upload/'; // 设置附件上传（子）目录
+    // 上传文件 
+    $info   =   $upload->upload();
+    $pic_url = $info[$pic]['savepath'].$info[$pic]['savename'];
+    return $pic_url;
 }

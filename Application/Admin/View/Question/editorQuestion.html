@@ -22,6 +22,17 @@
 					<option <?php if($question_info['category'] == 4) echo "selected"; ?> value="4">科目4</option>
 				</select>
 			</p>
+			<p style="width:500px">
+				<label>章节：</label>
+				<select name="chapter" id="" class="chapter">
+					<option <?php if($question_info['chapter'] == 1) echo "selected"; ?> value="1">第1章</option>
+					<option <?php if($question_info['chapter'] == 2) echo "selected"; ?> value="2">第2章</option>
+					<option <?php if($question_info['chapter'] == 3) echo "selected"; ?> value="3">第3章</option>
+					<option <?php if($question_info['chapter'] == 4) echo "selected"; ?> value="4">第4章</option>
+					<option <?php if($question_info['chapter'] == 5) echo "selected"; ?> value="5">第5章</option>
+					<option <?php if($question_info['chapter'] == 6) echo "selected"; ?> value="6">第6章</option>
+				</select>
+			</p>
 			<p style="width:500px;display:none" class="province">
 				<label>地区：</label>
 				<select name="province" id="">

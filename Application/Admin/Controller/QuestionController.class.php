@@ -127,4 +127,78 @@ class QuestionController extends CommonController {
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
     }
+
+    public function batch(){
+        $this->display();
+    }
+
+    /**
+     * 批量导入题库
+     * @return [type] [description]
+     */
+    public function batchQuestion(){
+        $question_type = I('post.question_type',0);
+        $file = uploadFile('file');
+        if (!$file) {
+            $this->error('文件出错');
+        }
+        $list = readExcel('./Public/'.$file);
+        unset($list[1]);
+        foreach($list as $key=>$value){
+            if (!$value[2]) {
+                continue;
+            }
+            if ($question_type == 1) {
+                $stem_content = array($value[3],$value[4],$value[5],$value[6]);
+                $answer = strtoupper($value[7]);
+                
+                $find = array('A','B','C','D','，');
+                $replace = array(1,2,3,4,',');
+                $answer = str_replace($find,$replace,$answer);
+                $answer = explode(',',$answer);
+                if ($question_type == '3') {
+                    $data['is_true'] = current($answer);
+                }
+                $data['explain'] = $value[8]?$value[8]:'';
+                $data['category'] = $value[9];
+                $data['chapter'] = $value[10];
+                $data['province'] = $value[11];
+            } elseif ($question_type == 2){
+                $stem_content = array($value[3],$value[4],$value[5],$value[6],$value[7]);
+                $answer = strtoupper($value[8]);
+                $find = array('A','B','C','D','，');
+                $replace = array(1,2,3,4,',');
+                $answer = str_replace($find,$replace,$answer);
+                $answer = explode(',',$answer);
+                if ($question_type == '3') {
+                    $data['is_true'] = current($answer);
+                }
+                $data['explain'] = $value[9]?$value[9]:'';
+                $data['category'] = $value[10];
+                $data['chapter'] = $value[11];
+                $data['province'] = $value[12];
+            }
+            $data['title'] = $value[2];
+            $data['level'] = $value[1];
+            $data['question_type'] = (int)$question_type;
+            $data['create_time'] = time();
+            $id = M('Question')->add($data);
+        
+            if (is_array($stem_content) && !empty($stem_content)) {
+                foreach($stem_content as $key=>$value) {
+                    if (!$value) continue;
+                    $item['stem_content'] = $value;
+                    $item['sn']  =$key+1;
+                    if (in_array($key+1, $answer)) {
+                        $item['is_true'] = 1;
+                    } else {
+                        $item['is_true'] = 0;
+                    }
+                    $item['question_id'] = $id;
+                    M('question_stem')->add($item);
+                }
+            } 
+        }
+        redirect(U('admin/index/index'));
+    }
 }

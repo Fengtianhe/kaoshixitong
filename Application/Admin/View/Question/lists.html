@@ -69,6 +69,7 @@
 <div class="panelBar">
 		<ul class="toolBar">
 			<li><a class="add" href="/admin/question/editorQuestion" target="dialog" width="700" height="600"><span>添加</span></a></li>
+			<li><a class="add" href="/admin/question/batch" target="dialog" width="700" height="600"><span>批量添加</span></a></li>
 			<li><a class="edit" href="/admin/question/editorQuestion?id={sid}" target="dialog" width="700" height="600" warn="请选择一道题"><span>修改</span></a></li>
 			<li><a class="edit" href="/admin/question/saveQuestion?id={sid}&is_del=1" target="ajaxTodo" warn="请选择一道题" title="确认删除么？"><span>删除</span></a></li>
 			<li><a class="edit" href="/admin/question/saveQuestion?id={sid}&is_del=0" target="ajaxTodo" warn="请选择一道题" title="确认恢复么？"><span>恢复</span></a></li>
@@ -84,7 +85,6 @@
 				<th width="70">创建日期</th>
 				<th width="70">修改日期</th>
 				<th width="70">最后修改人</th>
-				<th width="20">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -97,10 +97,6 @@
 				<td><?php echo date('Y-m-d H:i:s',$vo['create_time']) ?></td>
 				<td><?php echo date('Y-m-d H:i:s',$vo['update_time']) ?></td>
 				<td>{$vo.admin_user_id}</td>
-				<td>
-					<!-- <a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a> -->
-					<a title="编辑" target="dialog" href="/admin/question/editor_question?id={$vo.id}" class="btnEdit">编辑</a>
-				</td>
 			</tr>
 			</volist>
 		</tbody>

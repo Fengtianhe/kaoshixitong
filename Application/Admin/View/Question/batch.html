@@ -1,0 +1,35 @@
+<h2 class="contentTitle">题目</h2>
+
+
+<div class="pageContent">
+	
+	<form method="post" action="/admin/question/batchQuestion" class="pageForm required-validate" enctype="multipart/form-data">
+		<div class="pageFormContent nowrap" layoutH="97">
+			<p style="width:500px">
+				<label>题型：</label>
+				<select name="question_type" id="">
+					<option <?php if($question_info['question_type'] == 1) echo "selected"; ?> value="1">单选</option>
+					<option <?php if($question_info['question_type'] == 2) echo "selected"; ?> value="2">多选</option>
+					<option <?php if($question_info['question_type'] == 3) echo "selected"; ?> value="3">判断</option>
+				</select>
+			</p>
+			<p style="width:500px;height:60px">
+				<label>上传文件：</label>
+				<input type="file" name="file" value="">
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$question_info['id']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+	
+</script>
