@@ -21,9 +21,14 @@ class PracticeController extends CommonController {
         $this->assign("maxtime",$maxtime);
         $this->display();
     }
+    public function beforeStartPractice(){
+        $this->assign('category',I('get.category'));
+        $this->display();
+    }
     public function startPractice(){
-        $category = I('get.category');
-        $question = D('Question')->getSimpleQuestionByWhere(array('category'=>$category));
+        $category = I('get.category',1);
+        $chapter = I('get.chapter',1);
+        $question = D('Question')->getSimpleQuestionByWhere(array('category'=>$category,'chapter'=>$chapter));
         $first_question = D('Question')->getInfoById($question[0]['id']);
         $this->assign('question', $question);
         $this->assign('first_question', $first_question);

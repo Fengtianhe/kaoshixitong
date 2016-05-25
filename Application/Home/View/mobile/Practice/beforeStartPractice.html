@@ -45,13 +45,14 @@
                 <p class="info text-center">
                     <span class="icon1"><i class="fa fa-check"></i></span>
                     已更新至:<?php echo date('Y/m/d',$maxtime);?></p>
-                <p class="info2 text-center">单选一共{$dan_count}题,多选一共{$duo_count}题</p>
             </div>
             <div class="gonggao">
-                <a href="/home/practice/beforeStartPractice?category=1" rel=""  class="btn center-block btn-zs">政策与法律法规</a>
-                <a href="/home/practice/beforeStartPractice?category=2" rel=""  class="btn center-block btn-zs">导游业务</a>
-                <a href="/home/practice/beforeStartPractice?category=3" rel=""  class="btn center-block btn-zs">全国导游基础知识</a>
-                <a href="/home/practice/beforeStartPractice?category=4" rel=""  class="btn center-block btn-zs">地方导游基础知识</a>          
+                <a href="/home/practice/startPractice?category={$category}&chapter=1" rel="" class="btn center-block btn-zs">第1章</a>
+			<a href="/home/practice/startPractice?category={$category}&chapter=2" rel="" class="btn center-block btn-zs">第2章</a>
+			<a href="/home/practice/startPractice?category={$category}&chapter=3" rel="" class="btn center-block btn-zs">第3章</a>
+			<a href="/home/practice/startPractice?category={$category}&chapter=4" rel="" class="btn center-block btn-zs">第4章</a>
+			<a href="/home/practice/startPractice?category={$category}&chapter=5" rel="" class="btn center-block btn-zs">第5章</a>
+			<a href="/home/practice/startPractice?category={$category}&chapter=6" rel="" class="btn center-block btn-zs">第6章</a>        
             </div>
         </div>
     </div>
