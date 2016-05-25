@@ -1,7 +1,12 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class UserController extends CommonController {
+class UserController extends Controller {
+    public function _initialize(){
+        if (is_mobile_request()) {
+            C('DEFAULT_THEME','mobile');
+        }
+    }
     public function verify_c(){  
         $Verify = new \Think\Verify();  
         $Verify->fontSize = 18;  
