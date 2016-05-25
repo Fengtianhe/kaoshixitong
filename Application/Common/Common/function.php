@@ -97,3 +97,25 @@ function is_mobile_request()
 	else 
 		return false;   
 }
+
+/**
+ * 读取excel内容
+ * @param  string $name 文件名
+ * @return array   $data['row']['colum']
+ */
+function readExcel($name,$page=0){
+	include "./Application/Common/vendor/PHPExcel/IOFactory.php";
+	$objPHPExcel = \PHPExcel_IOFactory::load($name);
+	$sheets = $objPHPExcel->getAllSheets(); 
+	$sheetsinfo = array(); 
+	$sheetData = array(); 
+	$sheet = $sheets[$page]; 
+	$sheetsinfo["rows"] = $sheet->getHighestRow(); 
+
+	for($row=1;$row<=$sheetsinfo["rows"];$row++){ 
+		for($column=0;$column<9;$column++){ 
+			$sheetData[$row][$column] = $sheet->getCellByColumnAndRow($column, $row)->getValue(); 
+		} 
+	} 
+	return $sheetData;
+}
