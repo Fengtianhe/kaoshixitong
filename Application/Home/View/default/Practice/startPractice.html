@@ -98,8 +98,8 @@
     <div class="right">
         <ul class="timus list-unstyled">
             <volist id="vo" name="question">
-            <a class="num" rel="{$vo.id}">
-                <li class="active">{$key+1}</li>
+            <a class="num active" rel="{$vo.id}">
+                {$key+1}
             </a>
             </volist>
         </ul>
@@ -160,6 +160,7 @@
 		return false;
 	});
 	$(document).on('click','.next',function(){
+		$(".question-answer").addClass('hide');
 		moveQuestion('next');
 	});
 	$(document).on('click','.prev',function(){
@@ -197,6 +198,7 @@ function moveQuestion(direction){
 	switch (direction) {
 		case "prev":
 		var current_direction = current.prev();
+		
 			break;
 		case "next":
 		var current_direction = current.next();
@@ -240,7 +242,6 @@ function ajaxGetQuestion(data){
 			//题目
 			var title = data.question_info.sn+'.'+'('+type+')'+data.question_info.title;
 			$('.question-title').html(""+title);
-
 			//选项
 			var stem = ''; 
 			for(var i in data.question_info.question_stem){
