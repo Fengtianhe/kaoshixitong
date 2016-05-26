@@ -39,9 +39,9 @@
     <!-- =========================================== mycode =====================================- -->
 
     <div class="top">
-        <!-- <img src="img/logo.png" class="logo" alt=""> -->
+        <img src="__PC__/img/logo.png" class="logo" alt="">
         <h1>导游考试模拟系统</h1>
-        <div class="test-info">
+        <!-- <div class="test-info">
             <div class="info">
                 <span class="name">开始时间</span>
                 00:00:00
@@ -61,9 +61,9 @@
             <div class="time">
                 11:11:11
             </div>
-        </div>
+        </div> -->
         <div class="user">
-            <p>您好,XXX <span class="exit"><a >退出</a></span></p>
+            <p>您好,<php>echo $_SESSION['me']['realname']</php> <span class="exit"><a href="">退出</a></span></p>
         </div>
     </div>
     <div class="test">
