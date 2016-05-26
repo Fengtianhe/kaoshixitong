@@ -12,5 +12,7 @@ return array(
     'DB_DEBUG'  =>  TRUE, // 数据库调试模式 开启后可以记录SQL日志 3.2.3新增
     'TMPL_PARSE_STRING'=> array(
         '__MOBILE__' => __ROOT__.'/Public/Mobile',
+        '__PC__' => __ROOT__.'/Public/PC',
+        '__TMPL__' => __ROOT__.'/Application/Home/View/default',
     ),
 );

@@ -1,4 +1,3 @@
-<include file="left"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +38,8 @@
     <!-- =========================================== mycode =====================================- -->
 
     <div class="top">
-        <!-- <img src="img/logo.png" class="logo" alt=""> -->
-        <h1>导游考试模拟系统</h1>
+        <img src="img/logo.png" class="logo" alt="">
+        <h1>中国光大银行考试系统</h1>
         <div class="test-info">
             <div class="info">
                 <span class="name">开始时间</span>
@@ -63,47 +62,53 @@
             </div>
         </div>
         <div class="user">
-            <p>您好,XXX <span class="exit"><a >退出</a></span></p>
+            <p>您好,XXX <span class="exit"><a href="">退出</a></span></p>
         </div>
     </div>
     <div class="test">
         <div class="question question-on clearfix">
-            <h3 class="question-title"></h3>
-            <!-- <span class="question-tip ">
+            <h3 class="question-title">1.下列那种标志是驾驶机动车上路行驶应当放置的标志?</h3>
+            <span class="question-tip ">
                 <span class="question-num">1</span>/
                 <span class="question-totalnum">30</span>
                 <span class="question-icon"><i class="fa fa-lg fa-map-marker"></i></span>
-            </span> -->
+            </span>
             <ul class="list-unstyled options">
-            
+            <li><input type="checkbox"><span class="question-order">A:</span>产品合格标志</li>
+                <li><input type="checkbox"><span class="question-order">B:</span>产品合格标志</li>
+                <li><input type="checkbox"><span class="question-order">C:</span>产品合格标志</li>
+                <li><input type="checkbox"><span class="question-order">D:</span>产品合格标志</li>
             </ul>
             <div class="question-btns">
-                <a  class="btn btn-prev prev">上一题</a>
-                <a  class="btn btn-next next">下一题</a>
-                <a  class="btn btn-question-submit push">提交</a>
+                <a href="" class="btn btn-prev">上一题</a>
+                <a href="" class="btn btn-next">下一题</a>
+                <a href="" class="btn btn-question-submit">提交</a>
             </div>
         </div>
 
-        <div class="question-answer hide">
+        <div class="question-answer">
             <div class="question-tip-left">
                 <h3>分析</h3>
             </div>
-            <p class="answer-result"></p>
+            <p class="answer-result">回答正确!回答错误!正确答案是:D</p>
             <div class="question-tip-left">
                 <h3>答案详解</h3>
             </div>
-            <p class="answer-analysis"></p>
+            <p class="answer-analysis">回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正>回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正确回答正>回答正确回答正确回答正确回答正确回</p>
         </div>
     </div>
     <div class="right">
         <ul class="timus list-unstyled">
+        <?php
+            var_dump($question);
+        ?>
             <volist id="vo" name="question">
-            <a class="num" rel="{$vo.id}">
-                <li class="active">{$key+1}</li>
+            <a href="">
+                <li class="active" rel="{$vo.id}">{$key+1}</li>
             </a>
             </volist>
         </ul>
-        <!-- <div class="right-menu">
+        <div class="right-menu">
             <div class="show pull-left">
                 <span class="s1">1</span>
                 未答题
@@ -116,8 +121,8 @@
                 <span class="s2">2</span>
                 已答题
             </div>
-            <a  class="btn btn-submit">完成提交</a>
-        </div> -->
+            <a href="" class="btn btn-submit">完成提交</a>
+        </div>
     </div>
 
 
@@ -144,115 +149,3 @@
     </script>
 </body>
 </html>
-<include file="right"/>
-<script>
-	//初始化获取第一题
-	ajaxGetQuestion({id:{$first_question.id}});
-	$('.num:eq(0)').addClass('current');
-	$(function(){
-	//点击答题卡获取题
-	$('.num').click(function(){
-		$(this).addClass('current').siblings().removeClass('current');
-		var sn = $(this).html();
-		var id = $(this).attr('rel');
-		var data = {id:id,sn:sn};
-		ajaxGetQuestion(data);
-		return false;
-	});
-	$(document).on('click','.next',function(){
-		moveQuestion('next');
-	});
-	$(document).on('click','.prev',function(){
-		moveQuestion('prev');
-	});
-	//提交处理
-	$(document).on('click','.push',function(){
-		var input = $('input[rel="1"]');
-		var checked = $('input:checked');
-		var answer_true = false;
-		if (input.length == checked.length) {
-			answer_true = true;
-			for(var i =0;i<input.length;i++){
-				if ($(input[i]).val() != $(checked[i]).val()) {
-					answer_true = false;
-					break;
-				}	
-			}
-		} 
-		$('.question-answer').removeClass('hide');
-		if (answer_true) {
-			$('.answer-result').html('回答正确');
-		} else {
-			$('.answer-result').html('回答错误');
-		}
-	});
-	});
-/**
- * 移动题目 主要用于上一题 下一题
- * @param  string direction 方向 next prev
- * @return 
- */
-function moveQuestion(direction){
-	var current = $('.num.current');
-	switch (direction) {
-		case "prev":
-		var current_direction = current.prev();
-			break;
-		case "next":
-		var current_direction = current.next();
-			break;
-	}
-	if (!(current_direction.length > 0)) {
-		alert('没有啦');
-		return false;
-	}
-	current_direction.addClass('current');
-	current.removeClass('current');
-	var id = current_direction.attr('rel');
-	var sn = current_direction.html();
-	var data = {id:id,sn:sn};
-	ajaxGetQuestion(data);
-}
-/**
- * ajax 获取题目 并显示在页面上
- * @param  json data post数据
- * @return 
- */
-function ajaxGetQuestion(data){
-	$.ajax({
-		type:"post",
-		url:"/home/Practice/ajaxGetQuestion",
-		data:data,
-		datatype:"json",
-		success:function(data){
-			switch (data.question_info.question_type) {
-				case '1':
-					var type = '单选';
-					var input_name = 'answer';
-					var input_type = 'radio';
-					break;
-				case '2':
-					var type = '多选';
-					var input_name = 'answer[]';
-					var input_type = 'checkbox';
-					break;
-			}
-			//题目
-			var title = data.question_info.sn+'.'+'('+type+')'+data.question_info.title;
-			$('.question-title').html(""+title);
-
-			//选项
-			var stem = ''; 
-			for(var i in data.question_info.question_stem){
-				stem += '<li><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+data.question_info.question_stem[i].stem_content+'</li>';
-			}
-			$('.options').html(stem);
-
-			// str += '<div class="btnn"><span class="push btn">提交</span><span class="prev btn">上一题</span><span class="next btn">下一题</span></div><br/>';
-
-			var analysis = data.question_info.explain;
-			$('.answer-analysis').html(analysis);
-		}
-	});
-}
-	</script>

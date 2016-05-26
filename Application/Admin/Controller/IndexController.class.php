@@ -38,7 +38,9 @@ class IndexController extends CommonController {
     	if ($result) {
     		$_SESSION['admin']['me'] = $result;
     		$this->redirect('index');
-    	}
+    	}else{
+            $this->error('登陆失败');
+        }
     	 
     }
     public function logout(){

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    -->
+    <link rel="stylesheet" href="__MOBILE__/css/normalize.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.offcanvas.min.css">
+
+    <link rel="stylesheet" href="__MOBILE__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="__MOBILE__/css/style.css">
+    <title>考试系统</title>
+</head>
+<body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">您正在使用一个 <strong>老旧的</strong> 浏览器. 为了您能获取更好的互联网体验，请 <a href="http://browsehappy.com.cn/" target="_blank">升级</a> 您的浏览器.</p>
+            <![endif]-->
+
+    <!-- =========================================== mycode =====================================- -->
+<div class="container-fluid" style="padding: 0">
+    <div class="row clearfix center-block maxw">
+        <div class="col-md-12 column nopadding">
+            <div class="welcome clearfix">
+                <p class="user pull-left">您好
+                <php>if(!$_SESSION['me'] || $_SESSION['me']==''){</php>
+                        <a href="/Home/User/login">请登录</a>
+                    <php>}else{</php>
+                        <font color="#4FAED2"><php>echo $_SESSION['me']['realname'];</php></font><a href="/Home/User/center" class="clearMargin">[个人中心]</a>
+                    <php>}</php>
+                </p>
+                <p class="exit pull-right"><a href="/Home/User/logout">退出</a></p>
+            </div>
+            <h1 class="biaoti">个人中心</h1>
+            <ul class="user-info list-unstyled">
+                <li>真实姓名:{$info.realname}</li>
+                <li>身份证号:{$info.idcard}</li>
+                <li>联系电话:{$info.phone}</li>
+                <li>邮箱:{$info.email}</li>
+                <li>所在省份:{$info.province_name}</li>
+                <li>是否是正式学员:<if condition="$info['formal'] eq 1">
+                                是
+                                <else/>
+                                否
+                                </if></li>
+                <li>剩余体验时间:{$info.time_length}</li>
+                <li>上次登陆时间:<?php echo date('Y-m-d H:i:s',$info['last_login_time']) ?></li>
+                <li>用户创建时间:<?php echo date('Y-m-d H:i:s',$info['create_time']) ?></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- ============================================ end =======================================- -->
+
+
+
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+    <script src="__MOBILE__/js/jquery-1.9.1.min.js" ></script>
+    <script src="__MOBILE__/js/bootstrap.min.js"></script>
+    <script src="__MOBILE__/js/bootstrap.offcanvas.min.js"></script>
+    <script src="__MOBILE__/js/jquery.cookie.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
