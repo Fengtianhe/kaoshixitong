@@ -241,7 +241,7 @@ function ajaxGetQuestion(data){
 			}
 			//题目
 			var title = data.question_info.sn+'.'+'('+type+')'+data.question_info.title;
-			$('.question-title').html(""+title);
+			$('.question-title').html(title);
 			//选项
 			var stem = ''; 
 			for(var i in data.question_info.question_stem){

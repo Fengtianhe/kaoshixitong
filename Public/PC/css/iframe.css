@@ -117,7 +117,7 @@ body a:hover {
   padding: 20px;
   background: #fff;
   position: relative;
-  border: 1px #ccc solid;
+  /*border: 1px #ccc solid;*/
   margin-bottom: 20px;
 }
 .question .question-title {
