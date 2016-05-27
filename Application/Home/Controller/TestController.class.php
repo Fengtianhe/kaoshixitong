@@ -23,8 +23,7 @@ class TestController extends CommonController {
     }
     public function startTest(){
         $no = I('get.no');
-        $province = $_SESSION['me']['province_id'];
-
+        $province = $_SESSION['me']['province'];
         scookie('person_test_result',null);
         $question = D('Question')->getTestQuestion($no, $province);
         scookie('person_test', $question);

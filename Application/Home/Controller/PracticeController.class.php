@@ -26,9 +26,14 @@ class PracticeController extends CommonController {
         $this->display();
     }
     public function startPractice(){
+        $user_info = $_SESSION['me'];
         $category = I('get.category',1);
         $chapter = I('get.chapter',1);
-        $question = D('Question')->getSimpleQuestionByWhere(array('category'=>$category,'chapter'=>$chapter));
+        $where = array('category'=>$category,'chapter'=>$chapter);
+        if ($category == 4) {
+            $where['province_id'] = $user_info['province'];
+        }
+        $question = D('Question')->getSimpleQuestionByWhere($where);
         $first_question = D('Question')->getInfoById($question[0]['id']);
         $this->assign('question', $question);
         $this->assign('first_question', $first_question);
