@@ -162,7 +162,7 @@ class QuestionController extends CommonController {
                 $data['explain'] = $value[8]?$value[8]:'';
                 $data['category'] = $value[9];
                 $data['chapter'] = $value[10];
-                $data['province'] = $value[11];
+                $data['province_id'] = $value[11];
             } elseif ($question_type == 2){
                 $stem_content = array($value[3],$value[4],$value[5],$value[6],$value[7]);
                 $answer = strtoupper($value[8]);
@@ -176,7 +176,7 @@ class QuestionController extends CommonController {
                 $data['explain'] = $value[9]?$value[9]:'';
                 $data['category'] = $value[10];
                 $data['chapter'] = $value[11];
-                $data['province'] = $value[12];
+                $data['province_id'] = $value[12];
             }
             $data['title'] = $value[2];
             $data['level'] = $value[1];
