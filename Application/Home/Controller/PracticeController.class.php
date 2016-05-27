@@ -6,30 +6,40 @@ class PracticeController extends CommonController {
         parent::_initialize();
     }
     public function index(){
-        $program=M();
-        $strSql="select max(create_time) as max from ks_question ";
-        $res=$program->query($strSql);
-        $maxtime= $res[0]['max'];
-
-        $question = M('question');
-        $dan_list = $question->where(array('question_type'=>1))->select();
-        $dan_count = count($dan_list);
-        $duo_list = $question->where(array('question_type'=>2))->select();
-        $duo_count = count($duo_list);
-        $this->assign("dan_count",$dan_count);
-        $this->assign("duo_count",$duo_count);
-        $this->assign("maxtime",$maxtime);
-        $this->display();
-    }
-    public function beforeStartPractice(){
-        $permission = $this->verifyPermission();
-        if ($permission == '-1') {
-            echo "<script>alert('您对此章节无权限，请联系管理员！');history.back();</script>";
+        $open = M('system')->where(array('id'=>1))->find();
+        if ($open['practice'] == '-1') {
+            echo '<script>alert("练习模式尚未开放");history.back();</script>';
         }else{
-            $this->assign('category',I('get.category'));
+            $program=M();
+            $strSql="select max(create_time) as max from ks_question ";
+            $res=$program->query($strSql);
+            $maxtime= $res[0]['max'];
+
+            $question = M('question');
+            $dan_list = $question->where(array('question_type'=>1))->select();
+            $dan_count = count($dan_list);
+            $duo_list = $question->where(array('question_type'=>2))->select();
+            $duo_count = count($duo_list);
+            $this->assign("dan_count",$dan_count);
+            $this->assign("duo_count",$duo_count);
+            $this->assign("maxtime",$maxtime);
             $this->display();
         }
-        
+    }
+    public function beforeStartPractice(){
+        $open = $this->verityOpen();
+        if ($open == '-1') {
+            echo "<script>alert('此章节尚未开放，请联系管理员！');history.back();</script>";
+        }
+        else{
+           $permission = $this->verifyPermission();
+            if ($permission == '-1') {
+                echo "<script>alert('您对此章节无权限，请联系管理员！');history.back();</script>";
+            }else{
+                $this->assign('category',I('get.category'));
+                $this->display();
+            } 
+        }
     }
     public function startPractice(){
 
@@ -79,6 +89,16 @@ class PracticeController extends CommonController {
         $num = I('get.category');
         $category = 'course_'.$num;
         $result = M('user_permission')->where(array('uid'=>$uid))->find();
+        return $result[$category];
+    }
+
+    /**
+    *  章节开关验证
+    */
+    private function verityOpen(){
+        $num = I('get.category');
+        $category = 'practice_child'.$num;
+        $result = M('system')->where(array('id'=>1))->find();
         return $result[$category];
     }
 }

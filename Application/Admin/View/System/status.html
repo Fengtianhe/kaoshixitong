@@ -47,6 +47,7 @@
 			var obj = document.getElementsByName('practice');
 			for (var i = 0; i < obj.length; i++) {
 				if (obj[i].checked == true) {
+					alert(obj[i].value);
 					if (obj[i].value == 1) {
 						$('.practice_child').show();
 					}else{
