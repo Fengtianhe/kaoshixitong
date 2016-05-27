@@ -41,9 +41,9 @@ class QuestionModel extends Model {
 	 */
 	function getFreeQuestion(){
 		$where['question_type'] = 1;
-		$radio_question = $this->getSimpleQuestionByWhere($where,0,10);
+		$radio_question = $this->getSimpleQuestionByWhere($where,0,50);
 		$where['question_type'] = 2;
-		$checkbox_question = $this->getSimpleQuestionByWhere($where,0,10);
+		$checkbox_question = $this->getSimpleQuestionByWhere($where,0,50);
 		return  array_merge($radio_question, $checkbox_question);
 	}
 
