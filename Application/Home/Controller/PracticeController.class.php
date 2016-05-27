@@ -22,10 +22,17 @@ class PracticeController extends CommonController {
         $this->display();
     }
     public function beforeStartPractice(){
-        $this->assign('category',I('get.category'));
-        $this->display();
+        $permission = $this->verifyPermission();
+        if ($permission == '-1') {
+            echo "<script>alert('您对此章节无权限，请联系管理员！');history.back();</script>";
+        }else{
+            $this->assign('category',I('get.category'));
+            $this->display();
+        }
+        
     }
     public function startPractice(){
+
         $user_info = $_SESSION['me'];
         $category = I('get.category',1);
         $chapter = I('get.chapter',1);
@@ -62,5 +69,16 @@ class PracticeController extends CommonController {
         $this->assign('question', $question);
         $this->assign('first_question', $first_question);
         $this->display('startPractice');
+    }
+
+    /**
+    *  权限验证
+    */
+    private function verifyPermission(){
+        $uid = $_SESSION['me']['id'];
+        $num = I('get.category');
+        $category = 'course_'.$num;
+        $result = M('user_permission')->where(array('uid'=>$uid))->find();
+        return $result[$category];
     }
 }

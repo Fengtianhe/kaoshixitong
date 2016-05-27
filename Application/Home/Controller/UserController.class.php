@@ -62,7 +62,7 @@ class UserController extends Controller {
                 D('User_session')->add(array('user_id'=>$id));
                 M('user_permission')->add(array('uid'=>$id));
                 if (is_mobile_request()) {
-                    $this->success('注册成功', U('home/user/index'));
+                    $this->success('注册成功', U('home/index/index'));
                 }else{
                     $this->success('注册成功', U('home/index/index'));
                 }

@@ -10,6 +10,9 @@ a{
 a:hover{
 	color: #999;
 }
+a:visited{
+ 	color: #000;
+}
 html,body,#all{
 	height: 100%;
 	width: 100%;
