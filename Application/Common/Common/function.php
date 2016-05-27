@@ -104,7 +104,7 @@ function is_mobile_request()
  * @return array   $data['row']['colum']
  */
 function readExcel($name,$page=0){
-	include "./Application/Common/vendor/PHPExcel/IOFactory.php";
+	include "./Application/Common/Vendor/PHPExcel/IOFactory.php";
 	$objPHPExcel = \PHPExcel_IOFactory::load($name);
 	$sheets = $objPHPExcel->getAllSheets(); 
 	$sheetsinfo = array(); 
