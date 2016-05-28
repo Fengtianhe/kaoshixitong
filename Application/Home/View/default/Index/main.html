@@ -24,7 +24,7 @@
 		<div class="main">
 			<div class="title_bg">
 				<div class="big_title">
-					导游机考练习及模拟考试系统
+					导游考试网站模拟考试系统
 				</div>
 			</div>
 
@@ -52,7 +52,7 @@
 
 				<div class="info">
 					<div class="info_tit">
-						导游机考练习及模拟考试系统
+						导游考试网站模拟考试系统
 					</div>
 					<div class="info_box">
 						<div class="text">
@@ -62,14 +62,14 @@
 							<div class="btns">
 								<php>if($_SESSION['me']['formal']==1){</php>
 									<div class="button" >
-										<a href="/home/practice/index">全真练习</a>
+										<a href="/Home/practice/index">全真练习</a>
 									</div>
 									<div class="button">
-										<a href="{:U('home/test/index')}">模拟考试</a>
+										<a href="/Home/test/index">模拟考试</a>
 									</div>
 								<php>}else{</php>
 									<div class="button btn">
-										<a href="/Home/Practice/free">免费体验</a>
+										<a href="/Home/practice/free">免费体验</a>
 									</div>
 								<php>}</php>
 							</div>	
