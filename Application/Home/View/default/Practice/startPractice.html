@@ -246,7 +246,22 @@ function ajaxGetQuestion(data){
 			//选项
 			var stem = ''; 
 			for(var i in data.question_info.question_stem){
-				stem += '<li><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+data.question_info.question_stem[i].stem_content+'</li>';
+                switch(i){
+                    case '0':
+                        var serial = 'A';
+                        break;
+                    case '1':
+                        var serial = 'B';
+                        break;
+                    case '2':
+                        var serial = 'C';
+                        break;
+                    case '3':
+                        var serial = 'D';
+                        break;
+                }
+                
+				stem += '<li><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+serial+'、 '+data.question_info.question_stem[i].stem_content+'</li>';
 			}
 			$('.options').html(stem);
 

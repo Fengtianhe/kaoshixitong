@@ -262,7 +262,21 @@ function ajaxGetQuestion(data){
 
 			
 			for(var i in data.question_info.question_stem){
-				str += '<div class="form-group"><div class="checkbox"><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+data.question_info.question_stem[i].stem_content+'</label></div></div>';
+				switch(i){
+                    case '0':
+                        var serial = 'A';
+                        break;
+                    case '1':
+                        var serial = 'B';
+                        break;
+                    case '2':
+                        var serial = 'C';
+                        break;
+                    case '3':
+                        var serial = 'D';
+                        break;
+                }
+				str += '<div class="form-group"><div class="checkbox"><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+serial+'、 '+data.question_info.question_stem[i].stem_content+'</label></div></div>';
 			}
 			str += '<div class="stem">';
 			str += '<div class="question-menu cleafrfix center-block"><span class="btn btn-question-prev pull-left prev">←上一题</span><span class="btn btn-question-next pull-right next">下一题→</span><input type="submit" href="" class="btn btn-question-submit center-block push" value="提交"></div>';
