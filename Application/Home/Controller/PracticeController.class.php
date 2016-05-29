@@ -41,12 +41,18 @@ class PracticeController extends CommonController {
             } 
         }
     }
+    public function selectQuestionType(){
+        $this->assign('category',I('get.category'));
+        $this->assign('chapter',I('get.chapter'));
+        $this->display();
+    }
     public function startPractice(){
 
         $user_info = $_SESSION['me'];
         $category = I('get.category',1);
         $chapter = I('get.chapter',1);
-        $where = array('category'=>$category,'chapter'=>$chapter);
+        $questionType = I('get.question_type',1);
+        $where = array('category'=>$category,'chapter'=>$chapter,'question_type'=>$questionType);
         if ($category == 4) {
             $where['province_id'] = $user_info['province'];
         }

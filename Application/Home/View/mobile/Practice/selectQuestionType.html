@@ -47,12 +47,8 @@
                     已更新至:<?php echo date('Y/m/d',$maxtime);?></p>
             </div>
             <div class="gonggao">
-                <a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="" class="btn center-block btn-zs">第1章</a>
-			<a href="/home/practice/selectQuestionType?category={$category}&chapter=2" rel="" class="btn center-block btn-zs">第2章</a>
-			<a href="/home/practice/selectQuestionType?category={$category}&chapter=3" rel="" class="btn center-block btn-zs">第3章</a>
-			<a href="/home/practice/selectQuestionType?category={$category}&chapter=4" rel="" class="btn center-block btn-zs">第4章</a>
-			<a href="/home/practice/selectQuestionType?category={$category}&chapter=5" rel="" class="btn center-block btn-zs">第5章</a>
-			<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="" class="btn center-block btn-zs">第6章</a>        
+                <a href="/home/practice/startPractice?category={$category}&chapter={$chapter}&question_type=1" rel="" class="btn center-block btn-zs">单选</a>
+    			<a href="/home/practice/startPractice?category={$category}&chapter={$chapter}&question_type=2" rel="" class="btn center-block btn-zs">多选</a>   
             </div>
         </div>
     </div>
