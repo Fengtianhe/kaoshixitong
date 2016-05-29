@@ -36,6 +36,19 @@ class QuestionController extends CommonController {
 
         $totalCount  = M('Question')->where($where)->count('id');
         $lists = M('Question')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        foreach ($lists as $key=>$value) {
+            $stem = M('question_stem')->where("question_id = {$value['id']}")->select();
+            $str = '';
+            foreach ($stem as $k => $v) {
+                if ($v['is_true']) {
+                    $str .= '<b>'.$v['stem_content'].'</b>';
+                } else {
+                    $str .= $v['stem_content'];
+                }
+                $str .= '|';
+            }
+            $lists[$key]['stem'] = $str;
+        }
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
         $this->assign('lists', $lists);

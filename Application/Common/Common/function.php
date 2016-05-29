@@ -113,7 +113,7 @@ function readExcel($name,$page=0){
 	$sheetsinfo["rows"] = $sheet->getHighestRow(); 
 
 	for($row=1;$row<=$sheetsinfo["rows"];$row++){ 
-		for($column=0;$column<12;$column++){ 
+		for($column=0;$column<13;$column++){ 
 			$sheetData[$row][$column] = $sheet->getCellByColumnAndRow($column, $row)->getValue(); 
 		} 
 	} 

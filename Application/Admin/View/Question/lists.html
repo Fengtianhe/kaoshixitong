@@ -75,12 +75,13 @@
 			<li><a class="edit" href="/admin/question/saveQuestion?id={sid}&is_del=0" target="ajaxTodo" warn="请选择一道题" title="确认恢复么？"><span>恢复</span></a></li>
 		</ul>
 	</div>
-	<table class="table" width="100%" layoutH="135">
+	<table class="table" width="100%" layoutH="165">
 		<thead>
 			<tr>
 				<th width="50">Id</th>
 				<th width="220">题干</th>
 				<th width="50">题型</th>
+				<th width="150">选项</th>
 				<th width="80">分类</th>
 				<th width="70">创建日期</th>
 				<th width="70">修改日期</th>
@@ -93,9 +94,10 @@
 				<td>{$vo.id}</td>
 				<td>{$vo.title}</td>
 				<td>{$vo.question_type}</td>
+				<td>{$vo.stem}</td>
 				<td>{$vo.category}</td>
 				<td><?php echo date('Y-m-d H:i:s',$vo['create_time']) ?></td>
-				<td><?php echo date('Y-m-d H:i:s',$vo['update_time']) ?></td>
+				<td><?php echo $vo['update_time']? date('Y-m-d H:i:s',$vo['update_time']) : '未修改'; ?></td>
 				<td>{$vo.admin_user_id}</td>
 			</tr>
 			</volist>

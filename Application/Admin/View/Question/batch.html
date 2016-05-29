@@ -23,7 +23,7 @@
 			<ul>
 				<input type="hidden" name="id" value="{$question_info['id']}">
 				<input type="hidden" name="close_dialog" value="1">
-				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" class="sub">提交</button></div></div></li>
 				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
 			</ul>
 		</div>
@@ -31,5 +31,9 @@
 	
 </div>
 <script type="text/javascript">
-	
+	//防止多次提交
+	$(document).on('click','.sub',function(){
+		alert('qwe');
+		$(this).attr('disabled',true);
+	})
 </script>
