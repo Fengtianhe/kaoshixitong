@@ -108,7 +108,7 @@
 				<th width="120">修改日期</th>
 				<th width="120" orderField="lastlogintime" class="<?php if ($page['orderField'] == 'lastlogintime') echo $page['orderDirection']?>">最后登陆</th>
 				<th width="30">权限</th>
-				<th width="20">操作</th>
+				<th width="80">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -143,6 +143,7 @@
 				<td>
 					<!-- <a title="删除" target="ajaxTodo" href="demo/common/ajaxDone.html?id=xxx" class="btnDel">删除</a> -->
 					<a title="编辑" target="dialog" href="/admin/user/edit_user?id={$vo.id}" class="btnEdit">编辑</a>
+					<a target="ajaxTodo" href="/admin/user/del?id={$vo.id}" class="btnDel" title="确定删除么?">删除</a>
 				</td>
 			</tr>
 			</volist>

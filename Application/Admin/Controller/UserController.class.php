@@ -173,6 +173,22 @@ class UserController extends CommonController {
         }
     }
 
+    public function del(){
+        $id = I('get.id');
+        M('User')->where(array('id'=>$id))->delete();
+        M('User_session')->where(array('user_id'=>$id))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
+        $result['navTabId'] = "user";
+        $result['rel']   = "user";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+    }
+
     public function online(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);
