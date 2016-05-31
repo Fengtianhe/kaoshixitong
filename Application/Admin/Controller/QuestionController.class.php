@@ -27,8 +27,8 @@ class QuestionController extends CommonController {
         if (I('request.title')) {
             $where['title'] = I('request.title');
         }
-        if (I('request.type')) {
-            $where['type'] = I('request.type');
+        if (I('request.question_type')) {
+            $where['question_type'] = I('request.question_type');
         }
         if (I('request.category')) {
             $where['category'] = I('request.category');
@@ -51,6 +51,8 @@ class QuestionController extends CommonController {
         }
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
+        $this->assign('question_type',$this->question_type);
+        $this->assign('category',$this->question_category);
         $this->assign('lists', $lists);
         $this->display();
     }
@@ -131,6 +133,21 @@ class QuestionController extends CommonController {
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
+        $result['navTabId'] = "question";
+        $result['rel']   = "question";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+    }
+
+    public function del(){
+        $id = I('get.id');
+        M('Question')->where(array('id'=>$id))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
         $result['navTabId'] = "question";
         $result['rel']   = "question";
         if (I('close_dialog') == 1) {

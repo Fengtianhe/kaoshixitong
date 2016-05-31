@@ -16,15 +16,15 @@
 			</li>
 			<li>
 				题干：
-				<input type="text" name="email" value="<?php echo $_REQUEST['title']?>"/>
+				<input type="text" name="title" value="<?php echo $_REQUEST['title']?>"/>
 			</li>
 			 <li>
 				<p style="width:500px">
 					题型：
-					<select class="" name="status" id="status">
-							<option value="">所有用户</option>
-							<foreach name="user_status" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['status']">selected="selected"</if>>{$statu.name}</option>
+					<select class="" name="question_type" id="question_type">
+							<option value="">所有题型</option>
+							<foreach name="question_type" item="statu">
+							<option value="{$key}" <if condition="$key eq $_REQUEST['question_type']">selected="selected"</if>>{$statu.name}</option>
 							</foreach>
 					</select>
 				</p>
@@ -32,10 +32,10 @@
 			<li>
 				<p style="width:500px">
 					分类：
-					<select class="" name="is_verify_email" id="is_verify_email">
+					<select class="" name="category" id="category">
 							<option value="">全部</option>
-							<foreach name="email_verify_status" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['is_verify_email']">selected="selected"</if>>{$statu.name}</option>
+							<foreach name="category" item="statu">
+							<option value="{$key}" <if condition="$key eq $_REQUEST['category']">selected="selected"</if>>{$statu.name}</option>
 							</foreach>
 					</select>
 				</p>
@@ -73,6 +73,7 @@
 			<li><a class="edit" href="/admin/question/editorQuestion?id={sid}" target="dialog" width="700" height="600" warn="请选择一道题"><span>修改</span></a></li>
 			<li><a class="edit" href="/admin/question/saveQuestion?id={sid}&is_del=1" target="ajaxTodo" warn="请选择一道题" title="确认删除么？"><span>删除</span></a></li>
 			<li><a class="edit" href="/admin/question/saveQuestion?id={sid}&is_del=0" target="ajaxTodo" warn="请选择一道题" title="确认恢复么？"><span>恢复</span></a></li>
+			<li><a class="edit" href="/admin/question/del?id={sid}" target="ajaxTodo" warn="请选择一道题" title="确认删除么？"><span>物理删除</span></a></li>
 		</ul>
 	</div>
 	<table class="table" width="100%" layoutH="165">

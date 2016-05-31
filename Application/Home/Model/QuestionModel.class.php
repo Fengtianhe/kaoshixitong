@@ -8,7 +8,9 @@ class QuestionModel extends Model {
 		$question = $this->getQuestionByWhere($where);
 		$question_infos = $question['question'];
 		$question_info = current($question_infos);
-		$question_info['question_stem'] = $question['stem'][$question_info['id']];
+		$question_stem = $question['stem'][$question_info['id']];
+		shuffle($question_stem);
+		$question_info['question_stem'] = $question_stem;
 		return $question_info;
 	}
 	function getQuestionByWhere($where)

@@ -6,54 +6,19 @@
 </form>
 
 <div class="pageHeader">
-	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/user/lists" method="post">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/user/online" method="post">
 	<div class="searchBar">
 		<ul class="searchContent" style="height:auto">
+		<!--
 			<li>
 				姓名：
-				<input type="text" name="id" value="<?php echo $_REQUEST['realname']?>"/>
+				<input type="text" name="realname" value="<?php echo $_REQUEST['realname']?>"/>
 			</li>
 			<li>
 				邮 箱：
 				<input type="text" name="email" value="<?php echo $_REQUEST['email']?>"/>
 			</li>
-			<li>
-				身份证号：
-				<input type="text" name="nickname" value="<?php echo $_REQUEST['idcard']?>"/>
-			</li>
-			<li>
-				<p style="width:500px">
-					状　　态：
-					<select class="" name="status" id="status">
-							<option value="">所有用户</option>
-							<foreach name="user_status" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['province']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
-					</select>
-				</p>
-			</li>
-			<li>
-				<p style="width:500px">
-					省    份：
-					<select class="" name="province" id="area_id">
-							<option value="">所有城市</option>
-							<volist name="areas" id="vo">
-							<option value="{$vo.area_id}" <if condition="$vo['area_id'] eq $_REQUEST['province']">selected="selected"</if>>{$vo.area_name}</option>
-							</volist>
-					</select>
-				</p>
-			</li>
-			<li>
-				<p style="width:500px">
-					会员状态：
-					<select class="" name="fstatus" id="fstatus">
-							<option value="">所有用户</option>
-							<foreach name="formal_status" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['fstatus']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
-					</select>
-				</p>
-			</li>
+		-->
 			<!--<li>
 				<p style="width:500px">
 					邮箱验证状态：
@@ -81,17 +46,18 @@
 				<input type="text" class="date" name="start_time" value="<?php echo $_REQUEST['start_time']?>" style="width:75px"/>~<input type="text" class="date" name="end_time" value="<?php echo $_REQUEST['end_time']?>" style="width:75px"/>
 			</li> -->
 		</ul>
-		
+		<!--
 		<div class="subBar">
 			<ul>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查找</button></div></div></li>
 			</ul>
 		</div>
+		-->
 	</div>
 	</form>
 </div>
 <div class="pageContent">
-	<table class="table" width="100%" layoutH="135">
+	<table class="table" width="100%" layoutH="65">
 		<thead>
 			<tr>
 				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
