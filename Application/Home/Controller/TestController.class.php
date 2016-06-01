@@ -74,8 +74,10 @@ class TestController extends CommonController {
         if (is_array($errors) && !empty($errors)) {
             $where['id'] = array('in',$errors);
             $error_question = M("question")->where($where)->select();
-            var_dump($error_question);
+            
         }
+        //$error_question 是打错的所有题
+        echo getGradeLevel($grade);
         echo 'grade:'.$grade;
         
     }

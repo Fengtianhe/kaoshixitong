@@ -29,6 +29,10 @@
 
     <link rel="stylesheet" href="__PC__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="__PC__/css/iframe.css">
+    <style type="text/css">
+    	.num {margin-top:0px !important;margin-bottom:10px !important;}
+    	.current {background: #19B4ED !important;color:#fff !important;}
+    </style>
     <title>考试系统</title>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" 
@@ -148,7 +152,7 @@ $(function(){
 	var stop = window.setInterval("autoFinishTest()",1000);
 	//点击答题卡获取题
 	$('.num').click(function(){
-		$(this).closest('.content_right').find('.current').removeClass('current');
+		$(this).closest('.right').find('.current').removeClass('current');
 		$(this).addClass('current');
 		var sn = $(this).html();
 		var id = $(this).attr('rel');
@@ -197,8 +201,8 @@ function autoFinishTest(){
  * @return 
  */
 function submitQuestion(){
-	var id = $('.question').attr('rel');
-	var type = $('.question').attr('type');
+	var id = $('.question_info').attr('rel');
+	var type = $('.question_info').attr('type');
 	var input = $('.question input[rel="1"]');
 	var checked = $('.question input:checked');
 	var answer_true = false;
@@ -221,6 +225,11 @@ function submitQuestion(){
 	checked.each(function(){
 		selected +=  $(this).val() + ',';
 	});
+	console.log($('.question_info'));
+	console.log(id);
+	console.log(select);
+	console.log(selected);
+	console.log(type);
 	$.ajax({
 		type:'post',
 		url:'/home/test/handletest',
@@ -286,7 +295,7 @@ function ajaxGetQuestion(data){
 					break;
 			}
 			//题目
-			var str = '<h3 class="question-title question" rel="'+data.question_info.id+'" type="'+data.question_info.question_type+'">'+data.question_info.sn+'.'+'('+type+')'+data.question_info.title+'</h3>';
+			var str = '<h3 class="question-title question_info" rel="'+data.question_info.id+'" type="'+data.question_info.question_type+'">'+data.question_info.sn+'.'+'('+type+')'+data.question_info.title+'</h3>';
 			
 
 			//选项
