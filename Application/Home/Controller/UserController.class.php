@@ -107,6 +107,8 @@ class UserController extends Controller {
     	if ($user_info = $user->where(array('idcard'=>$idcard, 'password'=>md5($password)))->find()) {
             if ($user_info['is_del'] == '1') {
                 echo '<script>alert("您的账号无法登陆，请联系管理员");history.back();</script>';
+            }elseif($user_info['time_length'] <= 0){
+                echo '<script>alert("您的使用时间已到，请充值后再登录");history.back();</script>';
             }else{
                 $session_id = session_id();
                 $last_login_time = time();

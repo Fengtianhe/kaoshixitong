@@ -76,10 +76,21 @@ class TestController extends CommonController {
             $error_question = M("question")->where($where)->select();
             
         }
+        $stem = M('question_stem');
+        foreach ($error_question as $k => &$v) {
+            $map['question_id'] = $v['id'];
+            $map['is_ture'] = 1;
+            $v['true'] = $stem->where($map)->getField('stem_content');
+            $v['tid'] = $k+1;
+        }
         //$error_question 是打错的所有题
-        echo getGradeLevel($grade);
-        echo 'grade:'.$grade;
-        
+        $Level = getGradeLevel($grade);
+        $this->assign('grade',$grade);
+        $this->assign('level',$Level);
+        $this->assign('error',$error_question);
+        // var_dump($error_question);
+        // die();
+        $this->display();
     }
     function test(){
         $a = gcookie('person_test_result');

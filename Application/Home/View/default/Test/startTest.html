@@ -84,8 +84,8 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
         </div>
 
     </div>
-    <div class="right">
-        <ul class="timus list-unstyled">
+    <div class="right" style="height:100%;">
+        <ul class="timus list-unstyled" style="height:35%">
         	<div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">单选题</div>
             <volist id="vo" name="question['radio']">
             <a class="num active radio" rel="{$vo.id}">
@@ -93,7 +93,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
             </a>
             </volist>
         </ul>
-        <ul class="timus list-unstyled">
+        <ul class="timus list-unstyled" style="height:35%;">
         	<div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">多选题</div>
             <volist id="vo" name="question['checkbox']">
             <a class="num active checkbox" rel="{$vo.id}">
@@ -114,7 +114,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
                 <span class="s2">2</span>
                 已答题
             </div> -->
-            <a  class="btn btn-submit finish">完成提交</a>
+            <!-- <a  class="btn btn-submit finish">完成提交</a> -->
         </div>
     </div>
 
@@ -320,7 +320,7 @@ function ajaxGetQuestion(data){
 			str += '</ul>';
 			
             //按钮
-            str += '<div class="question-btns"> <a  class="btn btn-prev prev">上一题</a> <a  class="btn btn-next next">下一题</a> <a  class="btn btn-question-submit push">提交</a></div>';
+            str += '<div class="question-btns"> <a  class="btn btn-next finish">交卷</a> <a  class="btn btn-question-submit push">提交</a></div>';
 
 			$('.question-on').html(str);
 			// str += '<p><span class="push btn">提交</span><span class="prev btn">上一题</span><span class="next btn">下一题</span><span class="finish btn">交卷</span></p>';
