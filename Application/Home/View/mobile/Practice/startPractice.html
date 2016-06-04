@@ -160,7 +160,13 @@
 		if (answer_true) {
 			$('.results').html('回答正确');
 		} else {
-			$('.results').html('回答错误');
+			var answer_str = '';
+            input.each(function(){
+                var s = $(this).closest('label').text().substr(0,1);
+                answer_str += s + ',';
+            });
+            answer_str = answer_str.replace(/(^,*)|(,*$)/g, "");
+			$('.results').html('回答错误 正确答案:'+answer_str);
 		}
 	});
 	});

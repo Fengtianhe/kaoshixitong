@@ -310,7 +310,7 @@ body a:hover {
 }
 .test .tipleft {
   background: #004F6D;
-  width: 80px;
+  /*width: 80px; */
 }
 .test .tipleft h4 {
   font-size: 14px;
