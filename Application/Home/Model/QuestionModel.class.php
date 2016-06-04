@@ -42,6 +42,7 @@ class QuestionModel extends Model {
 	 * @return array()
 	 */
 	function getFreeQuestion(){
+		$where['category'] = 1;
 		$where['question_type'] = 1;
 		$radio_question = $this->getSimpleQuestionByWhere($where,0,50);
 		$where['question_type'] = 2;
