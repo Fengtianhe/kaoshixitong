@@ -185,7 +185,13 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 		if (answer_true) {
 			$('.answer-result').html('回答正确');
 		} else {
-			$('.answer-result').html('回答错误');
+            var answer_str = '';
+            input.each(function(){
+                var s = $(this).closest('li').text().substr(0,1);
+                answer_str += s + ',';
+            });
+            answer_str = answer_str.replace(/(^,*)|(,*$)/g, "");
+			$('.answer-result').html('回答错误 正确答案:'+answer_str);
 		}
 	});
 	});
