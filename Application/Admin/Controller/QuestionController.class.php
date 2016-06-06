@@ -231,4 +231,20 @@ class QuestionController extends CommonController {
         }
         redirect(U('admin/index/index'));
     }
+
+    public function batchDel(){
+        $id = I('post.ids');
+        $id = explode(',',$id);
+        $list = M('Question')->where(array('id'=>array('in',$id)))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
+        $result['navTabId'] = "question";
+        $result['rel']   = "question";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+    }
 }
