@@ -38,11 +38,11 @@ class QuestionModel extends Model {
 		return $question;
 	}
 	/**
-	 * 单选 多选 各10道
+	 * 单选 多选 各50道
 	 * @return array()
 	 */
 	function getFreeQuestion(){
-		$where['category'] = 1;
+		$where['category'] = 3;
 		$where['question_type'] = 1;
 		$radio_question = $this->getSimpleQuestionByWhere($where,0,50);
 		$where['question_type'] = 2;
