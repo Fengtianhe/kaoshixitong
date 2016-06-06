@@ -90,6 +90,7 @@ class QuestionController extends CommonController {
         $data['title']              = I('request.title','');
         $data['question_type']      = I('request.question_type',0);
         $data['category']           = I('request.category',0);
+        $data['chapter']            = I('request.chapter',0);
         $data['province_id']        = I('request.province',0);
         $data['explain']            = I('request.explain',0);
         $data['stem_content']       = I('request.stem_content',0);
