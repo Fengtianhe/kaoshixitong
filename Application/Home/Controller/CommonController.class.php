@@ -24,7 +24,10 @@ class CommonController extends Controller {
         if($user_info['is_del'] == 1){
             echo '<script>alert("您的账号无法登陆，请联系管理员");window.location.href = "/home/user/logout";</script>';
         }
-        if ($user_info['time_length'] <= 0) {
+        if($user_info['formal'] == -1){
+            // $this->redirect(U('home/practice/free'));
+            $this->display('index/main');
+        }elseif ($user_info['formal'] == 1 && $user_info['time_length'] <= 0) {
             echo '<script>alert("您的使用时间已到，请充值后再登录");window.location.href = "/home/user/logout";</script>';
         }
     }
