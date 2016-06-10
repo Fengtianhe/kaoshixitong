@@ -28,9 +28,9 @@ function handle_user_session($user_session) {
 	} else {
 		$time_length = 1800;
 	}
-	if ($user_session['session_id']) {
-		D('User')->where(array('id'=>$user_session['user_id']))->setDec('time_length',$time_length);
-	}
+	//if ($user_session['session_id']) {
+	//	D('User')->where(array('id'=>$user_session['user_id']))->setDec('time_length',$time_length);
+	//}
 	
 	$content = file_get_contents($user_sessionfile);
 	if ($content) {
