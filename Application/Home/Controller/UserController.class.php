@@ -58,6 +58,7 @@ class UserController extends Controller {
     		//注册
     		if (!$list = $user->where(array('idcard'=>$idcard))->find()) {
     			$data['create_time'] = time();
+                $data['time_length'] = 1*60*60;
     			$id = $user->add($data);
                 D('User_session')->add(array('user_id'=>$id));
                 M('user_permission')->add(array('uid'=>$id));
