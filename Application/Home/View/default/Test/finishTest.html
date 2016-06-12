@@ -121,3 +121,21 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 
 
 <include file="right"/>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                var hashLocation = location.hash;
+                var hashSplit = hashLocation.split("#!/");
+                var hashName = hashSplit[1];
+                    if (hashName !== '') {
+                    var hash = window.location.hash;
+                        if (hash === '') {
+                            window.location.href="{:U('home/test/index')}";
+                        }
+                    }
+            });
+        window.history.pushState('finish', null, './#finish');
+        }
+    });
+</script>

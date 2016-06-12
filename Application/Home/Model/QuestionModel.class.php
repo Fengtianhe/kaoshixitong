@@ -110,8 +110,12 @@ class QuestionModel extends Model {
 		$second_radio = array_slice($two_radio,0,30);
 		$first_checkbox = array_slice($one_checkbox,0,35);
 		$second_checkbox = array_slice($two_checkbox,0,35);
-		$result['radio'] = array_merge($first_radio,$second_radio);
-		$result['checkbox'] = array_merge($first_checkbox,$second_checkbox);
+		$all_radio = array_merge($first_radio,$second_radio);
+		$all_checkbox = array_merge($first_checkbox,$second_checkbox);
+		shuffle($all_radio);
+		shuffle($all_checkbox);
+		$result['radio'] = $all_radio;
+		$result['checkbox'] = $all_checkbox;
 		return $result;
 	}
 }

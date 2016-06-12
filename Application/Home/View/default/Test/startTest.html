@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="__PC__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="__PC__/css/iframe.css">
     <style type="text/css">
-    	.num {margin-top:0px !important;margin-bottom:10px !important;}
+    	.num {margin-top:0px !important;margin-bottom:10px !important;margin-left:3px !important;border-radius:5px;}
     	.current {background: #19B4ED !important;color:#fff !important;}
     </style>
     <title>考试系统</title>
@@ -85,16 +85,18 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 
     </div>
     <div class="right" style="height:100%;">
-        <ul class="timus list-unstyled" style="height:35%">
-        	<div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">单选题</div>
+    <div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">单选题</div>
+        <ul class="timus list-unstyled" style="height:35%;clear:both">
+        	
             <volist id="vo" name="question['radio']">
             <a class="num active radio" rel="{$vo.id}">
                 {$key+1}
             </a>
             </volist>
         </ul>
-        <ul class="timus list-unstyled" style="height:35%;">
-        	<div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">多选题</div>
+        <div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">多选题</div>
+        <ul class="timus list-unstyled" style="height:35%;clear:both">
+        	
             <volist id="vo" name="question['checkbox']">
             <a class="num active checkbox" rel="{$vo.id}">
                 {$key+1}
@@ -320,7 +322,7 @@ function ajaxGetQuestion(data){
 			str += '</ul>';
 			
             //按钮
-            str += '<div class="question-btns"> <a  class="btn btn-next finish">交卷</a> <a  class="btn btn-question-submit push">提交</a></div>';
+            str += '<div class="question-btns"> <a  class="btn btn-question-submit push">提交</a> <a  class="btn btn-prev next">标注</a> <a  class="btn btn-next finish">交卷</a></div>';
 
 			$('.question-on').html(str);
 			// str += '<p><span class="push btn">提交</span><span class="prev btn">上一题</span><span class="next btn">下一题</span><span class="finish btn">交卷</span></p>';
