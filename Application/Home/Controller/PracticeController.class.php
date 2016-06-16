@@ -80,7 +80,8 @@ class PracticeController extends CommonController {
      * @return [type] [description]
      */
     public function free(){
-        $question = D('Question')->getFreeQuestion();
+        $type = I('get.type',0);
+        $question = D('Question')->getFreeQuestion($type);
         $first_question = D('Question')->getInfoById($question[0]['id']);
         $this->assign('question', $question);
         $this->assign('first_question', $first_question);

@@ -38,16 +38,14 @@ class QuestionModel extends Model {
 		return $question;
 	}
 	/**
-	 * 单选 多选 各50道
+	 * 单选或多选 100道
 	 * @return array()
 	 */
-	function getFreeQuestion(){
+	function getFreeQuestion($type){
 		$where['category'] = 3;
-		$where['question_type'] = 1;
-		$radio_question = $this->getSimpleQuestionByWhere($where,0,50);
-		$where['question_type'] = 2;
-		$checkbox_question = $this->getSimpleQuestionByWhere($where,0,50);
-		return  array_merge($radio_question, $checkbox_question);
+		$where['question_type'] = $type;
+		$question = $this->getSimpleQuestionByWhere($where,0,100);
+		return $question;
 	}
 
 	function getTestQuestion($no, $province = 0){
