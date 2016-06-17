@@ -79,7 +79,7 @@ class TestController extends CommonController {
         $stem = M('question_stem');
         foreach ($error_question as $k => &$v) {
             $map['question_id'] = $v['id'];
-            $map['is_ture'] = 1;
+            $map['is_true'] = 1;
             $v['true'] = $stem->where($map)->getField('stem_content');
             $v['tid'] = $k+1;
         }
@@ -88,8 +88,6 @@ class TestController extends CommonController {
         $this->assign('grade',$grade);
         $this->assign('level',$Level);
         $this->assign('error',$error_question);
-        // var_dump($error_question);
-        // die();
         $this->display();
     }
     function test(){

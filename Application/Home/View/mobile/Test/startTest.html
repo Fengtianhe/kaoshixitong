@@ -297,7 +297,7 @@ function ajaxGetQuestion(data){
 			var selected = data.question_answer.selected;
 
 			for (var i in selected) {
-				$('.question input[value="'+selected[i]+'"]').prop('checked',true);
+				$('.questions input[value="'+selected[i]+'"]').prop('checked',true);
 			}
 		}
 	});
