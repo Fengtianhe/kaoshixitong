@@ -3,22 +3,31 @@
 <head>
 <style>
 .num{
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
 	display: block;
 	text-align: center;
 	color: #50267c;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	float: left;
-	margin: 10px;
+	margin: 2px;
+	margin-top:0px !important;
+	border-radius:3px;
+}
+.num_title {
+	clear:both;
+	height:20px;
+	line-height: 30px
 }
 .current{
-	background: #ccc;
+	background: #19B4ED;
+	color:#fff;
 }
 .text-right{
 	width: 120px;
 }
+.btn-next {background:#999 !important;}
 </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,18 +77,14 @@
                     <div class="test-menu"><a href="/Home/User/logout" class="btn btn-test-menu">退出登录</a></div>
                 </div>
                 <div class="questions">
-                    
-                    
-                       
-                    
-
                 </div>
                 
                 <div class="all_num">
+					<p class="num_title"><b>单选</b></p>
                     <volist id="vo" name="question['radio']">
 						<span class="num radio" rel="{$vo.id}">{$key+1}</span>
 					</volist>
-					
+					<p class="num_title"><b>多选</b></p>
 					<volist id="vo" name="question['checkbox']">
 						<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
 					</volist>
@@ -120,7 +125,7 @@
 				var stop = window.setInterval("autoFinishTest()",1000);
 				//点击答题卡获取题
 				$('.num').click(function(){
-					$(this).closest('.content_right').find('.current').removeClass('current');
+					$(this).closest('.all_num').find('.current').removeClass('current');
 					$(this).addClass('current');
 					var sn = $(this).html();
 					var id = $(this).attr('rel');
@@ -140,7 +145,12 @@
 				});
 				//提交处理
 				$(document).on('click','.push',function(){
-					submitQuestion();
+					var status = submitQuestion();
+					if (status == 'ok') {
+						$('.num.current').addClass('btn-success');
+					} else {
+						$('.num.current').addClass('btn-danger');
+					}
 					moveQuestion('next');
 				});
 			});
@@ -171,8 +181,8 @@ function autoFinishTest(){
 function submitQuestion(){
 	var id = $('.question').attr('rel');
 	var type = $('.question').attr('type');
-	var input = $('.question input[rel="1"]');
-	var checked = $('.question input:checked');
+	var input = $('.questions input[rel="1"]');
+	var checked = $('.questions input:checked');
 	var answer_true = false;
 	if (input.length == checked.length) {
 		answer_true = true;
@@ -200,6 +210,7 @@ function submitQuestion(){
 		async: false,
 		data:{'id':id,'select':select,'type':type,'selected':selected}
 	});
+	return select;
 }
 /**
  * 移动题目 主要用于上一题 下一题
@@ -210,10 +221,10 @@ function moveQuestion(direction){
 	var current = $('.num.current');
 	switch (direction) {
 		case "prev":
-		var current_direction = current.prev();
+		var current_direction = current.prev('.num');
 			break;
 		case "next":
-		var current_direction = current.next();
+		var current_direction = current.next('.num');
 			break;
 	}
 	if (!(current_direction.length > 0)) {
@@ -279,10 +290,9 @@ function ajaxGetQuestion(data){
 				str += '<div class="form-group"><div class="checkbox"><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+serial+'、 '+data.question_info.question_stem[i].stem_content+'</label></div></div>';
 			}
 			str += '<div class="stem">';
-			str += '<div class="question-menu cleafrfix center-block"><span class="btn btn-question-prev pull-left prev">←上一题</span><span class="btn btn-question-next pull-right next">下一题→</span><input type="submit" href="" class="btn btn-question-submit center-block push" value="提交"></div>';
+			//str += '<div class="question-menu cleafrfix center-block"><span class="btn btn-question-prev pull-left prev">←上一题</span><span class="btn btn-question-next pull-right next">标注</span><input type="submit" href="" class="btn btn-question-submit center-block push" value="提交"></div>';
+			str += '<div class="question-menu cleafrfix center-block"> <a  class="btn btn-question-submit push">提交</a> <a  class="btn btn-next next">标注</a> <a  class="btn finish">交卷</a></div>';
 			str += '</div>';
-			//str += '<p class = "explain hide">分析：'+data.question_info.explain+'</p>';
-			//str += '<p class = "result"></p>';
 			$('.questions').html(str);
 			var selected = data.question_answer.selected;
 

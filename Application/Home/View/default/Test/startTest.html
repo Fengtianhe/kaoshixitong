@@ -47,7 +47,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
         <img src="__PC__/img/logo.png" class="logo" alt="">
         <h1>导游考试模拟系统</h1>
         <div class="test-info">
-            <div class="info">
+            <!-- <div class="info">
                 <span class="name">开始时间</span>
                 00:00:00
             </div>
@@ -62,7 +62,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
             <div class="info">
                 <span class="name">创建人员</span>
                 XXX
-            </div>
+            </div> -->
             <div class="time">
                 <span class="i">90</span>:
 				<span class="s">00</span>
@@ -174,7 +174,12 @@ $(function(){
 	});
 	//提交处理
 	$(document).on('click','.push',function(){
-		submitQuestion();
+		var status = submitQuestion();
+		if (status == 'ok') {
+			$('.num.current').addClass('btn-success');
+		} else {
+			$('.num.current').addClass('btn-danger');
+		}
 		moveQuestion('next');
 	});
 });
@@ -200,7 +205,7 @@ function autoFinishTest(){
 }
 /**
  * 答题
- * @return 
+ * @return ok or error
  */
 function submitQuestion(){
 	var id = $('.question_info').attr('rel');
@@ -227,11 +232,6 @@ function submitQuestion(){
 	checked.each(function(){
 		selected +=  $(this).val() + ',';
 	});
-	console.log($('.question_info'));
-	console.log(id);
-	console.log(select);
-	console.log(selected);
-	console.log(type);
 	$.ajax({
 		type:'post',
 		url:'/home/test/handletest',
@@ -239,6 +239,7 @@ function submitQuestion(){
 		async: false,
 		data:{'id':id,'select':select,'type':type,'selected':selected}
 	});
+	return select;
 }
 /**
  * 移动题目 主要用于上一题 下一题
