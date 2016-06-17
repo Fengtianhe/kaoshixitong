@@ -3,18 +3,21 @@
 <head>
 <style>
 .num{
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
 	display: block;
 	text-align: center;
 	color: #50267c;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	float: left;
-	margin: 10px;
+	margin: 2px;
+	margin-top:0px !important;
+	border-radius:3px;
 }
 .current{
-	background: #ccc;
+	background: #19B4ED;
+	color:#fff;
 }
 .text-right{
 	width: 120px;
@@ -88,7 +91,7 @@
                 <div class="all_num">
 					<volist id="vo" name="question">
 					<!-- <a href="/home/practice/startPractice?category=1" rel="{$vo.id}">{$key+1}</a> -->
-					<span class="num" rel="{$vo.id}">{$key+1}</span>
+					<span class="num <?php if ($res = $results[$vo['id']]){ if ($res['select'] == 'ok') {echo 'btn-success';} else {echo 'btn-danger'; } }?>" rel="{$vo.id}">{$key+1}</span>
 					</volist>
 				</div>
             </div>
@@ -122,7 +125,9 @@
     	<script>
 	//初始化获取第一题
 	ajaxGetQuestion({id:{$first_question.id}});
-	$('.num:eq(0)').addClass('current');
+	if (!($('.num:eq(0)').hasClass('btn-success') || $('.num:eq(0)').hasClass('btn-danger'))) {
+        $('.num:eq(0)').addClass('current');
+    }
 	$(function(){
 	//点击答题卡获取题
 	$('.num').click(function(){
@@ -133,7 +138,7 @@
 		ajaxGetQuestion(data);
 		return false;
 	});
-	$(document).on('click','.next',function(){
+	/*$(document).on('click','.next',function(){
 		moveQuestion('next');
 		$('.explain').addClass('hide');
 		$('.r').addClass('hide');
@@ -141,12 +146,34 @@
 	});
 	$(document).on('click','.prev',function(){
 		moveQuestion('prev');
+	});*/
+	$(document).on('click','.next',function(){
+        submitQuestion();
+        $('.explain').addClass('hide');
+		moveQuestion('next');
+	});
+	$(document).on('click','.prev',function(){
+        submitQuestion();
+        $('.explain').addClass('hide');
+		moveQuestion('prev');
 	});
 	//提交处理
 	$(document).on('click','.push',function(){
 		var input = $('input[rel="1"]');
 		var checked = $('input:checked');
-		var answer_true = false;
+		submitQuestion();
+	});
+	});
+/**
+ * 答题
+ * @return ok or error
+ */
+function submitQuestion(){
+    	var id = $('.questions-text').attr('rel');
+        var type = $('.questions-text').attr('type');
+        var input = $('.questions input[rel="1"]');
+        var checked = $('.questions input:checked');
+        var answer_true = false;
 		if (input.length == checked.length) {
 			answer_true = true;
 			for(var i =0;i<input.length;i++){
@@ -168,8 +195,28 @@
             answer_str = answer_str.replace(/(^,*)|(,*$)/g, "");
 			$('.results').html('回答错误 正确答案:'+answer_str);
 		}
-	});
-	});
+        if (answer_true) {
+            var select = 'ok';
+            $('.num.current').addClass('btn-success').removeClass('btn-danger');
+        } else {
+            var select = 'error';
+            $('.num.current').addClass('btn-danger').removeClass('btn-success');
+        }
+        
+        //获取 用户选择答案
+        var selected = '';
+        checked.each(function(){
+            selected +=  $(this).val() + ',';
+        });
+        $.ajax({
+            type:'post',
+            url:'/home/practice/ajaxhandle',
+            dataType:'json',
+            async: false,
+            data:{'id':id,'select':select,'type':type,'selected':selected}
+        });
+        return select;
+}
 /**
  * 移动题目 主要用于上一题 下一题
  * @param  string direction 方向 next prev
@@ -223,6 +270,8 @@ function ajaxGetQuestion(data){
 			//添加题目
 			var questionstip = '<span class="questionstip">'+type+'</span>'+data.question_info.sn+'、'+data.question_info.title;
 			$('.questions-text').html(questionstip);
+			$('.questions-text').attr('rel',data.question_info.id);
+            $('.questions-text').attr('type',data.question_info.question_type);
 
 			//添加选项和按钮
 			var str = '';
@@ -250,7 +299,11 @@ function ajaxGetQuestion(data){
 			//添加答案详解
 			var explain = data.question_info.explain;
 			$('.r').html(explain);
-			
+			var selected = data.question_answer.selected;
+
+            for (var i in selected) {
+                $('.questions input[value="'+selected[i]+'"]').prop('checked',true);
+            }
 		}
 	});
 }

@@ -29,6 +29,9 @@
 
     <link rel="stylesheet" href="__PC__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="__PC__/css/iframe.css">
+    <style type="text/css">
+        .current {background: #19B4ED !important;color:#fff !important;}
+    </style>
     <title>考试系统</title>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" 
@@ -99,7 +102,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
     <div class="right">
         <ul class="timus list-unstyled">
             <volist id="vo" name="question">
-            <a class="num active" rel="{$vo.id}">
+            <a class="num active <?php if ($res = $results[$vo['id']]){ if ($res['select'] == 'ok') {echo 'btn-success';} else {echo 'btn-danger'; } }?>" rel="{$vo.id}">
                 {$key+1}
             </a>
             </volist>
@@ -149,7 +152,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 <script>
 	//初始化获取第一题
 	ajaxGetQuestion({id:{$first_question.id}});
-	$('.num:eq(0)').addClass('current');
+    if (!($('.num:eq(0)').hasClass('btn-success') || $('.num:eq(0)').hasClass('btn-danger'))) {
+        $('.num:eq(0)').addClass('current');
+    }
 	$(function(){
 	//点击答题卡获取题
 	$('.num').click(function(){
@@ -161,40 +166,73 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 		return false;
 	});
 	$(document).on('click','.next',function(){
-		$(".question-answer").addClass('hide');
+        submitQuestion();
+        $('.question-answer').addClass('hide');
 		moveQuestion('next');
 	});
 	$(document).on('click','.prev',function(){
+        submitQuestion();
+        $('.question-answer').addClass('hide');
 		moveQuestion('prev');
 	});
 	//提交处理
 	$(document).on('click','.push',function(){
-		var input = $('input[rel="1"]');
-		var checked = $('input:checked');
-		var answer_true = false;
-		if (input.length == checked.length) {
-			answer_true = true;
-			for(var i =0;i<input.length;i++){
-				if ($(input[i]).val() != $(checked[i]).val()) {
-					answer_true = false;
-					break;
-				}	
-			}
-		} 
-		$('.question-answer').removeClass('hide');
-		if (answer_true) {
-			$('.answer-result').html('回答正确');
-		} else {
+        submitQuestion();
+	});
+	});
+/**
+ * 答题
+ * @return ok or error
+ */
+function submitQuestion(){
+    var id = $('.question-title').attr('rel');
+        var type = $('.question-title').attr('type');
+        var input = $('.question input[rel="1"]');
+        var checked = $('.question input:checked');
+        var answer_true = false;
+        if (input.length == checked.length) {
+            answer_true = true;
+            for(var i =0;i<input.length;i++){
+                if ($(input[i]).val() != $(checked[i]).val()) {
+                    answer_true = false;
+                    break;
+                }   
+            }
+        } 
+        $('.question-answer').removeClass('hide');
+        if (answer_true) {
+            $('.answer-result').html('回答正确');
+        } else {
             var answer_str = '';
             input.each(function(){
                 var s = $(this).closest('li').text().substr(0,1);
                 answer_str += s + ',';
             });
             answer_str = answer_str.replace(/(^,*)|(,*$)/g, "");
-			$('.answer-result').html('回答错误 正确答案:'+answer_str);
-		}
-	});
-	});
+            $('.answer-result').html('回答错误 正确答案:'+answer_str);
+        }
+        if (answer_true) {
+            var select = 'ok';
+            $('.num.current').addClass('btn-success').removeClass('btn-danger');
+        } else {
+            var select = 'error';
+            $('.num.current').addClass('btn-danger').removeClass('btn-success');
+        }
+        
+        //获取 用户选择答案
+        var selected = '';
+        checked.each(function(){
+            selected +=  $(this).val() + ',';
+        });
+        $.ajax({
+            type:'post',
+            url:'/home/practice/ajaxhandle',
+            dataType:'json',
+            async: false,
+            data:{'id':id,'select':select,'type':type,'selected':selected}
+        });
+        return select;
+}
 /**
  * 移动题目 主要用于上一题 下一题
  * @param  string direction 方向 next prev
@@ -249,6 +287,8 @@ function ajaxGetQuestion(data){
 			//题目
 			var title = data.question_info.sn+'.'+'('+type+')'+data.question_info.title;
 			$('.question-title').html(title);
+            $('.question-title').attr('rel',data.question_info.id);
+            $('.question-title').attr('type',data.question_info.question_type);
 			//选项
 			var stem = ''; 
 			for(var i in data.question_info.question_stem){
@@ -275,6 +315,12 @@ function ajaxGetQuestion(data){
 
 			var analysis = data.question_info.explain;
 			$('.answer-analysis').html(analysis);
+
+            var selected = data.question_answer.selected;
+
+            for (var i in selected) {
+                $('.question input[value="'+selected[i]+'"]').prop('checked',true);
+            }
 		}
 	});
 }
