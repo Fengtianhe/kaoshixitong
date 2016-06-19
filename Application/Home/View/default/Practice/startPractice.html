@@ -152,9 +152,9 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 <script>
 	//初始化获取第一题
 	ajaxGetQuestion({id:{$first_question.id}});
-    if (!($('.num:eq(0)').hasClass('btn-success') || $('.num:eq(0)').hasClass('btn-danger'))) {
+    //if (!($('.num:eq(0)').hasClass('btn-success') || $('.num:eq(0)').hasClass('btn-danger'))) {
         $('.num:eq(0)').addClass('current');
-    }
+    //}
 	$(function(){
 	//点击答题卡获取题
 	$('.num').click(function(){
@@ -304,6 +304,9 @@ function ajaxGetQuestion(data){
                         break;
                     case '3':
                         var serial = 'D';
+                        break;
+                    case '4':
+                        var serial = 'E';
                         break;
                 }
                 

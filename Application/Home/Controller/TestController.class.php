@@ -88,7 +88,7 @@ class TestController extends CommonController {
         $this->assign('grade',$grade);
         $this->assign('level',$Level);
         $this->assign('error',$error_question);
-        $this->display();
+        $this->display('finishTest');
     }
     function test(){
         $a = gcookie('person_test_result');
