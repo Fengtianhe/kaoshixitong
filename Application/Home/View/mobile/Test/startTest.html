@@ -134,6 +134,7 @@
 					return false;
 				});
 				$(document).on('click','.next',function(){
+					$('.num.current').addClass('btn-danger');
 					moveQuestion('next');
 				});
 				$(document).on('click','.prev',function(){
@@ -146,11 +147,11 @@
 				//提交处理
 				$(document).on('click','.push',function(){
 					var status = submitQuestion();
-					if (status == 'ok') {
+					//if (status == 'ok') {
 						$('.num.current').addClass('btn-success');
-					} else {
-						$('.num.current').addClass('btn-danger');
-					}
+					//} else {
+					//	$('.num.current').addClass('btn-danger');
+					//}
 					moveQuestion('next');
 				});
 			});
