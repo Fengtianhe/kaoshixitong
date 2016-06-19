@@ -114,9 +114,9 @@ function readExcel($name,$page=0){
 
 	for($row=1;$row<=$sheetsinfo["rows"];$row++){ 
 		for($column=0;$column<13;$column++){ 
-			$sheetData[$row][$column] = $sheet->getCellByColumnAndRow($column, $row)->getValue(); 
+			$sheetData[$row][$column] = (string)$sheet->getCellByColumnAndRow($column, $row)->getValue(); 
 		} 
-	} 
+	}
 	return $sheetData;
 }
 

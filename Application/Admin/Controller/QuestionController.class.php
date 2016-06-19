@@ -25,7 +25,7 @@ class QuestionController extends CommonController {
             $where['id'] = I('request.id');
         }
         if (I('request.title')) {
-            $where['title'] = I('request.title');
+            $where['title'] = array('like','%'.I('request.title').'%');
         }
         if (I('request.question_type')) {
             $where['question_type'] = I('request.question_type');
