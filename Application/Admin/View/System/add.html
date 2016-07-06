@@ -1,0 +1,31 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/system/ajaxDoAdd" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px;" class="practice">
+				<label>名字:</label>
+				<input type="text" name="nickname" class="required">
+			</p>
+			<p style="width:500px;" class="practice">
+				<label>邮箱:</label>
+				<input type="text" name="email" class="required">
+			</p>
+			<p style="width:500px;" class="practice">
+				<label>密码:</label>
+				<input type="text" name="password" class="required" minlength="6">
+			</p>
+			<p style="width:500px;" class="practice" >
+				<label>确认密码:</label>
+				<input type="text" name="ckpassword" class="required" minlength="6">
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

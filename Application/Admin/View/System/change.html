@@ -1,0 +1,27 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/system/ajaxDoChange" class="pageForm required-validate">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px;" class="practice">
+				<label>原始密码:</label>
+				<input type="text" name="oldpwd" class="required">
+			</p>
+			<p style="width:500px;" class="practice">
+				<label>新密码:</label>
+				<input type="text" name="password" class="required" minlength="6">
+			</p>
+			<p style="width:500px;" class="practice" >
+				<label>确认新密码:</label>
+				<input type="text" name="ckpassword" class="required" minlength="6">
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -94,7 +94,7 @@ $(function(){
 			<div class="headerNav">
 				<a class="logo" href="{:U('Admin/Index/index')}">标志</a>
 				<ul class="nav">	
-					<li><a href="#">{$_SESSION['admin']['me']['nickname']}</a>&nbsp;&nbsp;<a href="{:U('admin/Index/logout')}">退出</a></li>
+					<li><a href="#">{$_SESSION['admin']['me']['nickname']}</a>&nbsp;&nbsp;<a href="{:U('admin/System/change')}" target="dialog" rel="ck">修改密码</a>&nbsp;&nbsp;<a href="{:U('admin/Index/logout')}">退出</a></li>
 				</ul>
 			</div>
 
@@ -133,8 +133,8 @@ $(function(){
 						<ul class="tree treeFolder">
 							<li>
 								<a href="{:U('Admin/System/status')}" target="dialog" rel="system">系统开关</a>
-								<!-- <a href="{:U('Admin/School/lists')}" target="navTab" rel="school">学校管理</a>
-								<a href="{:U('Admin/Article/lists')}" target="navTab" rel="article">文章发布</a>
+								<a href="{:U('Admin/System/add')}" target="dialog" rel="addadmin">添加管理员</a>
+								<!-- <a href="{:U('Admin/Article/lists')}" target="navTab" rel="article">文章发布</a>
 								<a href="{:U('Admin/Message/lists')}" target="navTab" rel="message">站内信管理</a>
 								<a href="{:U('Admin/Adminuser/lists')}" target="navTab" rel="admin_user">管理员设置</a> -->
 							</li>
