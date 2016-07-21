@@ -287,6 +287,9 @@ function ajaxGetQuestion(data){
                     case '3':
                         var serial = 'D';
                         break;
+                    case '4':
+                        var serial = 'E';
+                        break;
                 }
 				str += '<div class="form-group"><div class="checkbox"><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+serial+'、 '+data.question_info.question_stem[i].stem_content+'</label></div></div>';
 			}

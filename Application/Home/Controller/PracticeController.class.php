@@ -27,7 +27,13 @@ class PracticeController extends CommonController {
         }
     }
     public function beforeStartPractice(){
+        $program=M();
+        $strSql="select max(create_time) as max from ks_question ";
+        $res=$program->query($strSql);
+        $maxtime= $res[0]['max'];
+        $this->assign("maxtime",$maxtime);
         $open = $this->verityOpen();
+        
         if ($open == '-1') {
             echo "<script>alert('此章节尚未开放，请联系管理员！');history.back();</script>";
         }
@@ -42,6 +48,11 @@ class PracticeController extends CommonController {
         }
     }
     public function selectQuestionType(){
+        $program=M();
+        $strSql="select max(create_time) as max from ks_question ";
+        $res=$program->query($strSql);
+        $maxtime= $res[0]['max'];
+        $this->assign("maxtime",$maxtime);
         $this->assign('category',I('get.category'));
         $this->assign('chapter',I('get.chapter'));
         $this->display();
