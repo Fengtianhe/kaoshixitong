@@ -197,8 +197,8 @@ class QuestionController extends CommonController {
             } elseif ($question_type == 2){
                 $stem_content = array($value[3],$value[4],$value[5],$value[6],$value[7]);
                 $answer = strtoupper($value[8]);
-                $find = array('A','B','C','D','，');
-                $replace = array(1,2,3,4,',');
+                $find = array('A','B','C','D','E','，');
+                $replace = array(1,2,3,4,5,',');
                 $answer = str_replace($find,$replace,$answer);
                 $answer = explode(',',$answer);
                 if ($question_type == '3') {
