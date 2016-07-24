@@ -80,7 +80,8 @@ class TestController extends CommonController {
         foreach ($error_question as $k => &$v) {
             $map['question_id'] = $v['id'];
             $map['is_true'] = 1;
-            $v['true'] = $stem->where($map)->getField('stem_content');
+            $v['true'] = $stem->where($map)->getField('stem_content', true);
+            $v['true'] = implode(',',$v['true']);
             $v['tid'] = $k+1;
         }
         //$error_question 是打错的所有题

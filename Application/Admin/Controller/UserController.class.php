@@ -147,8 +147,8 @@ class UserController extends CommonController {
                 $result['callbackType'] = "closeCurrent";
             }
             $result['statusCode'] = "200";
-            $result['navTabId'] = "user";
-            $result['rel']   = "user";           
+            //$result['navTabId'] = "user";
+            //$result['rel']   = "user";           
             $result['forwardUrl']   = "";
             $result['confirmMsg'] = "";
         }else {
