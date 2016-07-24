@@ -1,0 +1,28 @@
+<div class="pageContent">
+	
+	<form method="post" action="/admin/system/saveData" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="60">
+			<p style="width:500px;" class="practice">
+				<label>昵称:</label>
+				<input type="text" name="nickname" class="required" value="{$admin.nickname}">
+			</p>
+			<p style="width:500px;" class="practice">
+				<label>email:</label>
+				<input type="text" name="email" class="required" value="{$admin.email}">
+			</p>
+			<p style="width:500px;" class="practice" >
+				<label>密码:</label>
+				<input type="text" name="password" >(*默认为空，表示不修改密码)
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$id}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

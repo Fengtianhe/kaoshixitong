@@ -1,0 +1,82 @@
+<form id="pagerForm" method="post" action="#rel#">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="{$page.numPerPage}" />
+	<input type="hidden" name="orderField" value="{$page.orderField}" />
+	<input type="hidden" name="orderDirection" value="{$page.orderDirection}" />
+</form>
+
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/system/lists" method="post">
+	<div class="searchBar">
+		<ul class="searchContent" style="height:auto">
+			<li>
+				id：
+				<input type="text" name="id" value="<?php echo $_REQUEST['id']?>"/>
+			</li>
+			<li>
+				email：
+				<input type="text" name="email" value="<?php echo $_REQUEST['email']?>"/>
+			</li>
+			<!--<li>
+				<p style="width:500px">
+					学  校：
+					<select class="" name="school_id" id="school">
+							<option value="">所有学校</option>
+							<volist name="school_list" id="school">
+								<option value="{$school.id}" <if condition="$school['id'] eq $_REQUEST['school_id']">selected="selected"</if>>{$school.s_name}</option>
+							</volist>
+					</select>
+				</p>
+			</li>
+			<li>
+				注册时间：
+				<input type="text" class="date" name="start_time" value="<?php echo $_REQUEST['start_time']?>" style="width:75px"/>~<input type="text" class="date" name="end_time" value="<?php echo $_REQUEST['end_time']?>" style="width:75px"/>
+			</li> -->
+		</ul>
+		
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">查找</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="/admin/system/add" target="dialog" width="700" height="600"><span>添加</span></a></li>
+			<li><a class="edit" href="/admin/system/edit?id={sid}" target="dialog" width="700" height="600" warn="请选择一位管理员"><span>修改</span></a></li>
+			<li><a class="edit" href="/admin/system/delete?id={sid}" target="ajaxTodo" warn="请选择一位管理员" title="确认删除么？"><span>删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="165">
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="50">Id</th>
+				<th width="220">email</th>
+				<th width="50">昵称</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist id="vo" name="lists">
+			<tr target="sid" rel="{$vo.id}">
+				<td><input name="ids" value="{$vo.id}" type="checkbox"></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.email}</td>
+				<td>{$vo.nickname}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$page.totalCount}条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="{$page.totalCount}" numPerPage="{$page.numPerPage}" pageNumShown="6" currentPage="{$page.pageNum}"></div>
+
+	</div>
+</div>
