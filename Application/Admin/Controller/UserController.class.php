@@ -85,8 +85,8 @@ class UserController extends CommonController {
         if (M('user')->where(array('id'=>$uid))->save($data)) {
             $result['statusCode'] = "200";
             $result['message']   = "充值成功";
-            $result['navTabId'] = "user";
-            $result['rel']   = "user";
+            //$result['navTabId'] = "user";
+            //$result['rel']   = "user";
             
             $result['callbackType'] = "closeCurrent";
             
@@ -112,8 +112,8 @@ class UserController extends CommonController {
         if (M('user')->where(array('id'=>$id))->save($data)) {
             $result['statusCode'] = "200";
             $result['message']   = "修改成功";
-            $result['navTabId'] = "user";
-            $result['rel']   = "user";
+            //$result['navTabId'] = "user";
+            //$result['rel']   = "user";
             if (I('close_dialog') == 1) {
                 $result['callbackType'] = "closeCurrent";
             }            
@@ -164,8 +164,8 @@ class UserController extends CommonController {
         if (M('user_permission')->where(array('uid'=>$id))->save($data)) {
             $result['statusCode'] = "200";
             $result['message']   = "操作成功";
-            $result['navTabId'] = "user";
-            $result['rel']   = "user";
+            //$result['navTabId'] = "user";
+            //$result['rel']   = "user";
             $result['callbackType'] = "closeCurrent";
             $result['forwardUrl']   = "";
             $result['confirmMsg'] = "";
@@ -179,8 +179,8 @@ class UserController extends CommonController {
         M('User_session')->where(array('user_id'=>$id))->delete();
         $result['statusCode'] = "200";
         $result['message']   = "删除成功";
-        $result['navTabId'] = "user";
-        $result['rel']   = "user";
+        //$result['navTabId'] = "user";
+        //$result['rel']   = "user";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
