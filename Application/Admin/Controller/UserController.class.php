@@ -83,6 +83,12 @@ class UserController extends CommonController {
         $data['update_time'] = time();
         $data['time_length'] = $info['time_length'] + $time_s;
         if (M('user')->where(array('id'=>$uid))->save($data)) {
+            $log['user_id'] = $uid;
+            $log['admin_id'] = $_SESSION['admin']['me']['id'];
+            $log['value'] = $time_s;
+            $log['create_time'] = time();
+            D('UserLog')->addLog($log);
+            
             $result['statusCode'] = "200";
             $result['message']   = "充值成功";
             //$result['navTabId'] = "user";
