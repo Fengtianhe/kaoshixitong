@@ -1,0 +1,50 @@
+<form id="pagerForm" method="post" action="#rel#">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="{$page.numPerPage}" />
+	<input type="hidden" name="orderField" value="{$page.orderField}" />
+	<input type="hidden" name="orderDirection" value="{$page.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/log/lists" method="post">
+	
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="60">
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="30" orderField="id" class="<?php if ($page['orderField'] == 'id') echo $page['orderDirection']?>">ID</th>
+				<th width="50">管理员名</th>
+				<th width="50">管理员	邮箱</th>
+				<th width="85">用户名</th>
+				<th width="85">用户邮箱</th>
+				<th width="70">充值时常</th>
+				<th width="80">创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist id="vo" name="lists">
+			<tr target="sid_user" rel="1">
+				<td><input name="ids" value="xxx" type="checkbox"></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.admin_name}</td>
+				<td>{$vo.admin_email}</td>
+				<td>{$vo.user_name}</td>
+				<td>{$vo.user_email}</td>
+				<td>{$vo.value}</td>
+				<td>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$page.totalCount}条</span>
+		</div>
+		
+		<div class="pagination" targetType="navTab" totalCount="{$page.totalCount}" numPerPage="{$page.numPerPage}" pageNumShown="6" currentPage="{$page.pageNum}"></div>
+
+	</div>
+</div>
