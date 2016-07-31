@@ -2,6 +2,9 @@
 namespace Admin\Controller;
 use Think\Controller;
 class LogController extends CommonController {
+    public function _initialize(){
+        $this->checkLogin();
+    }
 	public function lists(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);

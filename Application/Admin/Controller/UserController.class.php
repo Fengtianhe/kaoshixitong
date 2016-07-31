@@ -2,6 +2,9 @@
 namespace Admin\Controller;
 use Think\Controller;
 class UserController extends CommonController {
+    public function _initialize(){
+        $this->checkLogin();
+    }
     public $user_status = array(
         -1 => array('id'=>0, 'name'=>'开启中'),
         1 => array('id'=>1, 'name'=>'关闭中'),

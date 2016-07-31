@@ -1,7 +1,10 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
+use Admin\Controller;
 class QuestionController extends CommonController {
+    public function _initialize(){
+        $this->checkLogin();
+    }
     public $question_type = array(
         1 => array('name'=>'单选'),
         2 => array('name'=>'多选'),
