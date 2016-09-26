@@ -88,15 +88,6 @@ class SystemController extends CommonController
      	$results = M('admin')->where(array('id'=>$aid))->save($map);
 		if ($results) {
 			echo "<script>alert('修改成功!');location.href='/admin/Index/logout'</script>";
-			// echo "<script>alert('!');</script>";
-			// $result['statusCode'] = "200";
-   //          $result['message']   = "操作成功";
-   //          $result['navTabId'] = "ck";
-   //          $result['rel']   = "ck";
-   //          $result['callbackType'] = "closeCurrent";
-   //          $result['forwardUrl']   = "";
-   //          $result['confirmMsg'] = "";
-   //          $this->ajaxReturn($result);
         }else{
         	echo "<script>alert('修改失败!新密码不可和原密码相同');history.back();</script>";
         }
