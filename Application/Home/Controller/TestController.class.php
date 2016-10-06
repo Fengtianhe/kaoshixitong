@@ -7,7 +7,7 @@ class TestController extends CommonController {
     }
     public function index(){
         $open = M('system')->where(array('id'=>1))->find();
-        if ($open['simulation'] == '-1') {
+        if ($open['simulation'] == '-1' && $_SESSION['me']['id'] != 7) {
             echo '<script>alert("模拟考试尚未开放");history.back();</script>';
         }else{
             $program=M();
