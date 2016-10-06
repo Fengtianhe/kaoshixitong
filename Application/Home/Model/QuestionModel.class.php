@@ -34,7 +34,7 @@ class QuestionModel extends Model {
 		return $result;
 	}
 	function getSimpleQuestionByWhere($where,$offset=0,$limit=0) {
-		$question = $this->where($where)->limit($offset, $limit)->select();
+		$question = $this->where($where)->limit($offset, $limit)->field('id')->select();
 		return $question;
 	}
 	/**

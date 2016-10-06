@@ -29,9 +29,11 @@ class TestController extends CommonController {
     public function startTest(){
         $no = I('get.no');
         $province = $_SESSION['me']['province'];
-        scookie('person_test_result',null);
+        //scookie('person_test_result',null);
+        F('person_test_result'.$_SESSION['me']['id'],null);
         $question = D('Question')->getTestQuestion($no, $province);
-        scookie('person_test', $question);
+        //scookie('person_test', $question);
+        F('person_test'.$_SESSION['me']['id'],$question);
         $first_question = current($question['radio']);
         $this->assign('first_question', $first_question);
         $this->assign('question', $question);
@@ -42,7 +44,8 @@ class TestController extends CommonController {
         $question_info = D('Question')->getInfoById($id);
     	$result['question_info'] = $question_info;
         $result['question_info']['sn'] = I('post.sn',1);
-        $answer = gcookie('person_test_result');
+        //$answer = gcookie('person_test_result');
+        $answer = F('person_test_result'.$_SESSION['me']['id']);
         $result['question_answer'] = isset($answer[$id])? $answer[$id] : array();
     	$result['status'] = $status;
         $this->ajaxReturn($result);
@@ -54,15 +57,18 @@ class TestController extends CommonController {
         $select         = I('post.select');
         $selected       = I('post.selected');
         $type           = I('post.type');
-        $answer = gcookie('person_test_result');
+        //$answer = gcookie('person_test_result');
+        $answer = F('person_test_result'.$_SESSION['me']['id']);
         $selected = explode(',', trim($selected,','));
         $answer[$question_id] = array('select'=>$select, 'type'=>$type,'selected'=>$selected);
-        scookie('person_test_result',$answer);
+        //scookie('person_test_result',$answer);
+        F('person_test_result'.$_SESSION['me']['id'],$answer);
         $result['status'] = 'OK';
         $this->ajaxReturn($result);
     }
     public function finishTest(){
-        $answer = gcookie('person_test_result');
+        //$answer = gcookie('person_test_result');
+        $answer = F('person_test_result'.$_SESSION['me']['id']);
         $grade = 0;
         foreach($answer as $key=>$value){
             if ($value['select'] == 'error') {
