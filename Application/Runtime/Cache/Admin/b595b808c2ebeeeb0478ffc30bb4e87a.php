@@ -121,7 +121,8 @@ $(function(){
 								<a href="<?php echo U('Admin/User/lists');?>" target="navTab" rel="user">用户管理</a>
 								<a href="<?php echo U('Admin/Question/lists');?>" target="navTab" rel="question">题库管理</a>
 								<a href="<?php echo U('Admin/User/online');?>" target="navTab" rel="user_online">在线用户</a>
-								<a href="<?php echo U('Admin/Question/lists');?>" target="navTab" rel="subjects_chapter">科目与章节管理</a>
+								<a href="<?php echo U('Admin/Subject/lists');?>" target="navTab" rel="subject_lists">科目管理</a>
+								<a href="<?php echo U('Admin/Chapter/lists');?>" target="navTab" rel="chapter_lists">章节管理</a>
 								<!-- <a href="<?php echo U('Admin/News/report');?>" target="navTab" rel="report">举报管理</a>
 								<a href="<?php echo U('Admin/Contact/lists');?>" target="navTab" rel="contact">留言管理</a> -->
 							</li>

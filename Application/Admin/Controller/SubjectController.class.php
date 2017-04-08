@@ -6,8 +6,7 @@ class SubjectController extends CommonController {
         $this->checkLogin();
     }
     public function lists(){
-        echo 123;
-        $this->display();
+       $this->display();
     }
     
 
