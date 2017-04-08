@@ -6,12 +6,11 @@ class SubjectController extends CommonController {
         $this->checkLogin();
     }
     public function lists(){
-        echo 123;
+        
         $this->display();
     }
-    
-
-    
-
+    public function editorSubject(){
+        $this->display();
+    }
     
 }
