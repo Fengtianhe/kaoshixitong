@@ -1,0 +1,49 @@
+<h2 class="contentTitle">章节</h2>
+
+
+<div class="pageContent">
+	
+	<form method="post" action="/admin/chapter/saveChapter" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="97">
+			<p style="width:500px height:800px">
+				<label>所属科目：</label>
+				<textarea class="" name="name" rows="1" cols="20">{$subject_info.title}</textarea>
+			</p>
+			<p style="width:500px height:800px">
+				<label>章节名称：</label>
+				<textarea class="" name="chapter_name" rows="1" cols="20">{$chapter_info.title}</textarea>
+			</p>
+			<p style="width:500px">
+				<label>权限：</label>
+				<select name="flog" id="" class="chapter">
+					<option <?php if($chapter_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
+					<option <?php if($chapter_info['flog'] == 2) echo "selected"; ?> value="2">关闭</option>
+				</select>
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$chapter_info['id']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+	$(function(){
+		// if ({$question_type}  == 4) {
+		// 	$('.province').show();
+		// }
+		$('.category').change(function(){
+			if ($(this).val() == 4) {
+				$('.province').show();
+			} else {
+				$('.province').hide();
+			}
+		});
+	})
+</script>
