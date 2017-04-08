@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class SubjectController extends CommonController {
+class ChapterController extends CommonController {
     public function _initialize(){
         $this->checkLogin();
     }
@@ -9,8 +9,9 @@ class SubjectController extends CommonController {
         
         $this->display();
     }
-    public function editorSubject(){
-        $this->display();
-    }
+    
+
+    
+
     
 }
