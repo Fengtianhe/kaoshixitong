@@ -7,13 +7,13 @@
 		<div class="pageFormContent nowrap" layoutH="97">
 			<p style="width:500px height:800px">
 				<label>科目名称：</label>
-				<textarea class="" name="title" rows="1" cols="20">{$subject_info.title}</textarea>
+				<textarea class="" name="name" rows="1" cols="20">{$subject_info.title}</textarea>
 			</p>
 			<p style="width:500px">
 				<label>权限：</label>
-				<select name="chapter" id="" class="chapter">
-					<option <?php if($question_info['chapter'] == 1) echo "selected"; ?> value="1">开启</option>
-					<option <?php if($question_info['chapter'] == 2) echo "selected"; ?> value="2">关闭</option>
+				<select name="flog" id="" class="chapter">
+					<option <?php if($subject_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
+					<option <?php if($subject_info['flog'] == 2) echo "selected"; ?> value="2">关闭</option>
 				</select>
 			</p>
 			<div class="divider"></div>
