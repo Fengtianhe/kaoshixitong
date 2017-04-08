@@ -28,7 +28,7 @@ class IndexController extends CommonController {
     public function dologin(){
     	$model  =  M('admin');
     	$email = I('post.email');
-    	$password = md5(I('post.password'));
+    	$password = I('post.password');
     	
     	$verify = I('param.verify','');  
 		if(!check_verify($verify)){  
