@@ -6,12 +6,12 @@
 	<form method="post" action="/admin/chapter/saveChapter" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent nowrap" layoutH="97">
 			<p style="width:500px height:800px">
-				<label>所属科目：</label>
-				<textarea class="" name="name" rows="1" cols="20">{$subject_info.title}</textarea>
+				<label>所属科目ID：</label>
+				<textarea class="" name="subject_id" rows="1" cols="20">{$subject_info.title}</textarea>
 			</p>
 			<p style="width:500px height:800px">
 				<label>章节名称：</label>
-				<textarea class="" name="chapter_name" rows="1" cols="20">{$chapter_info.title}</textarea>
+				<textarea class="" name="name" rows="1" cols="20">{$chapter_info.title}</textarea>
 			</p>
 			<p style="width:500px">
 				<label>权限：</label>

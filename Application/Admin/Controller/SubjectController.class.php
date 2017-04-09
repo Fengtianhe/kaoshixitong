@@ -38,6 +38,11 @@ class SubjectController extends CommonController {
         $this->display();
     }
     public function editorSubject(){
+    	$id = I('get.id');
+        if ($id) {
+            $subject_info = M('Subject')->where(array('id' => $id))->find();
+            $this->assign('subject_info',$subject_info);
+        }
         $this->display();
     }
     public function saveSubject(){
@@ -51,7 +56,7 @@ class SubjectController extends CommonController {
         //     }
         // }
         
-        
+       
         if ($id) {
             $data['model_time'] = time();
             M('Subject')->where(array('id'=>$id))->save($data);
@@ -62,8 +67,22 @@ class SubjectController extends CommonController {
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
-        $result['navTabId'] = "question";
-        $result['rel']   = "question";
+        $result['navTabId'] = "subject";
+        $result['rel']   = "subject";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+    }
+    public function del(){
+        $id = I('get.id');
+        M('Subject')->where(array('id'=>$id))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
+        $result['navTabId'] = "subject";
+        $result['rel']   = "subject";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
