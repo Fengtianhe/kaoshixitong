@@ -5,6 +5,7 @@ class QuestionController extends CommonController {
     public function _initialize(){
         $this->checkLogin();
     }
+
     public $question_type = array(
         1 => array('name'=>'单选'),
         2 => array('name'=>'多选'),
@@ -83,6 +84,8 @@ class QuestionController extends CommonController {
             $this->assign('question_info',$question_info);
         }
         $area = M('areas')->where(array('area_type'=>1))->select();
+        $subject=M('subject')->where(array('flog'=>1))->select();
+        $this->assign('subject',$subject);
         $this->assign('area',$area);
         $this->assign('question_type',$question_type);
         $this->display();

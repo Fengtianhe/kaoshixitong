@@ -15,20 +15,21 @@
 			</li>
 			<li>
 				所属科目ID：
-				<input type="text" name="title" value="<?php echo $_REQUEST['title']?>"/>
+				<input type="text" name="subject_id" value="<?php echo $_REQUEST['subject_id']?>"/>
 			</li>
 			<li>
 				章节名称：
-				<input type="text" name="title" value="<?php echo $_REQUEST['title']?>"/>
+				<input type="text" name="name" value="<?php echo $_REQUEST['name']?>"/>
 			</li>
 			 <li>
 				<p style="width:500px">
 					权限：
-					<select class="" name="question_type" id="question_type">
+					<select class="" name="flog" id="flog">
+							<option value="0">选择</option>
 							<option value="1">开启</option>
-							<option value="0">关闭</option>
-							<foreach name="question_type" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['question_type']">selected="selected"</if>>{$statu.name}</option>
+							<option value="2">关闭</option>
+							<foreach name="flog" item="statu">
+							<option value="{$key}" <if condition="$key eq $_REQUEST['flog']">selected="selected"</if>>{$statu.name}</option>
 							</foreach>
 					</select>
 				</p>
@@ -75,7 +76,7 @@
 				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="50">Id</th>
 				<th width="150">章节名称</th>
-				<th width="200">所属科目名称</th>
+				<th width="200">所属科目ID</th>
 				<th width="50">权限</th>
 				<th width="70">创建日期</th>
 				<th width="70">修改日期</th>
@@ -87,7 +88,7 @@
 				<td><input name="ids" value="{$vo.id}" type="checkbox"></td>
 				<td>{$vo.id}</td>
 				<td>{$vo.name}</td>
-				<td>{$vo.subject_name}</td>
+				<td>{$vo.subject_id}</td>
 				<td>{$vo.flog}</td>
 				<td><?php echo date('Y-m-d H:i:s',$vo['creat_time']) ?></td>
 				<td><?php echo $vo['model_time']? date('Y-m-d H:i:s',$vo['model_time']) : '未修改'; ?></td>

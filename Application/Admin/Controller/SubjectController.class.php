@@ -25,7 +25,7 @@ class SubjectController extends CommonController {
         if(!$where){
         	$lists = M('Subject')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }else{
-        	$lists = M('Subject')->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        	$lists = M('Subject')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }
    		
         $totalCount  = M('Subject')->where($where)->count('id');

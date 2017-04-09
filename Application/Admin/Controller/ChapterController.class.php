@@ -16,8 +16,11 @@ class ChapterController extends CommonController {
         if (I('request.id')) {
             $where['id'] = I('request.id');
         }
+        if (I('request.subject_id')) {
+            $where['subject_id'] = I('request.subject_id');
+        }
         if (I('request.name')) {
-            $where['name'] = I('request.name');
+            $where['subject_name'] = I('request.name');
         }
         if (I('request.flog')) {
             $where['flog'] = I('request.flog');
@@ -25,15 +28,14 @@ class ChapterController extends CommonController {
         if(!$where){
         	$lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }else{
-        	$lists = M('Chapter')->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        	$lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }
    		
         $totalCount  = M('Chapter')->where($where)->count('id');
-        
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
-        $this->assign('question_type',$this->question_type);
-        $this->assign('category',$this->question_category);
+        // $this->assign('question_type',$this->question_type);
+        // $this->assign('category',$this->question_category);
         $this->assign('lists', $lists);
         $this->display();
     }
@@ -64,8 +66,22 @@ class ChapterController extends CommonController {
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
-        $result['navTabId'] = "question";
-        $result['rel']   = "question";
+        $result['navTabId'] = "chapter";
+        $result['rel']   = "chapter";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+    }
+    public function del(){
+        $id = I('get.id');
+        M('Chapter')->where(array('id'=>$id))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
+        $result['navTabId'] = "chapter";
+        $result['rel']   = "chapter";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
@@ -75,6 +91,6 @@ class ChapterController extends CommonController {
     }
 
     
-
+ 
     
 }
