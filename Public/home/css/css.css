@@ -18,6 +18,12 @@ html,body,#all{
 #all{
 	background: url(../images/index_bg.png);
 }
+.clearfix::after{
+	display:block; 
+	height:0; 
+	content:"";
+	clear:both;
+}
 .header{
 	width: 100%;
 	line-height: 40px;
@@ -135,7 +141,8 @@ html,body,#all{
 }
 .info_box{
 	width: 100%;
-	height: 210px;
+	/*height: 210px;*/
+	padding:10px;
 	background: #f9f9f9;
 	border: 1px ridge #eee;
 }
@@ -155,7 +162,10 @@ html,body,#all{
 	text-align: center;
 	font-weight: bolder;
 	float: left;
-	margin-left: 5px;
+	margin-left: 20px;
+	list-style:none; 
+	margin-right:40px; 
+	margin-bottom:10px;
 }
 .button a{
 	color: #fff;
