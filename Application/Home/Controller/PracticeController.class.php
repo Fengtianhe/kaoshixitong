@@ -6,6 +6,14 @@ class PracticeController extends CommonController {
         parent::_initialize();
     }
     public function index(){
+
+
+
+        $where['flog']=1;
+        $category=M('subject')->where($where)->field('id,name')->select();
+
+
+
         $open = M('system')->where(array('id'=>1))->find();
         if ($open['practice'] == '-1') {
             echo '<script>alert("练习模式尚未开放");history.back();</script>';
@@ -20,6 +28,7 @@ class PracticeController extends CommonController {
             $dan_count = count($dan_list);
             $duo_list = $question->where(array('question_type'=>2))->select();
             $duo_count = count($duo_list);
+            $this->assign("category",$category);
             $this->assign("dan_count",$dan_count);
             $this->assign("duo_count",$duo_count);
             $this->assign("maxtime",$maxtime);

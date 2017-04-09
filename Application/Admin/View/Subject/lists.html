@@ -70,10 +70,11 @@
 			<tr>
 				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="50">Id</th>
-				<th width="200">科目名称</th>
+				<th width="130">科目名称</th>
 				<th width="50">权限</th>
 				<th width="70">创建日期</th>
 				<th width="70">修改日期</th>
+				<th width="70">地区状态</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -85,7 +86,7 @@
 				<td>{$vo.flog}</td>
 				<td><?php echo date('Y-m-d H:i:s',$vo['creat_time']) ?></td>
 				<td><?php echo $vo['model_time']? date('Y-m-d H:i:s',$vo['model_time']) : '未修改'; ?></td>
-
+				<td>{$vo.area}</td>
 			</tr>
 			</volist>
 		</tbody>

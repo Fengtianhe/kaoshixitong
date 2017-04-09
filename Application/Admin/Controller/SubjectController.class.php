@@ -50,6 +50,7 @@ class SubjectController extends CommonController {
         
         $data['name']              = I('request.name','');
         $data['flog']             = I('request.flog',0);
+        $data['area']             = I('request.area',0);
         // foreach ($data as $key=>$value) {
         //     if (!$value) {
         //         unset($data[$key]);

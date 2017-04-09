@@ -11,12 +11,12 @@ class QuestionController extends CommonController {
         2 => array('name'=>'多选'),
         3 => array('name'=>'判断'),
         );
-    public $question_category = array(
-        1 => array('name'=>'科目1'),
-        2 => array('name'=>'科目2'),
-        3 => array('name'=>'科目3'),
-        4 => array('name'=>'科目4'),
-        );
+    // public $question_category = array(
+    //     1 => array('name'=>'科目1'),
+    //     2 => array('name'=>'科目2'),
+    //     3 => array('name'=>'科目3'),
+    //     4 => array('name'=>'科目4'),
+    //     );
 	public function lists(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);
@@ -56,7 +56,7 @@ class QuestionController extends CommonController {
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
         $this->assign('question_type',$this->question_type);
-        $this->assign('category',$this->question_category);
+        // $this->assign('category',$this->question_category);
         $this->assign('lists', $lists);
         $this->display();
     }
