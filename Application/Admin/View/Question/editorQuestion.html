@@ -47,7 +47,7 @@
 			</p>
 			<p style="width:500px">
 				<label>章节：</label>
-				<select name="chapter" id="" class="chapter">
+				<select name="chapter" id="chapter" class="chapter">
 					
 				</select>
 			</p>
@@ -108,15 +108,15 @@
 				},
 				datatype:'json',
 				success:function(res){
-					for(var i=0;i<res.length;i++){
-						var status = res.status;
-						if(status == 1){
-							var message = res.message;
-							for(var i=0;i<message;i++){
-								var option = "<option>message[i]</option>"
-								$(".chapter").html(option);
-							}
+					var optiontpl = ""
+					if(res.status == "1"){
+						var message = res.message;
+						for(var i=0;i<message.length;i++){
+							optiontpl+= "<option value="+message[i].id+">"+message[i].name+"</option>"
 						}
+						console.log(optiontpl);
+						console.log($("#chapter"));
+						$("#chapter").html(optiontpl);
 					}
 				}
 			})
