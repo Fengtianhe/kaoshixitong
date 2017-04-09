@@ -257,8 +257,8 @@ class QuestionController extends CommonController {
     public function returnchapter_id(){
         $category = I('post.category');
         $where['flog']=1;
-        $where['subject']=$category;
-        $chapter=M('chapter')->where($where)->field('name')->select();
+        $where['subject_id']=$category;
+        $chapter=M('chapter')->where($where)->field('id,name')->select();
         $result['status']=1;
         $result['message']=$chapter;
         $this->ajaxReturn($result);
