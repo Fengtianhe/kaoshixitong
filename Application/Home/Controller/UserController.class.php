@@ -28,6 +28,11 @@ class UserController extends Controller {
         $this->assign('province',$province);
     	$this->display();
     }
+    public function regist1() {
+        $province = M('areas')->where(array('area_type' => 1 ))->select();
+        $this->assign('province',$province);
+        $this->display();
+    }
 
     //处理注册数据
     public function saveUser () {
