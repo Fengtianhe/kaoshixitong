@@ -103,7 +103,9 @@
 			$.ajax({
 				url:"http://kaoshixitong.cn/Admin/question/returnchapter_id",
 				type:"post",
-				data:{value},
+				data:{
+					category:value,
+				},
 				datatype:'json',
 				success:function(res){
 					for(var i=0;i<res.length;i++){
