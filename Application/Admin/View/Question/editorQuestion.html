@@ -104,7 +104,34 @@
 			} else {
 				$('.province').hide();
 			}
+			var value = $(".category option:selected").val();
+			$.ajax({
+				type:post,
+				url:"http://kaoshixitong.cn/Admin/question/returnchapter_id",
+				data:value,
+				datatype:json,
+				success:function(res){
+					for(var i=0;i<res.length;i++){
+						var status = res.status;
+						if(status == 1){
+							var message = res.message;
+							for(var i=0;i<message;i++){
+								var option = "<option>message[i]</option>"
+								$(".chapter").html(option);
+							}
+						}
+					}
+				}
+			})
 		});
+
 		
 	})
 </script>
+<option <?php if($question_info['chapter'] == 1) echo "selected"; ?> value="1">第1章</option>
+					<option <?php if($question_info['chapter'] == 2) echo "selected"; ?> value="2">第2章</option>
+					<option <?php if($question_info['chapter'] == 3) echo "selected"; ?> value="3">第3章</option>
+					<option <?php if($question_info['chapter'] == 4) echo "selected"; ?> value="4">第4章</option>
+					<option <?php if($question_info['chapter'] == 5) echo "selected"; ?> value="5">第5章</option>
+					<option <?php if($question_info['chapter'] == 6) echo "selected"; ?> value="6">第6章</option>
+					var option = "<option></option>"
