@@ -47,33 +47,28 @@ class AvderController extends CommonController {
         $data['flog']             = I('request.flog',0);
 
 
-        $info=uploadImg('image','sui');
-            if ($info['status']=='error') {
-                $this->error('上传失败');
-            }else{
-                $data['img']  = $info['path'];
-            }
-            
-        $id =M('sui')->add($data);
-        if($id>0){
-            $this->success('插入成功',U('admin/sui/add'),5);
-        }else{
-            $this->error('插入失败',U('admin/sui/add'),5);
+       $file = uploadFile('file');
+        if (!$file) {
+            $this->error('文件出错');
         }
+        $data['images']='./Public/'.$file;
+
 
 
         if ($id) {
             $data['update_time'] = time();
-            M('Avder')->where(array('id'=>$id))->save($data);
+            M('Adver')->where(array('id'=>$id))->save($data);
         } else {
             $data['create_time'] = time();
-            $id = M('Avder')->add($data);
+            $id = M('Adver')->add($data);
+            redirect(U('admin/index/index'));
         }
+
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
-        $result['navTabId'] = "subject";
-        $result['rel']   = "subject";
+        $result['navTabId'] = "adver";
+        $result['rel']   = "adver";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
@@ -83,6 +78,20 @@ class AvderController extends CommonController {
 
 
         
+    }
+    public function del(){
+        $id = I('get.id');
+        M('Adver')->where(array('id'=>$id))->delete();
+        $result['statusCode'] = "200";
+        $result['message']   = "删除成功";
+        $result['navTabId'] = "avder";
+        $result['rel']   = "avder";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
     }
 
   
