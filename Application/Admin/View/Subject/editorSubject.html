@@ -19,10 +19,10 @@
 			</p>
 
 			<p style="width:500px">
-				<label>权限：</label>
+				<label>状态：</label>
 				<select name="flog" id="" class="chapter">
+					<option <?php if($subject_info['flog'] == 0) echo "selected"; ?> value="0">关闭</option>
 					<option <?php if($subject_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
-					<option <?php if($subject_info['flog'] == 2) echo "selected"; ?> value="2">关闭</option>
 				</select>
 			</p>
 			<div class="divider"></div>

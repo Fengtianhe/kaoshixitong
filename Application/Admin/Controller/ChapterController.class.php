@@ -57,10 +57,10 @@ class ChapterController extends CommonController {
      	$data['subject_name']=M('Subject')->where(array('id'=>$sid))->find();
        
         if ($id) {
-            $data['model_time'] = time();
+            $data['update_time'] = time();
             M('Chapter')->where(array('id'=>$id))->save($data);
         } else {
-            $data['creat_time'] = time();
+            $data['create_time'] = time();
             $id = M('Chapter')->add($data);
         }
 
@@ -89,8 +89,5 @@ class ChapterController extends CommonController {
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
     }
-
-    
- 
-    
+      
 }

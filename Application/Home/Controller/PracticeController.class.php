@@ -6,18 +6,16 @@ class PracticeController extends CommonController {
         parent::_initialize();
     }
     public function index(){
-
-
-
-        $where['flog']=1;
-        $category=M('subject')->where($where)->field('id,name')->select();
-
-
-
+        
         $open = M('system')->where(array('id'=>1))->find();
         if ($open['practice'] == '-1') {
             echo '<script>alert("练习模式尚未开放");history.back();</script>';
         }else{
+
+
+            $where['flog']=1;
+            $category=M('subject')->where($where)->field('id,name')->select();
+
             $program=M();
             $strSql="select max(create_time) as max from ks_question ";
             $res=$program->query($strSql);
@@ -51,6 +49,10 @@ class PracticeController extends CommonController {
             if ($permission == '-1') {
                 echo "<script>alert('您对此章节无权限，请联系管理员！');history.back();</script>";
             }else{
+                $where['flog']=1;
+                $where['subject_id']=I('get.category');
+                $chapter=M('chapter')->where($where)->field('id,name')->select();
+                $this->assign('chapter',$chapter);
                 $this->assign('category',I('get.category'));
                 $this->display();
             } 

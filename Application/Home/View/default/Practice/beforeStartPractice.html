@@ -64,7 +64,13 @@
 							<p><b>名师题库：</b>顶级名师团队精心编写，题型全面，覆盖各类考点。</p>
 							<p><b>全新体验：</b>全面UI设计和交互体验，锻炼考生操作能力和速度。</p>
 							<div class="btns" style="height: 45px;">
-					
+								
+								<?php foreach ($chapter as $key => $value) { ?>
+									<div class="button" >
+										<a href="/home/practice/selectQuestionType?category={$category}&chapter={$value['id']}" rel="">{$value['name']}</a>
+									</div>
+								<?php } ?>
+
 								<div class="button" >
 									<a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="">第1章</a>
 								</div>

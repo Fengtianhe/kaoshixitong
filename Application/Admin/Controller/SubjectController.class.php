@@ -51,18 +51,12 @@ class SubjectController extends CommonController {
         $data['name']              = I('request.name','');
         $data['flog']             = I('request.flog',0);
         $data['area']             = I('request.area',0);
-        // foreach ($data as $key=>$value) {
-        //     if (!$value) {
-        //         unset($data[$key]);
-        //     }
-        // }
         
-       
         if ($id) {
-            $data['model_time'] = time();
+            $data['update_time'] = time();
             M('Subject')->where(array('id'=>$id))->save($data);
         } else {
-            $data['creat_time'] = time();
+            $data['create_time'] = time();
             $id = M('Subject')->add($data);
         }
 
