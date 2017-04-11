@@ -11,9 +11,7 @@ a:hover{
 	color: #999;
 }
 html,body,#all{
-	/*height: 100%;*/
 	width: 100%;
-	/*overflow: hidden;*/
 }
 #all{
 	background: url(../images/index_bg.png);
@@ -44,7 +42,6 @@ html,body,#all{
 	float: right;
 }
 .main{
-	/*height: 540px;*/
 	width: 100%;
 }
 .title_bg{
@@ -73,7 +70,6 @@ html,body,#all{
 }
 .list{
 	width: 200px;
-	/*height: 400px;*/
 	float: left;
 }
 .list_t{
@@ -82,11 +78,6 @@ html,body,#all{
 	background: #62B9C2;
 }
 .list_b{
-	/*width: 200px;
-	height: 80px;
-	background: #62B9C2 ;
-	border-bottom-left-radius: 70px;
-	border-bottom-right-radius: 80px;*/
 	width: 0px;
     height:0px;
     border-width: 100px;
@@ -128,7 +119,6 @@ html,body,#all{
 	border-radius: 5px;
 }
 .info{
-	/*height: 240px;*/
 	width: 750px;
 	float: left;
 	margin-left: 10px;
@@ -177,7 +167,6 @@ html,body,#all{
 .btns{
 	margin-top: 15px;
 	display: block;
-	/*margin-left: 130px;*/
 }
 .msg{
 	width: 250px;
@@ -216,4 +205,19 @@ html,body,#all{
 .ad{
 	width:100%;
 	height:30px;
+}
+.ad img{
+	width:100%;
+	height:30px;
+}
+.contact{
+	list-style: none;
+	float: left;
+	text-align: center;
+	margin-left: 30px;
+	margin-top: 10px;
+}
+.contact img{
+	width:80px;
+	height:80px;
 }
