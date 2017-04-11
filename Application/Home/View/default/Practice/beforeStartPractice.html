@@ -73,6 +73,14 @@
 
 								<div class="" >
 									<ul>
+
+
+										<?php foreach ($chapter as $key => $value) { ?>
+											<li class="button">
+												<a href="/home/practice/selectQuestionType?category={$category}&chapter={$value['id']}" rel="">{$value['name']}</a>
+											</li>
+										<?php } ?>
+
 										<li class="button">
 											<a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="">第1章</a>
 										</li>
@@ -91,30 +99,9 @@
 										<li class="button">
 											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
 										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
-										<li class="button">
-											<a href="/home/practice/selectQuestionType?category={$category}&chapter=6" rel="">第6章</a>
-										</li>
+										
+										
+										
 									</ul>
 									<!-- <a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="">第1章</a>
 								</div>

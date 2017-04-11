@@ -78,6 +78,51 @@ class UserController extends Controller {
     		}
     	}
     }
+    //新处理注册数据
+    public function saveUser1(){
+        $name       = I('post.name','','string');
+        $email      = I('post.email','','email');
+        $password   = I('post.password');
+        $phone      = I('post.phone','','/^\d{11}$/');
+        $idcard     = I('post.idcard','','/^\d{17}[0-9x]$/i');
+        $user_id    = I('post.user_id','','int');
+        $province   = I('post.province',0,'int');
+        if ($password!=8888 && !$phone ) {
+            $this->error('请正确填写信息。');
+        }
+ 
+        $user   =   D('User');
+        $data['realname'] = $name;
+        $data['phone'] = $phone;
+        $data['idcard'] = $idcard;
+        $data['email'] = $email;
+        $data['province'] = $province;
+        $data['password'] = md5($password);
+
+        //修改 
+        if ($user_id) {
+            $user->where(array('id'=>$user_id))->save($data);
+            $this->success('修改成功', U('home/index/index'));
+        } else {
+            //注册
+            if (!$list = $user->where(array('phone'=>$phone))->find()) {
+                $data['create_time'] = time();
+                $data['time_length'] = 1*60*60;
+                $id = $user->add($data);
+                D('User_session')->add(array('user_id'=>$id));
+                M('user_permission')->add(array('uid'=>$id));
+                if (is_mobile_request()) {
+                    $this->success('注册成功', U('home/index/index'));
+                }else{
+                    $this->success('注册成功', U('home/index/index'));
+                }
+                
+            } else {
+                $this->error('电话号已经注册，若不是您本人注册请联系管理员。');
+            }
+        }
+    }
+
 
     //登录页面
     public function login() {
