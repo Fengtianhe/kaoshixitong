@@ -12,17 +12,10 @@
 			<div class="login">
 				<span class="user_login">新用户注册</span>
 			</div>
-			<div class="login_box" action="/Home/User/saveUser" method="post">
-			<form action="{:U('home/user/saveUser')}" method="post" class="reg_form">
+			<div class="login_box" action="/Home/User/saveUser1" method="post">
+			<form action="{:U('home/user/saveUser1')}" method="post" class="reg_form">
 				<p>
 					手机号码：<input class="mr_26 phone" type="text" name="phone">
-				</p>
-				<p>
-					<select class="mr_26 email" name="province" style="width:120px;">
-						<volist name="province" id="vo">
-							<option value="{$vo.area_id}">{$vo.area_name}</option>
-						</volist>
-					</select>
 				</p>
 				<p>默认密码 ：8888</p>
 				<p>
@@ -39,6 +32,41 @@
 			</div>
 		</div>
 	</div>
-	
+	<script>
+		$(function(){
+			var $reg_num = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+			var $reg_phone = /^1[3|4|5|8][0-9]\d{4,8}$/;
+			var $reg_email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			$(".login_btn").click(function(){
+				var $name = $(".name").val();
+				var $num = $(".num").val();
+				var $phone = $(".phone").val();
+				var $email = $(".email").val();
+				var $pass = $(".pass").val();
+				var $sure_pass = $(".sure_pass").val();
+				//验证手机号
+				if($phone == ""){
+					alert("手机号码不能为空");
+					return false;
+				}else{
+					if($reg_phone.test($phone) == false){
+						alert("手机号码输入有误");
+						return false;
+					}
+				}
+				//验证密码
+				if($pass == ""){
+					alert("密码不能为空");
+					return false;
+				}
+				//确认密码
+				if($sure_pass == ""){
+					alert("密码不能为空");
+					return false;
+				}
+				$(".reg_form").submit();
+			})
+		})
+	</script>
 </body>
 </html>

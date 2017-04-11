@@ -69,7 +69,7 @@
 				<td>{$vo.desc}</td>
 				<td>{$vo.flog}</td>
 				<td>{$vo.images}</td>
-				<td><?php echo date('Y-m-d H:i:s',$vo['create_time']) ?></td>
+				<td><?php echo datzze('Y-m-d H:i:s',$vo['create_time']) ?></td>
 				<td><?php echo $vo['update_time']? date('Y-m-d H:i:s',$vo['update_time']) : '未修改'; ?></td>
 			</tr>
 			</volist>
