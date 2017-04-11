@@ -15,25 +15,13 @@
 			</p>
 			<p style="width:500px">
 				<label>分类：</label>
-
-
 				<select name="category" id="" class="category">
+					<option>请选择</option>
 					<?php foreach ($subject as $key => $value) { ?>
-					  <option value=<?php echo $value['id'] ?>>{$value['name']}</option>
+					  <option value="<?php echo $value['id']; ?>" rel="<?php echo $value['area']; ?>">{$value['name']}</option>
 					<?php } ?>
 					  
 				</select>
-				<!-- <select name="category" id="" class="category">
-
-					<?php  foreach ($subject as $key => $value) {  ?>
-
-						<option <?php if($question_info['category'] == 1) echo "selected"; ?> value="1">科目1</option>
-						<option <?php if($question_info['category'] == 2) echo "selected"; ?> value="2">科目2</option>
-						<option <?php if($question_info['category'] == 3) echo "selected"; ?> value="3">科目3</option>
-						<option <?php if($question_info['category'] == 4) echo "selected"; ?> value="4">科目4</option>
-					<?php } ?>
-
-				</select> -->
 			</p>
 			<p style="width:500px">
 				<label>章节：</label>
@@ -84,7 +72,8 @@
 			$('.province').show();
 		}
 		$('.category').change(function(){
-			if ($(this).val() == 4) {
+			//判断是否需要地区信息
+			if ($(this).find("option:selected").attr('rel') == 1) {
 				$('.province').show();
 			} else {
 				$('.province').hide();

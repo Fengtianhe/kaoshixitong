@@ -51,7 +51,7 @@ class AdverController extends CommonController {
         if (!$file) {
             $this->error('文件出错');
         }
-        $data['images']='./Public/'.$file;
+        $data['images']=$file;
 
 
 

@@ -12,7 +12,16 @@ class CommonController extends Controller {
     	}
         $this->verifyLogin();
     	$this->check_last_login();
+        $this->getAd();
 	}
+
+    public function getAd() {
+        $ad = D('adver')->order('id desc')->limit(1)->find();
+        $this->assign('ad', $ad);
+
+        $ad = D('adver')->order('id desc')->limit(1)->find();
+        $this->assign('ad', $ad);
+    }
 
     public function verifyLogin(){
         $uid = $_SESSION['me']['id'];
