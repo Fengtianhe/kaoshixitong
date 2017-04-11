@@ -1,0 +1,48 @@
+<h2 class="contentTitle">联系方式</h2>
+
+
+<div class="pageContent">
+	
+	<form method="post" action="/admin/contact/saveContact" class="pageForm required-validate" enctype="multipart/form-data">
+		<div class="pageFormContent nowrap" layoutH="97">
+			<p style="width:500px">
+				<label>联系方式：</label>
+				<select name="flog" id="" class="contact">
+					<option <?php if($contact_info['way'] == 0) echo "selected"; ?> value="0">请选择</option>
+					<option <?php if($contact_info['way'] == 1) echo "selected"; ?> value="1">qq</option>
+					<option <?php if($contact_info['way'] == 2) echo "selected"; ?> value="2">qq群</option>
+					<option <?php if($contact_info['way'] == 3) echo "selected"; ?> value="3">微信</option>
+				</select>
+			</p>
+			<p style="width:500px">
+				<label>状态：</label>
+				<select name="flog" id="" class="contact">
+					<option <?php if($contact_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
+					<option <?php if($contact_info['flog'] == 0) echo "selected"; ?> value="0">关闭</option>
+				</select>
+			</p>
+			<p style="width:500px;height:60px">
+				<label>上传二维码：</label>
+				<input type="file" name="file" value="">
+			</p>
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$adver_info['id']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" class="sub">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+	//防止多次提交
+	$(document).on('click','.sub',function(){
+		$(this).attr('disabled',true);
+		$('.pageForm').submit();
+		return true;
+	})
+</script>

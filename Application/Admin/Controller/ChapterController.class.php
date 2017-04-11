@@ -55,7 +55,11 @@ class ChapterController extends CommonController {
         $data['subject_id']              = I('request.subject_id','');
      	$sid= I('request.subject_id',0);
      	$data['subject_name']=M('Subject')->where(array('id'=>$sid))->find();
-       
+        foreach ($data as $key=>$value) {
+            if (!$value) {
+                unset($data[$key]);
+            }
+        }
         if ($id) {
             $data['update_time'] = time();
             M('Chapter')->where(array('id'=>$id))->save($data);

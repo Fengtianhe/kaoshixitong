@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class SubjectController extends CommonController {
+class ContactController extends CommonController {
     public function _initialize(){
         $this->checkLogin();
     }
@@ -16,75 +16,72 @@ class SubjectController extends CommonController {
         if (I('request.id')) {
             $where['id'] = I('request.id');
         }
-        if (I('request.name')) {
-            $where['name'] = I('request.name');
+        if (I('request.way')) {
+            $where['way'] = I('request.way');
         }
         if (I('request.flog')) {
             $where['flog'] = I('request.flog');
         }
         if(!$where){
-        	$lists = M('Subject')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        	$lists = M('Contact')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }else{
-        	$lists = M('Subject')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        	$lists = M('Contact')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }
    		
-        $totalCount  = M('Subject')->where($where)->count('id');
-        
+        $totalCount  = M('Contact')->where($where)->count('id');
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
-        $this->assign('question_type',$this->question_type);
-        $this->assign('category',$this->question_category);
         $this->assign('lists', $lists);
         $this->display();
     }
-    public function editorSubject(){
-    	$id = I('get.id');
-        if ($id) {
-            $subject_info = M('Subject')->where(array('id' => $id))->find();
-            $this->assign('subject_info',$subject_info);
-        }
+    public function editorContact(){
         $this->display();
     }
-    public function saveSubject(){
+    public function saveContact(){
         $id = I('request.id', 0);
-        
-        $data['name']              = I('request.name','');
-        $data['flog']             = I('request.flog',0);
-        $data['area']             = I('request.area',0);
-        
 
-         foreach ($data as $key=>$value) {
-            if (!$value) {
-                unset($data[$key]);
-            }
+        $data['way']              = I('request.way','');
+        $data['flog']             = I('request.flog',0);
+
+
+       $file = uploadFile('file');
+        if (!$file) {
+            $this->error('文件出错');
         }
-        
+        $data['images']='./Public/'.$file;
+
+
+
         if ($id) {
             $data['update_time'] = time();
-            M('Subject')->where(array('id'=>$id))->save($data);
+            M('Contact')->where(array('id'=>$id))->save($data);
         } else {
             $data['create_time'] = time();
-            $id = M('Subject')->add($data);
+            $id = M('Contact')->add($data);
         }
+
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
-        $result['navTabId'] = "subject";
-        $result['rel']   = "subject";
+        $result['navTabId'] = "contact";
+        $result['rel']   = "contact";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
         $result['forwardUrl']   = "";
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
+
+
+        
     }
     public function del(){
         $id = I('get.id');
-        M('Subject')->where(array('id'=>$id))->delete();
+        M('Contact')->where(array('id'=>$id))->delete();
         $result['statusCode'] = "200";
         $result['message']   = "删除成功";
-        $result['navTabId'] = "subject";
-        $result['rel']   = "subject";
+        $result['navTabId'] = "contact";
+        $result['rel']   = "contact";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
@@ -93,5 +90,6 @@ class SubjectController extends CommonController {
         $this->ajaxReturn($result);
     }
 
-    
+  
+
 }
