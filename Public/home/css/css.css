@@ -44,7 +44,7 @@ html,body,#all{
 	float: right;
 }
 .main{
-	height: 540px;
+	/*height: 540px;*/
 	width: 100%;
 }
 .title_bg{
@@ -212,4 +212,8 @@ html,body,#all{
 	margin:0 auto;
 	text-align: center;
 	font-size: 12px;
+}
+.ad{
+	width:100%;
+	height:30px;
 }
