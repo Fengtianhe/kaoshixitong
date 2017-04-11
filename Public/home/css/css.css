@@ -11,9 +11,9 @@ a:hover{
 	color: #999;
 }
 html,body,#all{
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 #all{
 	background: url(../images/index_bg.png);
@@ -128,7 +128,7 @@ html,body,#all{
 	border-radius: 5px;
 }
 .info{
-	height: 240px;
+	/*height: 240px;*/
 	width: 750px;
 	float: left;
 	margin-left: 10px;
@@ -162,7 +162,6 @@ html,body,#all{
 	text-align: center;
 	font-weight: bolder;
 	float: left;
-	margin-left: 20px;
 	list-style:none; 
 	margin-right:40px; 
 	margin-bottom:10px;
