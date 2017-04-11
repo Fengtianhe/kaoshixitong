@@ -36,7 +36,7 @@
 						<div class="input">
 							<select name="" id="">
 							
-							</select>
+							<select>
 						</div>
 						<ul>
 						<php>if($_SESSION['me']['formal']==1){</php>
@@ -60,7 +60,6 @@
 							<p><b>全新体验：</b>全面UI设计和交互体验，锻炼考生操作能力和速度。</p>
 							<div class="btns">
 									<div class="" >
-									<div>
 										<ul>
 											<li class="button">
 												<a href="{:U('home/test/startTest',array('no'=>1))}">试卷1</a>
@@ -81,28 +80,15 @@
 									</div>	
 							</div>	
 						</div>
-						<div class="a">
-							<include file="Public/right_msg" />
-							<div class="contact_box">
-								<ul class="clearfix">
-									<li class="contact">
-										<img src="__PUBLIC__/admin/uploadify/img/QR-code.png">
-										<p>QQ</p>
-									</li>
-									<li class="contact">
-										<img src="__PUBLIC__/admin/uploadify/img/QR-code.png">
-										<p>微信</p>
-									</li>
-								</ul>
-							</div>	
-						</div>
+						<include file="Public/right_msg" />
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="footer">
-			Copyright © 2016 导游在线模拟考试系统
+			Copyright  2016 导游在线模拟考试系统
 		</div>
 	</div>
 </body>
-</html>
+<html>
