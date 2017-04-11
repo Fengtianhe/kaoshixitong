@@ -3,18 +3,18 @@
 
 <div class="pageContent">
 	
-	<form method="post" action="/admin/avder/saveAvder" class="pageForm required-validate" enctype="multipart/form-data">
+	<form method="post" action="/admin/adver/saveAdver" class="pageForm required-validate" enctype="multipart/form-data">
 		<div class="pageFormContent nowrap" layoutH="97">
 			<p style="width:500px">
 				<p style="width:500px height:800px">
 				<label>描述：</label>
-				<textarea class="" name="desc" rows="1" cols="20">{$avder_info.desc}</textarea>
+				<textarea class="" name="desc" rows="1" cols="20">{$adver_info.desc}</textarea>
 			</p>
 			<p style="width:500px">
 				<label>状态：</label>
-				<select name="flog" id="" class="avder">
-					<option <?php if($avder_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
-					<option <?php if($avder_info['flog'] == 0) echo "selected"; ?> value="0">关闭</option>
+				<select name="flog" id="" class="adver">
+					<option <?php if($adver_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
+					<option <?php if($adver_info['flog'] == 0) echo "selected"; ?> value="0">关闭</option>
 				</select>
 			</p>
 			</p>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="formBar">
 			<ul>
-				<input type="hidden" name="id" value="{$avder_info['id']}">
+				<input type="hidden" name="id" value="{$adver_info['id']}">
 				<input type="hidden" name="close_dialog" value="1">
 				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" class="sub">提交</button></div></div></li>
 				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>

@@ -1,7 +1,7 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class AvderController extends CommonController {
+class AdverController extends CommonController {
     public function _initialize(){
         $this->checkLogin();
     }
@@ -40,7 +40,7 @@ class AvderController extends CommonController {
     public function editorAdver(){
         $this->display();
     }
-    public function saveAvder(){
+    public function saveAdver(){
         $id = I('request.id', 0);
 
         $data['desc']              = I('request.desc','');
@@ -61,7 +61,6 @@ class AvderController extends CommonController {
         } else {
             $data['create_time'] = time();
             $id = M('Adver')->add($data);
-            redirect(U('admin/index/index'));
         }
 
 
@@ -84,8 +83,8 @@ class AvderController extends CommonController {
         M('Adver')->where(array('id'=>$id))->delete();
         $result['statusCode'] = "200";
         $result['message']   = "删除成功";
-        $result['navTabId'] = "avder";
-        $result['rel']   = "avder";
+        $result['navTabId'] = "adver";
+        $result['rel']   = "adver";
         if (I('close_dialog') == 1) {
             $result['callbackType'] = "closeCurrent";
         }
