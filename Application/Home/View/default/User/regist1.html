@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<link rel="stylesheet" href="__PUBLIC__/home/style.css">
+	<script type="text/javascript" src="__PUBLIC__/home/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container ">
+		<div class="box regist" style="background: #fff;margin-top: 90px;border-radius: 15px;border: 1px solid #999;width: 535px; margin-left: 410px; height: 400px;">
+			<div class="login">
+				<span class="user_login">新用户注册</span>
+			</div>
+			<div class="login_box" action="/Home/User/saveUser" method="post">
+			<form action="{:U('home/user/saveUser')}" method="post" class="reg_form">
+				<p>
+					手机号码：<input class="mr_26 phone" type="text" name="phone">
+				</p>
+				<p>
+					<select class="mr_26 email" name="province" style="width:120px;">
+						<volist name="province" id="vo">
+							<option value="{$vo.area_id}">{$vo.area_name}</option>
+						</volist>
+					</select>
+				</p>
+				<p>默认密码 ：8888</p>
+				<p>
+					<span class="mar_25">密</span>码：<input class="mr_26 pass" type="password" name="password">
+				</p>
+				<p>
+					<label for="agreen">
+						<input type="checkbox" id="agreen">
+						已阅读并同意用户注册协议和隐私声明
+					</label>
+				</p>
+				<p class="login_btn">注册</p>
+			</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
