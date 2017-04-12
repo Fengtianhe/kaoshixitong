@@ -47,7 +47,16 @@
                     已更新至:<?php echo date('Y/m/d',$maxtime);?></p>
             </div>
             <div class="gonggao">
-                <a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="" class="btn center-block btn-zs">第1章</a>
+
+
+                <?php foreach ($chapter as $key => $value) { ?>
+
+                    <a href="/home/practice/selectQuestionType?category={$category}&chapter={$value['id']}" rel="" class="btn center-block btn-zs">{$value['name']}</a>
+                <?php } ?>
+
+
+
+            <a href="/home/practice/selectQuestionType?category={$category}&chapter=1" rel="" class="btn center-block btn-zs">第1章</a>
 			<a href="/home/practice/selectQuestionType?category={$category}&chapter=2" rel="" class="btn center-block btn-zs">第2章</a>
 			<a href="/home/practice/selectQuestionType?category={$category}&chapter=3" rel="" class="btn center-block btn-zs">第3章</a>
 			<a href="/home/practice/selectQuestionType?category={$category}&chapter=4" rel="" class="btn center-block btn-zs">第4章</a>

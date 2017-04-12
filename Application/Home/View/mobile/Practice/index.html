@@ -51,6 +51,11 @@
             </div>
             <div class="gonggao">
                 <ul>
+                    <?php foreach ($category as $key => $value) { ?>
+                        <li>
+                            <a href="/home/practice/beforeStartPractice?category=<?php echo $value['id']?>" rel="" class="btn center-block btn-zs">{$value['name']}</a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="/home/practice/beforeStartPractice?category=1" rel=""  class="btn center-block btn-zs">政策与法律法规</a>
                     </li>
