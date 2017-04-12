@@ -16,11 +16,14 @@ class CommonController extends Controller {
 	}
 
     public function getAd() {
-        $ad = D('adver')->order('id desc')->limit(1)->find();
+        $ad = D('adver')->where(array('flog'=>1))->order('id desc')->limit(1)->find();
+        $qq = D('contact')->where(array('flog'=>1,'way'=>1))->order('id desc')->limit(1)->find();
+        $qqGroup = D('contact')->where(array('flog'=>1,'way'=>2))->order('id desc')->limit(1)->find();
+        $weixin = D('contact')->where(array('flog'=>1,'way'=>3))->order('id desc')->limit(1)->find();
+        $this->assign('weixin', $weixin);
         $this->assign('ad', $ad);
-
-        $ad = D('adver')->order('id desc')->limit(1)->find();
-        $this->assign('ad', $ad);
+        $this->assign('qq', $qq);
+        $this->assign('qqGroup', $qqGroup);
     }
 
     public function verifyLogin(){
