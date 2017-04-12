@@ -39,7 +39,9 @@
 <div class="container-fluid" style="padding: 0;">
     <div class="row clearfix center-block maxw">
         <div class="col-md-12 column nopadding">
-
+            <div class="ad">
+                <img src="__PUBLIC__/{$ad.images}">
+            </div>
             <div class="guanggao">
                 <h2 class="title1 text-center">导游第一步,选对试题库</h2>
                 <p class="info text-center">
@@ -57,8 +59,14 @@
                 }else{
                     if($_SESSION['me']['formal']==1){
             </php>
-                <a href="/home/practice/index" class="btn center-block btn-ty">全真练习</a>
-                <a href="{:U('home/test/index')}" class="btn center-block btn-zs">模拟考试</a>
+                <ul>
+                    <li class="practice_box">
+                        <a href="/home/practice/index" class="btn center-block btn-ty">全真练习</a>
+                    </li>
+                    <li class="practice_box">
+                        <a href="{:U('home/test/index')}" class="btn center-block btn-zs">模拟考试</a>
+                    </li>
+                </ul>
             
             <php>
                     }else{

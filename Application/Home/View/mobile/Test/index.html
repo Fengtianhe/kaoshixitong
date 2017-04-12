@@ -39,7 +39,9 @@
 <div class="container-fluid" style="padding: 0;">
     <div class="row clearfix center-block maxw">
         <div class="col-md-12 column nopadding">
-
+            <div class="ad">
+                <img src="__PUBLIC__/{$ad.images}">
+            </div>
             <div class="guanggao">
                 <h2 class="title1 text-center">导游第一步,选对试题库</h2>
                 <p class="info text-center">
@@ -48,8 +50,14 @@
                 <p class="info2 text-center">单选一共{$dan_count}题,多选一共{$duo_count}题</p>
             </div>
             <div class="gonggao">
-                <a href="{:U('home/test/startTest',array('no'=>1))}" rel=""  class="btn center-block btn-zs">试卷1</a>
-                <a href="{:U('home/test/startTest',array('no'=>2))}" rel=""  class="btn center-block btn-zs">试卷2</a>          
+                <ul>
+                    <li>
+                        <a href="{:U('home/test/startTest',array('no'=>1))}" rel=""  class="btn center-block btn-zs">试卷1</a>
+                    </li>
+                    <li>
+                        <a href="{:U('home/test/startTest',array('no'=>2))}" rel=""  class="btn center-block btn-zs">试卷2</a>
+                    </li>
+                </ul>       
             </div>
         </div>
     </div>
