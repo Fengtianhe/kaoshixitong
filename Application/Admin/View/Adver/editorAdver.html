@@ -3,7 +3,7 @@
 
 <div class="pageContent">
 	
-	<form method="post" action="/admin/adver/saveAdver" class="pageForm required-validate" enctype="multipart/form-data">
+	<form method="post" action="/admin/adver/saveAdver" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent nowrap" layoutH="97">
 			<p style="width:500px">
 				<p style="width:500px height:800px">
@@ -18,9 +18,12 @@
 				</select>
 			</p>
 			</p>
-			<p style="width:500px;height:60px">
+			<p style="width:600px;height:60px">
 				<label>上传图片：</label>
+				<input type="hidden" name="image" class="image">
 				<input type="file" name="file" value="">
+				<button onClick="doUpload()" type="button">上传图片</button>
+				<span class="up-msg" style="color:green;display: none">上传成功</span>
 			</p>
 			<div class="divider"></div>
 		</div>
@@ -37,9 +40,25 @@
 </div>
 <script type="text/javascript">
 	//防止多次提交
-	$(document).on('click','.sub',function(){
-		$(this).attr('disabled',true);
-		$('.pageForm').submit();
-		return true;
-	})
+	// $(document).on('click','.sub',function(){
+	// 	$(this).attr('disabled',true);
+	// 	$('.pageForm').submit();
+	// 	return true;
+	// })
+	function doUpload() {
+		var formData = new FormData($( ".pageForm" )[0]);  
+		$.ajax({  
+			url: '{:U("admin/api/uploadAdImage")}' ,  
+			type: 'POST',  
+			data: formData,  
+			async: false,  
+			cache: false,  
+			contentType: false,  
+			processData: false,  
+			success: function (data) {  
+				$('.image').val(data);
+				$('.up-msg').show();
+			},  
+		});  
+	}
 </script>

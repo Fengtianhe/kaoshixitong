@@ -42,15 +42,7 @@ class ContactController extends CommonController {
 
         $data['way']              = I('request.way','');
         $data['flog']             = I('request.flog',0);
-
-
-       $file = uploadFile('file');
-        if (!$file) {
-            $this->error('文件出错');
-        }
-        $data['images']=$file;
-
-
+        $data['images']           = I('request.image','');
 
         if ($id) {
             $data['update_time'] = time();
@@ -59,7 +51,6 @@ class ContactController extends CommonController {
             $data['create_time'] = time();
             $id = M('Contact')->add($data);
         }
-
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
@@ -71,9 +62,6 @@ class ContactController extends CommonController {
         $result['forwardUrl']   = "";
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
-
-
-        
     }
     public function del(){
         $id = I('get.id');
@@ -89,7 +77,4 @@ class ContactController extends CommonController {
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
     }
-
-  
-
 }

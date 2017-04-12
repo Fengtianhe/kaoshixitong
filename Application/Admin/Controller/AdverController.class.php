@@ -43,17 +43,9 @@ class AdverController extends CommonController {
     public function saveAdver(){
         $id = I('request.id', 0);
 
-        $data['desc']              = I('request.desc','');
+        $data['desc']             = I('request.desc','');
         $data['flog']             = I('request.flog',0);
-
-
-       $file = uploadFile('file');
-        if (!$file) {
-            $this->error('文件出错');
-        }
-        $data['images']=$file;
-
-
+        $data['images']           = I('request.image','');
 
         if ($id) {
             $data['update_time'] = time();
@@ -62,7 +54,6 @@ class AdverController extends CommonController {
             $data['create_time'] = time();
             $id = M('Adver')->add($data);
         }
-
 
         $result['statusCode'] = "200";
         $result['message']   = "修改成功";
@@ -74,9 +65,6 @@ class AdverController extends CommonController {
         $result['forwardUrl']   = "";
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
-
-
-        
     }
     public function del(){
         $id = I('get.id');
@@ -92,7 +80,4 @@ class AdverController extends CommonController {
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
     }
-
-  
-
 }
