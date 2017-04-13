@@ -16,7 +16,7 @@
 			<div class="login_box" style="line-height: 40px;">
 			<form action="{:U('home/user/handleLogin')}" method="post" class="form">
 				<p>
-					账号：<input class="mr_26 num" type="text" placeholder="身份账号" name="idcard"/>
+					账号：<input class="mr_26 num" type="text" placeholder="手机号" name="phone"/>
 				</p>
 				<p>
 					密码：<input class="mr_26 pass" type="password" name="password"/>
@@ -40,7 +40,7 @@
 	<script>
 		$(function(){
 			var $btn = $(".login_btn");
-			var $reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+			var $reg = /(^\d{11}$)/;
 			$btn.click(function(){
 				var $num = $(".num").val();
 				var $pass = $(".pass").val();
@@ -51,7 +51,7 @@
 					return false;
 				}else{
 					if($reg.test($num) == false){
-						alert("身份证号码输入有误");
+						alert("手机号输入有误");
 						return false;
 					}
 				}

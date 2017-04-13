@@ -18,9 +18,7 @@
 					手机号码：<input class="mr_26 phone" type="text" name="phone">
 				</p>
 				<p>默认密码 ：8888</p>
-				<p>
-					<span class="mar_25">密</span>码：<input class="mr_26 pass" type="password" name="password">
-				</p>
+				
 				<p>
 					<label for="agreen">
 						<input type="checkbox" id="agreen">
@@ -53,16 +51,6 @@
 						alert("手机号码输入有误");
 						return false;
 					}
-				}
-				//验证密码
-				if($pass == ""){
-					alert("密码不能为空");
-					return false;
-				}
-				//确认密码
-				if($sure_pass == ""){
-					alert("密码不能为空");
-					return false;
 				}
 				$(".reg_form").submit();
 			})

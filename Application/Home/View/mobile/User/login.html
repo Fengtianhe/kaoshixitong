@@ -57,7 +57,7 @@
                     <div class="form-group input3">
                         <label for="name" class="col-sm-2 control-label">账<span class="px20">空</span>号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control num" id="name" placeholder="身份证号" name="idcard"/>
+                            <input type="text" class="form-control num" id="name" placeholder="手机号" name="phone"/>
                         </div>
                     </div>
 
@@ -79,7 +79,7 @@
                     <div class="input2">
                         <button type="submit" class="btn btn-submit">登录</button>
                     </div>
-                    <p class="text-right goregister"><a href="{:U('home/user/regist')}">注册新账号</a></p>
+                    <p class="text-right goregister"><a href="{:U('home/user/regist1')}">注册新账号</a></p>
                 </form>
             </div>
 
@@ -123,18 +123,18 @@
 	<script>
 		$(function(){
 			var $btn = $(".btn-submit");
-			var $reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+			var $reg = /(^\d{11}$)/;
 			$btn.click(function(){
 				var $num = $(".num").val();
 				var $pass = $(".pass").val();
 				var $code = $(".code").val();
-				//验证身份证号码
+				//验证账号
 				if($num == ""){
-					alert("身份证号码不能为空");
+					alert("账号不能为空");
 					return false;
 				}else{
 					if($reg.test($num) == false){
-						alert("身份证号码输入有误");
+						alert("账号输入有误");
 						return false;
 					}
 				}

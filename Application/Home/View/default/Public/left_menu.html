@@ -1,0 +1,19 @@
+<div class="list">
+	<div class="list_t">
+		<div class="input">
+			<select name="" id="">
+			
+			</select>
+		</div>
+		<ul>
+		<php>if($_SESSION['me']['formal']==1){</php>
+			<li><div class="list_style"></div><a href="{:U('home/practice/index')}">全真练习</a></li>
+			<li><div class="list_style"></div><a href="{:U('home/test/index')}">模拟考试</a></li>
+		<php>}else{</php>
+			<li><div class="list_style"></div><a href="/Home/practice/free/type/1">免费体验（单选）</a></li>
+			<li><div class="list_style"></div><a href="/Home/practice/free/type/2">免费体验（多选）</a></li>
+		<php>}</php>
+		</ul>
+	</div>
+	<div class="list_b"></div>
+</div>

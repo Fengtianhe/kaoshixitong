@@ -82,12 +82,12 @@ class UserController extends Controller {
     public function saveUser1(){
         $name       = I('post.name','','string');
         $email      = I('post.email','','email');
-        $password   = I('post.password');
+        $password   = I('post.password','8888');
         $phone      = I('post.phone','','/^\d{11}$/');
         $idcard     = I('post.idcard','','/^\d{17}[0-9x]$/i');
         $user_id    = I('post.user_id','','int');
         $province   = I('post.province',0,'int');
-        if ($password!=8888 && !$phone ) {
+        if (!$phone ) {
             $this->error('请正确填写信息。');
         }
  
@@ -145,17 +145,18 @@ class UserController extends Controller {
     //登录处理
     public function handleLogin() {
     	$password 	= I('post.password');
-    	$idcard 	= I('post.idcard','','/^\d{17}[0-9x]$/i');
+    	//$idcard 	= I('post.idcard','','/^\d{17}[0-9x]$/i');
+        $phone      = I('post.phone','','/^\d{11}$/i');
         $verify = I('param.verify','');
         if(!check_verify($verify)){  
             $this->error("亲，验证码输错了哦！",$this->site_url,3);  
         }
-    	if (!$password || !$idcard) {
+    	if (!$password || !$phone) {
     		$this->error('请正确填写信息。');
     	}
 
     	$user 	=	D('User');
-    	if ($user_info = $user->where(array('idcard'=>$idcard, 'password'=>md5($password)))->find()) {
+    	if ($user_info = $user->where(array('phone'=>$phone, 'password'=>md5($password)))->find()) {
             if ($user_info['is_del'] == '1') {
                 echo '<script>alert("您的账号无法登陆，请联系管理员");history.back();</script>';
             }elseif($user_info['time_length'] <= 0){
@@ -175,7 +176,7 @@ class UserController extends Controller {
             }
                 
     	} else {
-    		$this->error('身份证号或密码错误，请核对后重新登录');
+    		$this->error('账号或密码错误，请核对后重新登录');
     	}
     }
 
