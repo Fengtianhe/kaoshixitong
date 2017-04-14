@@ -107,7 +107,40 @@ class UserController extends CommonController {
             $this->error('服务器繁忙，充值失败');
         }
     }
+    public function uppassword(){
+        $uid = I('get.uid');
+        $userinfo = M('user')->where(array('id' => $uid))->find();
+        $this->assign('info',$userinfo);
+        $this->display();
+    }
+    public function douppassword(){
+        $password = md5(I('post.password'));
+        $uid = I('post.id');
+        $info = M('user')->where(array('id'=>$uid))->find();
+        $data['password']=$password;
+        $data['update_time'] = time();
+        if (M('user')->where(array('id'=>$uid))->save($data)) {
+            // $log['user_id'] = $uid;
+            // $log['admin_id'] = $_SESSION['admin']['me']['id'];
+            // $log['value'] = $time_s;
+            // $log['create_time'] = time();
+            // D('UserLog')->addLog($log);
+            
+            $result['statusCode'] = "200";
+            $result['message']   = "修改成功";
+            //$result['navTabId'] = "user";
+            //$result['rel']   = "user";
+            
+            $result['callbackType'] = "closeCurrent";
+            
+            $result['forwardUrl']   = "";
+            $result['confirmMsg'] = "";
 
+            $this->ajaxReturn($result);
+        }else{
+            $this->error('服务器繁忙，充值失败');
+        }
+    }
     public function ajaxChangeStatus(){
         if (I('get.status')) {
             $data['is_del'] = I('get.status');
