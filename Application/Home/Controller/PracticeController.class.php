@@ -138,7 +138,7 @@ class PracticeController extends CommonController {
     public function delUserPracticeResult() {
         $user_id = $_SESSION['me']['id'];
         D('UserResult')->delUserResult($user_id);
-        $this->success('清楚完成',U('home/index/index'));
+        $this->success('清除完成',U('home/index/index'));
     }
 
     /**
