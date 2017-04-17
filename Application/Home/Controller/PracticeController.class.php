@@ -80,29 +80,31 @@ class PracticeController extends CommonController {
         }
         $question = D('Question')->getSimpleQuestionByWhere($where);
         //
-        switch ($category) {
-            case 1 :
-                $field = 'one_result';
-                break;
-            case 2 :
-                $field = 'two_result';
-                break;
-            case 3 :
-                $field = 'three_result';
-                break;
-            case 4 :
-                $field = 'four_result';
-                break;
+        // switch ($category) {
+        //     case 1 :
+        //         $field = 'one_result';
+        //         break;
+        //     case 2 :
+        //         $field = 'two_result';
+        //         break;
+        //     case 3 :
+        //         $field = 'three_result';
+        //         break;
+        //     case 4 :
+        //         $field = 'four_result';
+        //         break;
 
-        }
-        $user_result = D('user_result')->where('user_id = '.$_SESSION['me']['id'])->find();
-        if (!$user_result) {
-            $result_id = D('user_result')->add(array('user_id'=>$_SESSION['me']['id']));
-            $results = array();
-        } else {
-            $result_id = $user_result['id'];
-            $results = unserialize($user_result[$field]);
-        }
+        // }
+        // $user_result = D('user_result')->where('user_id = '.$_SESSION['me']['id'])->find();
+        // if (!$user_result) {
+        //     $result_id = D('user_result')->add(array('user_id'=>$_SESSION['me']['id']));
+        //     $results = array();
+        // } else {
+        //     $result_id = $user_result['id'];
+        //     $results = unserialize($user_result[$field]);
+        // }
+
+        $results = D('UserResult')->getUserResult($_SESSION['me']['id']);
 
         //
         $first_question = D('Question')->getInfoById($question[0]['id']);
@@ -118,30 +120,8 @@ class PracticeController extends CommonController {
         $result['question_info']['sn'] = I('post.sn',1);
     	$result['status'] = 'ok';
 
-        switch ($question_info['category']) {
-            case 1 :
-                $field = 'one_result';
-                break;
-            case 2 :
-                $field = 'two_result';
-                break;
-            case 3 :
-                $field = 'three_result';
-                break;
-            case 4 :
-                $field = 'four_result';
-                break;
-
-        }
-        $user_result = D('user_result')->where('user_id = '.$_SESSION['me']['id'])->find();
-        if (!$user_result) {
-            $result_id = D('user_result')->add(array('user_id'=>$_SESSION['me']['id']));
-            $results = array();
-        } else {
-            $result_id = $user_result['id'];
-            $results = unserialize($user_result[$field]);
-        }
-        $result['question_answer'] = isset($results[$id])? $results[$id] : array();
+        $question_result = D('UserResult')->getResult($_SESSION['me']['id'], $id);
+        $result['question_answer'] = $question_result;
         $this->ajaxReturn($result);
     }
     public function handlePractice(){
@@ -167,41 +147,14 @@ class PracticeController extends CommonController {
         $select         = I('post.select');
         $selected       = I('post.selected');
         $type           = I('post.type');
-        $answer = gcookie('person_test_result');
 
-        $question_info = D('Question')->where('id = '.$question_id)->find();
-        switch ($question_info['category']) {
-            case 1 :
-                $field = 'one_result';
-                break;
-            case 2 :
-                $field = 'two_result';
-                break;
-            case 3 :
-                $field = 'three_result';
-                break;
-            case 4 :
-                $field = 'four_result';
-                break;
-
-        }
-        
-        $user_result = D('user_result')->where('user_id = '.$_SESSION['me']['id'])->find();
-        if (!$user_result) {
-            $result_id = D('user_result')->add(array('user_id'=>$_SESSION['me']['id']));
-            $results = array();
-        } else {
-            $result_id = $user_result['id'];
-            $results = unserialize($user_result[$field]);
-        }
+        $question_info = D('Question')->where('id = '.$question_id)->find(); 
 
         $selected = explode(',', trim($selected,','));
-        $results[$question_id] = array('select'=>$select, 'type'=>$type,'selected'=>$selected);
-        $results_str = serialize($results);
-        $data[$field] = $results_str;
-        D('user_result')->where("id = ".$result_id)->save($data);
+        $answer = array('select'=>$select, 'type'=>$type,'selected'=>$selected);
+        D('UserResult')->saveResult($_SESSION['me']['id'], $question_id,$answer);
         $result['status'] = 'OK';
-        $result['answer'] = json_encode($results[$question_id]);
+        $result['answer'] = json_encode($answer);
         $this->ajaxReturn($result);
 
     }
