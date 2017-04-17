@@ -12,7 +12,7 @@ class UserResultModel extends Model {
 	 * @E-mail   1977905246@qq.com
 	 * @param    [type]            $user_id     [description]
 	 * @param    [type]            $question_id [description]
-	 * @param    [type]            $answer      [description]
+	 * @param    array('select'=>$select, 'type'=>$type,'selected'=>$selected)  $answer 
 	 * @return   [type]                         [description]
 	 */
 	public function saveResult($user_id, $question_id,$answer) {
@@ -32,6 +32,16 @@ class UserResultModel extends Model {
 		}
 		return true;
 	}
+
+	/**
+	 * 获取用户某题答题记录
+	 * @Author   Maying
+	 * @DateTime 2017-04-18
+	 * @E-mail   1977905246@qq.com
+	 * @param    [type]            $user_id     [description]
+	 * @param    integer           $question_id [description]
+	 * @return   [type]                         [description]
+	 */
 	public function getResult($user_id, $question_id=0) {
 		$result = array();
 		$info = $this->getResultInfo($user_id, $question_id);
@@ -83,6 +93,20 @@ class UserResultModel extends Model {
 			}
 		}
 		return $result;
+	}
+
+	/**
+	 * 删除用户答题记录
+	 * @Author   Maying
+	 * @DateTime 2017-04-18
+	 * @E-mail   1977905246@qq.com
+	 * @param    [type]            $user_id [description]
+	 * @return   [type]                     [description]
+	 */
+	public function delUserResult($user_id) {
+		$tableName = $this->getTable($user_id);
+		$data 	   = $this->table($tableName)->where(array('user_id'=>$user_id))->delete();
+		return true;
 	}
 
 }

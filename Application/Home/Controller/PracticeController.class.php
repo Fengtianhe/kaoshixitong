@@ -79,34 +79,10 @@ class PracticeController extends CommonController {
             $where['province_id'] = $user_info['province'];
         }
         $question = D('Question')->getSimpleQuestionByWhere($where);
-        //
-        // switch ($category) {
-        //     case 1 :
-        //         $field = 'one_result';
-        //         break;
-        //     case 2 :
-        //         $field = 'two_result';
-        //         break;
-        //     case 3 :
-        //         $field = 'three_result';
-        //         break;
-        //     case 4 :
-        //         $field = 'four_result';
-        //         break;
 
-        // }
-        // $user_result = D('user_result')->where('user_id = '.$_SESSION['me']['id'])->find();
-        // if (!$user_result) {
-        //     $result_id = D('user_result')->add(array('user_id'=>$_SESSION['me']['id']));
-        //     $results = array();
-        // } else {
-        //     $result_id = $user_result['id'];
-        //     $results = unserialize($user_result[$field]);
-        // }
-
+        //获取用户答题记录
         $results = D('UserResult')->getUserResult($_SESSION['me']['id']);
 
-        //
         $first_question = D('Question')->getInfoById($question[0]['id']);
         $this->assign('question', $question);
         $this->assign('results', $results);
@@ -157,6 +133,12 @@ class PracticeController extends CommonController {
         $result['answer'] = json_encode($answer);
         $this->ajaxReturn($result);
 
+    }
+
+    public function delUserPracticeResult() {
+        $user_id = $_SESSION['me']['id'];
+        D('UserResult')->delUserResult($user_id);
+        $this->success('清楚完成',U('home/index/index'));
     }
 
     /**
