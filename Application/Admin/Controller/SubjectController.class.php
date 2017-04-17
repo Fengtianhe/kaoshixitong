@@ -14,7 +14,7 @@ class SubjectController extends CommonController {
         
         $offset = ($pageNum -1) * $numPerPage;
         if (I('request.id')) {
-            $where['id'] = I('request.id');
+            $where['id']   = I('request.id');
         }
         if (I('request.name')) {
             $where['name'] = I('request.name');
@@ -48,8 +48,8 @@ class SubjectController extends CommonController {
     public function saveSubject(){
         $id = I('request.id', 0);
         
-        $data['name']              = I('request.name','');
-        $data['sortnum']             = I('request.sortnum',0);
+        $data['name']             = I('request.name','');
+        $data['sortnum']          = I('request.sortnum',0);
         $data['flog']             = I('request.flog',0);
         $data['area']             = I('request.area',0);
          

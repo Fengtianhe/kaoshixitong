@@ -50,9 +50,10 @@ class ChapterController extends CommonController {
     public function saveChapter(){
         $id = I('request.id', 0);
         
-        $data['name']              = I('request.name','');
-        $data['flog']             = I('request.flog',0);
-        $data['sortnum']             = I('request.sortnum',0);
+        $data['name']           = I('request.name','');
+        $data['flog']           = I('request.flog',0);
+        $data['sortnum']        = I('request.sortnum',0);
+        $data['sn']             = I('request.sn',0);
         $data['subject_id']              = I('request.subject_id','');
      	$sid= I('request.subject_id',0);
      	$data['subject_name']=M('Subject')->where(array('id'=>$sid))->find();
