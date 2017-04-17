@@ -52,6 +52,7 @@ class ChapterController extends CommonController {
         
         $data['name']              = I('request.name','');
         $data['flog']             = I('request.flog',0);
+        $data['sortnum']             = I('request.sortnum',0);
         $data['subject_id']              = I('request.subject_id','');
      	$sid= I('request.subject_id',0);
      	$data['subject_name']=M('Subject')->where(array('id'=>$sid))->find();

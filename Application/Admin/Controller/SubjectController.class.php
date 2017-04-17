@@ -49,6 +49,7 @@ class SubjectController extends CommonController {
         $id = I('request.id', 0);
         
         $data['name']              = I('request.name','');
+        $data['sortnum']             = I('request.sortnum',0);
         $data['flog']             = I('request.flog',0);
         $data['area']             = I('request.area',0);
          
