@@ -4,20 +4,21 @@ CREATE TABLE `ks_user_result_0` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_1` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_2` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -25,10 +26,10 @@ CREATE TABLE `ks_user_result_2` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_3` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,10 +37,10 @@ CREATE TABLE `ks_user_result_3` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_4` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -47,10 +48,10 @@ CREATE TABLE `ks_user_result_4` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_5` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -58,10 +59,10 @@ CREATE TABLE `ks_user_result_5` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_6` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -69,10 +70,10 @@ CREATE TABLE `ks_user_result_6` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_7` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -80,10 +81,10 @@ CREATE TABLE `ks_user_result_7` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_8` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -91,10 +92,10 @@ CREATE TABLE `ks_user_result_8` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_9` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -102,10 +103,10 @@ CREATE TABLE `ks_user_result_9` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_10` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -113,10 +114,10 @@ CREATE TABLE `ks_user_result_10` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_11` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -124,10 +125,10 @@ CREATE TABLE `ks_user_result_11` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_12` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -135,10 +136,10 @@ CREATE TABLE `ks_user_result_12` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_13` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -146,10 +147,10 @@ CREATE TABLE `ks_user_result_13` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_14` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -157,10 +158,10 @@ CREATE TABLE `ks_user_result_14` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_15` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -168,10 +169,10 @@ CREATE TABLE `ks_user_result_15` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_16` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -179,10 +180,10 @@ CREATE TABLE `ks_user_result_16` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_17` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -190,10 +191,10 @@ CREATE TABLE `ks_user_result_17` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_18` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -201,10 +202,10 @@ CREATE TABLE `ks_user_result_18` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_19` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -212,10 +213,10 @@ CREATE TABLE `ks_user_result_19` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_20` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -223,10 +224,10 @@ CREATE TABLE `ks_user_result_20` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_21` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -234,10 +235,10 @@ CREATE TABLE `ks_user_result_21` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_22` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -245,10 +246,10 @@ CREATE TABLE `ks_user_result_22` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_23` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -256,10 +257,10 @@ CREATE TABLE `ks_user_result_23` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_24` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -267,10 +268,10 @@ CREATE TABLE `ks_user_result_24` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_25` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -278,10 +279,10 @@ CREATE TABLE `ks_user_result_25` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_26` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -289,10 +290,10 @@ CREATE TABLE `ks_user_result_26` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_27` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -300,10 +301,10 @@ CREATE TABLE `ks_user_result_27` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_28` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -311,10 +312,10 @@ CREATE TABLE `ks_user_result_28` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_29` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -322,10 +323,10 @@ CREATE TABLE `ks_user_result_29` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_30` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -333,10 +334,10 @@ CREATE TABLE `ks_user_result_30` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
 CREATE TABLE `ks_user_result_31` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -344,8 +345,8 @@ CREATE TABLE `ks_user_result_31` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `result` varchar(100) NOT NULL DEFAULT '',
   `is_true` tinyint(4) NOT NULL DEFAULT '0',
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`);
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户答题记录';
