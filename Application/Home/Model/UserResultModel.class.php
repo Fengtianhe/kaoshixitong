@@ -108,5 +108,11 @@ class UserResultModel extends Model {
 		$data 	   = $this->table($tableName)->where(array('user_id'=>$user_id))->delete();
 		return true;
 	}
+	public function getreformQuestions($tablenum){
+        $where_info['is_true']=0;
+        $where_info['user_id']=$_SESSION['me']['id'];
+        $reform_question=D('UserResult_'.$tablenum)->where(array('is_true'=>0,'user_id'=>$_SESSION['me']['id']))->select();
+        return $reform_question;
+	}
 
 }

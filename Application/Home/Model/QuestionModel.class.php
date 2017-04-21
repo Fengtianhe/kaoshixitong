@@ -33,6 +33,26 @@ class QuestionModel extends Model {
 		$result = array('question'=>$question, 'stem'=>$stems);
 		return $result;
 	}
+	function getSimpleQuestionInIds($where){
+		$where['id']=array('in',$where);
+		$question = $this->where($where)->select();
+		if (is_array($question) && !empty($question)) {
+			foreach ($question as $key=>$value) {
+				$ids[] = $value['id'];
+			}
+			$stem_where['question_id'] = array('in',$ids);
+			$question_stem = D('Question_stem')->where($stem_where)->select();
+			foreach ($question_stem as $qvalue) {
+				$stems[$qvalue['question_id']][] = $qvalue;
+			}
+			
+		} else {
+			$question = array();
+			$stems = array();
+		}
+		$result = array('question'=>$question, 'stem'=>$stems);
+		return $result;
+	}
 	function getSimpleQuestionByWhere($where,$offset=0,$limit=0) {
 		$question = $this->where($where)->limit($offset, $limit)->field('id')->select();
 		return $question;

@@ -79,11 +79,10 @@ class PracticeController extends CommonController {
             $where['province_id'] = $user_info['province'];
         }
         $question = D('Question')->getSimpleQuestionByWhere($where);
-
         //获取用户答题记录
         $results = D('UserResult')->getUserResult($_SESSION['me']['id']);
-
         $first_question = D('Question')->getInfoById($question[0]['id']);
+        
         $this->assign('question', $question);
         $this->assign('results', $results);
         $this->assign('first_question', $first_question);
@@ -139,6 +138,20 @@ class PracticeController extends CommonController {
         $user_id = $_SESSION['me']['id'];
         D('UserResult')->delUserResult($user_id);
         $this->success('清除完成',U('home/index/index'));
+    }
+    public function reform(){
+        $reform_question=D('UserResult')->getreformQuestions($_SESSION['me']['id']%32);
+        foreach ($reform_question as $key => $value) {
+            $question[$key]['id']=$value['question_id']; 
+        }
+        //获取答题信息
+        $results = D('UserResult')->getUserResult($_SESSION['me']['id']);
+        $first_question = D('Question')->getInfoById($reform_question[0]['question_id']);
+        
+        $this->assign('question', $question);
+        $this->assign('results', $results);
+        $this->assign('first_question', $first_question);
+        $this->display('startPractice');
     }
 
     /**
