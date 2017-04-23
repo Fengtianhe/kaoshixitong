@@ -21,12 +21,10 @@
 				<p style="width:500px">
 					状态：
 					<select class="" name="flog" id="question_type">
-							<option value="">请选择</option>
-							<option value="1">开启</option>
-							<option value="0">关闭</option>
-							<foreach name="flog" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['flog']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
+						<option value="">请选择</option>
+						<foreach name="status" item="statu">
+							<option value="{$key}" <?php if (isset($_REQUEST['flog']) && $key == $_REQUEST['flog']) echo "selected"; ?>>{$statu.name}</option>
+						</foreach>
 					</select>
 				</p>
 			</li>

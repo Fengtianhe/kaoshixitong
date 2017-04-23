@@ -2,6 +2,10 @@
 namespace Admin\Controller;
 use Think\Controller;
 class AdverController extends CommonController {
+     public $status = array(
+        0 => array('id'=>0, 'name'=>'未审核'),
+        1 => array('id'=>1, 'name'=>'已审核'),
+    );
     public function _initialize(){
         $this->checkLogin();
     }
@@ -22,19 +26,16 @@ class AdverController extends CommonController {
         if (I('request.desc')) {
             $where['desc'] = I('request.desc');
         }
-        if (I('request.flog')) {
+        if (I('request.flog') !== '') {
             $where['flog'] = I('request.flog');
         }
-        if(!$where){
-        	$lists = M('Adver')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
-        }else{
-        	$lists = M('Adver')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
-        }
+        $lists = M('Adver')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
    		
         $totalCount  = M('Adver')->where($where)->count('id');
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
         $this->assign('lists', $lists);
+        $this->assign('status', $this->status);
         $this->display();
     }
     public function editorAdver(){
