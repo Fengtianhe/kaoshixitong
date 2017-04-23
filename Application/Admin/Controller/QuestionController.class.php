@@ -62,6 +62,7 @@ class QuestionController extends CommonController {
     public function editorQuestion(){
         $id = I('get.id');
         $question_type=0;
+        $chapter = array();
         if ($id) {
             $question_info = M('Question')->where(array('id' => $id))->find();
             $question_stem = M('question_stem')->where(array('question_id'=>$id))->order('sn')->select();
@@ -77,11 +78,15 @@ class QuestionController extends CommonController {
             $question_info['question_stem_str'] = $question_stem_str;
             $question_type =$question_info['category'];
             $this->assign('question_info',$question_info);
+
+            $chapter=M('chapter')->where(array('flog'=>1, 'subject_id'=>$question_info['category']))->select();
+            
         }
         $area = M('areas')->where(array('area_type'=>1))->select();
         $subject=M('subject')->where(array('flog'=>1))->select();
         $this->assign('subject',$subject);
         $this->assign('area',$area);
+        $this->assign('chapter',$chapter);
         $this->assign('question_type',$question_type);
         $this->display();
     }
@@ -253,7 +258,7 @@ class QuestionController extends CommonController {
         $category = I('post.category');
         $where['flog']=1;
         $where['subject_id']=$category;
-        $chapter=M('chapter')->where($where)->field('id,name')->select();
+        $chapter=M('chapter')->where($where)->field('id,name,sn')->select();
         $result['status']=1;
         $result['message']=$chapter;
         $this->ajaxReturn($result);

@@ -18,7 +18,7 @@
 				<select name="category" id="" class="category">
 					<option>请选择</option>
 					<?php foreach ($subject as $key => $value) { ?>
-					  <option value="<?php echo $value['id']; ?>" rel="<?php echo $value['area']; ?>">{$value['name']}</option>
+					  <option <?php if($question_info['category'] == $value['id']) echo "selected"; ?> value="<?php echo $value['id']; ?>" rel="<?php echo $value['area']; ?>">{$value['name']}</option>
 					<?php } ?>
 					  
 				</select>
@@ -26,7 +26,10 @@
 			<p style="width:500px">
 				<label>章节：</label>
 				<select name="chapter" id="chapter" class="chapter">
-					
+					<option>请选择</option>
+					<?php foreach ($chapter as $key => $value) { ?>
+					  <option <?php if($question_info['chapter'] == $value['sn']) echo "selected"; ?> value="<?php echo $value['sn']; ?>">{$value['name']}</option>
+					<?php } ?>
 				</select>
 			</p>
 			<p style="width:500px;display:none" class="province">
@@ -91,7 +94,7 @@
 					if(res.status == "1"){
 						var message = res.message;
 						for(var i=0;i<message.length;i++){
-							optiontpl+= "<option value="+message[i].id+">"+message[i].name+"</option>"
+							optiontpl+= "<option value="+message[i].sn+">"+message[i].name+"</option>"
 						}
 						console.log(optiontpl);
 						console.log($("#chapter"));
