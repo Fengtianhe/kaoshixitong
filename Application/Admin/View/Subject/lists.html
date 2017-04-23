@@ -20,30 +20,14 @@
 			 <li>
 				<p style="width:500px">
 					状态：
-					<select class="" name="question_type" id="question_type">
+					<select class="" name="flog" id="flog">
+							<option value="">请选择</option>
 							<option value="1">开启</option>
 							<option value="0">关闭</option>
-							<foreach name="question_type" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['question_type']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
 					</select>
 				</p>
 			</li>
-			<!--<li>
-				<p style="width:500px">
-					学  校：
-					<select class="" name="school_id" id="school">
-							<option value="">所有学校</option>
-							<volist name="school_list" id="school">
-								<option value="{$school.id}" <if condition="$school['id'] eq $_REQUEST['school_id']">selected="selected"</if>>{$school.s_name}</option>
-							</volist>
-					</select>
-				</p>
-			</li>
-			<li>
-				注册时间：
-				<input type="text" class="date" name="start_time" value="<?php echo $_REQUEST['start_time']?>" style="width:75px"/>~<input type="text" class="date" name="end_time" value="<?php echo $_REQUEST['end_time']?>" style="width:75px"/>
-			</li> -->
+			
 		</ul>
 		
 		<div class="subBar">

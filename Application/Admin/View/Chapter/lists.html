@@ -6,7 +6,7 @@
 </form>
 
 <div class="pageHeader">
-	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/chapter/lists" method="post">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);" action="/admin/Chapter/lists" method="post">
 	<div class="searchBar">
 		<ul class="searchContent" style="height:auto">
 			<li>
@@ -21,16 +21,13 @@
 				章节名称：
 				<input type="text" name="name" value="<?php echo $_REQUEST['name']?>"/>
 			</li>
-			 <li>
+			<li>
 				<p style="width:500px">
 					权限：
 					<select class="" name="flog" id="flog">
-							<option value="">选择</option>
+							<option value="">请选择</option>
 							<option value="1">开启</option>
 							<option value="0">关闭</option>
-							<foreach name="flog" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['flog']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
 					</select>
 				</p>
 			</li>

@@ -20,7 +20,7 @@ class ChapterController extends CommonController {
             $where['subject_id'] = I('request.subject_id');
         }
         if (I('request.name')) {
-            $where['subject_name'] = I('request.name');
+            $where['name'] = I('request.name');
         }
         if (I('request.flog')) {
             $where['flog'] = I('request.flog');
@@ -28,7 +28,7 @@ class ChapterController extends CommonController {
         if(!$where){
         	$lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }else{
-        	$lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+        	$lists = M('Chapter')->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         }
    		
         $totalCount  = M('Chapter')->where($where)->count('id');

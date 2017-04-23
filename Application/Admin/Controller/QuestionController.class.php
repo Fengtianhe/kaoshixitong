@@ -11,12 +11,7 @@ class QuestionController extends CommonController {
         2 => array('name'=>'多选'),
         3 => array('name'=>'判断'),
         );
-    // public $question_category = array(
-    //     1 => array('name'=>'科目1'),
-    //     2 => array('name'=>'科目2'),
-    //     3 => array('name'=>'科目3'),
-    //     4 => array('name'=>'科目4'),
-    //     );
+    
 	public function lists(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);
