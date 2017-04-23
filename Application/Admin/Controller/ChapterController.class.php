@@ -5,6 +5,10 @@ class ChapterController extends CommonController {
     public function _initialize(){
         $this->checkLogin();
     }
+    public $status = array(
+        0 => array('id'=>0, 'name'=>'关闭'),
+        1 => array('id'=>1, 'name'=>'开启'),
+    );
     public function lists(){
         $limit = 20;
         $pageNum        = I('pageNum', 1);
@@ -22,14 +26,12 @@ class ChapterController extends CommonController {
         if (I('request.name')) {
             $where['name'] = I('request.name');
         }
-        if (I('request.flog')) {
+        if (I('request.flog') !== '') {
             $where['flog'] = I('request.flog');
         }
-        if(!$where){
-        	$lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
-        }else{
-        	$lists = M('Chapter')->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
-        }
+        
+        $lists = M('Chapter')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
+       
    		
         $totalCount  = M('Chapter')->where($where)->count('id');
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
@@ -37,6 +39,7 @@ class ChapterController extends CommonController {
         // $this->assign('question_type',$this->question_type);
         // $this->assign('category',$this->question_category);
         $this->assign('lists', $lists);
+        $this->assign('status', $this->status);
         $this->display();
     }
     public function editorChapter(){
