@@ -1,0 +1,72 @@
+<h2 class="contentTitle">题目</h2>
+
+
+<div class="pageContent">
+	
+	<form method="post" action="/admin/compet/saveCompet" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<div class="pageFormContent nowrap" layoutH="97">
+			<p style="width:500px height:800px">
+				<label>名字：</label>
+				<input type="text" name="name" value="{$compet_info.name}">
+				
+			</p>
+			<p style="width:500px height:800px">
+				<label>问题：</label>
+				<input type="text" name="question" value="{$compet_info.question}">
+				
+			</p>
+			<p style="width:500px">
+				<label>状态：</label>
+				<select name="flag" id="" class="compet">
+					<option <?php if($compet_info['flag'] == 1) echo "selected"; ?> value="1">开启</option>
+					<option <?php if($compet_info['flag'] == 0) echo "selected"; ?> value="0">关闭</option>
+				</select>
+			</p>
+			<p style="width:500px height:800px">
+				<label>开始时间：</label>
+				<input type="text" name="start_time" value="{$compet_info.start_time}">
+				
+			</p>
+			<p style="width:500px height:800px">
+				<label>结束时间：</label>
+				<input type="text" name="over_time" value="{$compet_info.over_time}">
+				
+			</p>
+			
+			<div class="divider"></div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<input type="hidden" name="id" value="{$compet_info['id']}">
+				<input type="hidden" name="close_dialog" value="1">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" class="sub">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+	//防止多次提交
+	// $(document).on('click','.sub',function(){
+	// 	$(this).attr('disabled',true);
+	// 	$('.pageForm').submit();
+	// 	return true;
+	// })
+	function doUpload() {
+		var formData = new FormData($( ".pageForm" )[0]);  
+		$.ajax({  
+			url: '{:U("admin/api/uploadAdImage")}' ,  
+			type: 'POST',  
+			data: formData,  
+			async: false,  
+			cache: false,  
+			contentType: false,  
+			processData: false,  
+			success: function (data) {  
+				$('.image').val(data);
+				$('.up-msg').show();
+			},  
+		});  
+	}
+</script>
