@@ -11,8 +11,8 @@
 				
 			</p>
 			<p style="width:500px height:800px">
-				<label>问题：</label>
-				<input type="text" name="question" value="{$compet_info.question}">
+				<label>简介：</label>
+				<input type="text" name="desc" value="{$compet_info.desc}">
 				
 			</p>
 			<p style="width:500px">
@@ -24,12 +24,15 @@
 			</p>
 			<p style="width:500px height:800px">
 				<label>开始时间：</label>
-				<input type="text" name="start_time" value="{$compet_info.start_time}">
+				<!-- <input type="text" name="start_time" value="{$compet_info.start_time}"> -->
 				
+				<input type="text" name="start_time" class="date" dateFmt="yyyy-MM-dd HH:mm:ss" value="{$compet_info.start_time|date='Y-m-d H:i:s',###}" />
+
 			</p>
 			<p style="width:500px height:800px">
 				<label>结束时间：</label>
-				<input type="text" name="over_time" value="{$compet_info.over_time}">
+				<!-- <input type="text" name="over_time" value="{$compet_info.over_time}"> -->
+				<input type="text" name="over_time" class="date" dateFmt="yyyy-MM-dd HH:mm:ss" value="{$compet_info.over_time|date='Y-m-d H:i:s',###}" />
 				
 			</p>
 			

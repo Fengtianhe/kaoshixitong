@@ -48,9 +48,13 @@ class CompetController extends CommonController {
 
         $data['name']             = I('request.name','');
         $data['flag']             = I('request.flag',0);
-        $data['question']           = I('request.question','');
-        $data['start_time']             = I('request.start_time',0);
-        $data['over_time']             = I('request.over_time',0);
+        $data['desc']             = I('request.desc','');
+        $data['question']         = I('request.question','');
+        $data['start_time']       = I('request.start_time',0);
+        $data['over_time']        = I('request.over_time',0);
+
+        $data['start_time']       = strtotime($data['start_time']);
+        $data['over_time']        = strtotime($data['over_time']);
 
         if ($id) {
             $data['update_time'] = time();
