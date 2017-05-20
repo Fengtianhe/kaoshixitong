@@ -36,17 +36,21 @@ class QuestionController extends CommonController {
         $totalCount  = M('Question')->where($where)->count('id');
         $lists = M('Question')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         foreach ($lists as $key=>$value) {
-            $stem = M('question_stem')->where("question_id = {$value['id']}")->select();
-            $str = '';
-            foreach ($stem as $k => $v) {
-                if ($v['is_true']) {
-                    $str .= '<b>'.$v['stem_content'].'</b>';
-                } else {
-                    $str .= $v['stem_content'];
+            if ($value['question_type'] == 3) {
+                $lists[$key]['stem'] = $value['is_true'] ? "<b>是</b>|否":"是|<b>否</b>";
+            } else {
+                $stem = M('question_stem')->where("question_id = {$value['id']}")->select();
+                $str = '';
+                foreach ($stem as $k => $v) {
+                    if ($v['is_true']) {
+                        $str .= '<b>'.$v['stem_content'].'</b>';
+                    } else {
+                        $str .= $v['stem_content'];
+                    }
+                    $str .= '|';
                 }
-                $str .= '|';
-            }
-            $lists[$key]['stem'] = $str;
+                $lists[$key]['stem'] = $str;
+            }  
         }
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
         $this->assign('page', $page);
@@ -65,20 +69,22 @@ class QuestionController extends CommonController {
         $chapter = array();
         if ($id) {
             $question_info = M('Question')->where(array('id' => $id))->find();
-            $question_stem = M('question_stem')->where(array('question_id'=>$id))->order('sn')->select();
-            $question_stem_str = '';
-            $answer = '';
-            foreach($question_stem as $key=>$value) {
-                $question_stem_str .= $value['stem_content']."\r\n";
-                if ($value['is_true']) {
-                    $answer .= $value['sn'].',';
+            if ($question_info['question_type'] == 3) {
+                $question_info['answer'] = $question_info['is_true'];
+            } else {
+                $question_stem = M('question_stem')->where(array('question_id'=>$id))->order('sn')->select();
+                $question_stem_str = '';
+                $answer = '';
+                foreach($question_stem as $key=>$value) {
+                    $question_stem_str .= $value['stem_content']."\r\n";
+                    if ($value['is_true']) {
+                        $answer .= $value['sn'].',';
+                    }
                 }
+                $question_info['answer'] = trim($answer,',');
+                $question_info['question_stem_str'] = $question_stem_str;
             }
-            $question_info['answer'] = trim($answer,',');
-            $question_info['question_stem_str'] = $question_stem_str;
-            $question_type =$question_info['category'];
             $this->assign('question_info',$question_info);
-
             $chapter=M('chapter')->where(array('flog'=>1, 'subject_id'=>$question_info['category']))->select();
             
         }
@@ -87,7 +93,6 @@ class QuestionController extends CommonController {
         $this->assign('subject',$subject);
         $this->assign('area',$area);
         $this->assign('chapter',$chapter);
-        $this->assign('question_type',$question_type);
         $this->display();
     }
     public function saveQuestion(){
@@ -113,6 +118,7 @@ class QuestionController extends CommonController {
         if ($data['question_type'] == '3') {
             $data['is_true'] = current($answer);
         }
+        //var_dump($data);die();
         if ($id) {
             $data['update_time'] = time();
             M('Question')->where(array('id'=>$id))->save($data);

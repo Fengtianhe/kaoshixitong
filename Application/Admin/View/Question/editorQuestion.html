@@ -71,9 +71,6 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		if ({$question_type}  == 4) {
-			$('.province').show();
-		}
 		$('.category').change(function(){
 			//判断是否需要地区信息
 			if ($(this).find("option:selected").attr('rel') == 1) {
@@ -90,14 +87,13 @@
 				},
 				datatype:'json',
 				success:function(res){
+					console.log(res);
 					var optiontpl = ""
 					if(res.status == "1"){
 						var message = res.message;
 						for(var i=0;i<message.length;i++){
 							optiontpl+= "<option value="+message[i].sn+">"+message[i].name+"</option>"
 						}
-						console.log(optiontpl);
-						console.log($("#chapter"));
 						$("#chapter").html(optiontpl);
 					}
 				}
