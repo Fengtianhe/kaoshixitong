@@ -8,8 +8,23 @@ class QuestionModel extends Model {
 		$question = $this->getQuestionByWhere($where);
 		$question_infos = $question['question'];
 		$question_info = current($question_infos);
-		$question_stem = $question['stem'][$question_info['id']];
-		shuffle($question_stem);
+		if ($question_info['question_type'] == 3) {
+			$question_stem = array(
+					array(
+						'sn' 		=> 1,
+						'is_true' 	=> $question_info['is_true'] ? 1 : 0 ,
+						'stem_content' => "是"
+						),
+					array(
+						'sn' 		=> 0,
+						'is_true' 	=> $question_info['is_true'] ? 0 : 1 ,
+						'stem_content' => "否"
+						)
+				);
+		} else {
+			$question_stem = $question['stem'][$question_info['id']];
+			shuffle($question_stem);
+		}
 		$question_info['question_stem'] = $question_stem;
 		return $question_info;
 	}

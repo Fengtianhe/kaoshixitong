@@ -283,6 +283,11 @@ function ajaxGetQuestion(data){
 					var input_name = 'answer[]';
 					var input_type = 'checkbox';
 					break;
+                case '3':
+                    var type = '判断';
+                    var input_name = 'answer';
+                    var input_type = 'radio';
+                    break;
 			}
 			//题目
 			var title = data.question_info.sn+'.'+'('+type+')'+data.question_info.title;
