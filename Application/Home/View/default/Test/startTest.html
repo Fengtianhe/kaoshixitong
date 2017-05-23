@@ -85,7 +85,7 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
 
     </div>
     <div class="right" style="height:100%;">
-    <div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">单选题</div>
+    	<div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">单选题</div>
         <ul class="timus list-unstyled" style="height:35%;clear:both">
         	
             <volist id="vo" name="question['radio']">
@@ -98,6 +98,15 @@ ondragstart="return false" onbeforecopy="return false" oncopy="document.selectio
         <ul class="timus list-unstyled" style="height:35%;clear:both">
         	
             <volist id="vo" name="question['checkbox']">
+            <a class="num active checkbox" rel="{$vo.id}">
+                {$key+1}
+            </a>
+            </volist>
+        </ul>
+         <div style="display: inline-block; height: 20px; clear: both; float: left; width: 100%;">判断题</div>
+        <ul class="timus list-unstyled" style="height:35%;clear:both">
+        	
+            <volist id="vo" name="question['truefalse']">
             <a class="num active checkbox" rel="{$vo.id}">
                 {$key+1}
             </a>
@@ -296,6 +305,11 @@ function ajaxGetQuestion(data){
 					var type = '多选';
 					var input_name = 'answer[]';
 					var input_type = 'checkbox';
+					break;
+				case '3':
+					var type = '判断';
+					var input_name = 'answer';
+					var input_type = 'radio';
 					break;
 			}
 			//题目

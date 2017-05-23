@@ -74,7 +74,11 @@ class TestController extends CommonController {
             if ($value['select'] == 'error') {
                 $errors[] = $key; 
             } else {
-                $grade += $value['type'] * 0.5;
+                if ($value['type'] == 3 || $value['type'] == 1) {
+                    $grade += 0.5; //单选判断 0.5
+                } else {
+                    $grade += 1.5; //多选 1.5
+                }
             }
         }
         if (is_array($errors) && !empty($errors)) {
@@ -84,10 +88,14 @@ class TestController extends CommonController {
         }
         $stem = M('question_stem');
         foreach ($error_question as $k => &$v) {
-            $map['question_id'] = $v['id'];
-            $map['is_true'] = 1;
-            $v['true'] = $stem->where($map)->getField('stem_content', true);
-            $v['true'] = implode(',',$v['true']);
+            if ($v['question_type'] == 3) {
+                $v['true'] = $v['is_true'] ? "是" : "否";
+            } else {
+                $map['question_id'] = $v['id'];
+                $map['is_true'] = 1;
+                $v['true'] = $stem->where($map)->getField('stem_content', true);
+                $v['true'] = implode(',',$v['true']);
+            }
             $v['tid'] = $k+1;
         }
         //$error_question 是打错的所有题
