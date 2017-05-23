@@ -88,6 +88,10 @@
 					<volist id="vo" name="question['checkbox']">
 						<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
 					</volist>
+					<p class="num_title"><b>判断</b></p>
+					<volist id="vo" name="question['truefalse']">
+						<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
+					</volist>
 				</div>
             </div>
         </div>
@@ -267,6 +271,11 @@ function ajaxGetQuestion(data){
 					var type = '多选';
 					var input_name = 'answer[]';
 					var input_type = 'checkbox';
+					break;
+				case '3':
+					var type = '判断';
+					var input_name = 'answer';
+					var input_type = 'radio';
 					break;
 			}
 			var str = '<p class="questions-text select_input_type question" rel="'+data.question_info.id+'" type="'+data.question_info.question_type+'">';
