@@ -18,7 +18,7 @@ class CompetResultModel extends Model {
 		$isJoin = $this->checkUserIsJoin($user_id, $compet_id);
 		if (!$isJoin) {
 			$answer = serialize($answer);
-			$data = array('user_id'=>$user_id, 'compet_id'=>$compet_id, 'score'=>$score, 'answer'=>$answer);
+			$data = array('user_id'=>$user_id, 'compet_id'=>$compet_id, 'score'=>$score, 'answer'=>$answer, 'create_time'=>time());
 			$id = $this->add($data);
 		}
 		

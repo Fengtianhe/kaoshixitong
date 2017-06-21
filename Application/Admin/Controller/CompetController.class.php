@@ -59,6 +59,7 @@ class CompetController extends CommonController {
             $data['update_time'] = time();
             M('Compet')->where(array('id'=>$id))->save($data);
         } else {
+            $data['question'] = '';
             $data['create_time'] = time();
             $id = M('Compet')->add($data);
         }
