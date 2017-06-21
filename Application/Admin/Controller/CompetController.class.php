@@ -30,6 +30,9 @@ class CompetController extends CommonController {
    		
         $totalCount  = M('Compet')->where($where)->count('id');
         $page = array('pageNum'=>$pageNum, 'orderField'=>$orderField, 'orderDirection'=>$orderDirection, 'numPerPage'=>$numPerPage, 'totalCount'=>$totalCount);
+        
+        $homeurl = 'http://'.$_SERVER['HTTP_HOST'].'/index.php/home/compet/startCompet?id=';
+        $this->assign('homeurl', $homeurl);
         $this->assign('page', $page);
         $this->assign('lists', $lists);
         $this->assign('status', $this->status);

@@ -6,19 +6,18 @@
 	<form method="post" action="/admin/contact/saveContact" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
 		<div class="pageFormContent nowrap" layoutH="97">
 			<p style="width:500px">
-				<label>联系方式：</label>
+				<label>类型：</label>
 				<select name="way" id="" class="contact">
 					<option <?php if($contact_info['way'] == 0) echo "selected"; ?> value="0">请选择</option>
 					<option <?php if($contact_info['way'] == 1) echo "selected"; ?> value="1">qq</option>
-					<option <?php if($contact_info['way'] == 2) echo "selected"; ?> value="2">qq群</option>
 					<option <?php if($contact_info['way'] == 3) echo "selected"; ?> value="3">微信</option>
 				</select>
 			</p>
 			<p style="width:500px">
 				<label>状态：</label>
 				<select name="flog" id="" class="contact">
-					<option <?php if($contact_info['flog'] == 1) echo "selected"; ?> value="1">开启</option>
-					<option <?php if($contact_info['flog'] == 0) echo "selected"; ?> value="0">关闭</option>
+					<option selected value="1">开启</option>
+					<option value="0">关闭</option>
 				</select>
 			</p>
 			<p style="width:600px;height:60px">

@@ -16,15 +16,11 @@
 			
 			 <li>
 				<p style="width:500px">
-					联系方式：
+					类型：
 					<select class="" name="way" id="question_type">
 							<option value="">请选择</option>
 							<option value="1">qq</option>
-							<option value="2">qq群</option>
 							<option value="3">微信</option>
-							<foreach name="way" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['way']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
 					</select>
 				</p>
 			</li>
@@ -35,9 +31,6 @@
 							<option value="">请选择</option>
 							<option value="1">开启</option>
 							<option value="0">关闭</option>
-							<foreach name="flog" item="statu">
-							<option value="{$key}" <if condition="$key eq $_REQUEST['flog']">selected="selected"</if>>{$statu.name}</option>
-							</foreach>
 					</select>
 				</p>
 			</li>
@@ -66,7 +59,7 @@
 				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<th width="50">Id</th>
 				<th width="130">图片路径</th>
-				<th width="50">联系方式 </th>
+				<th width="50">类型 </th>
 				<th width="50">状态</th>
 				<th width="70">创建日期</th>
 				<th width="70">修改日期</th>
@@ -77,8 +70,11 @@
 			<tr target="sid" rel="{$vo.id}">
 				<td><input name="ids" value="{$vo.id}" type="checkbox"></td>
 				<td>{$vo.id}</td>
-				<td>{$vo.images}</td>
-				<td>{$vo.way}</td>
+				<td>
+					<img src="/Public/{$vo.images}" width="20px" height="20px">
+					{$vo.images}
+				</td>
+				<td><?php if($vo['way'] == 1) echo "qq"; else echo "微信"; ?></td>
 				<td>{$vo.flog}</td>
 				<td><?php echo date('Y-m-d H:i:s',$vo['create_time']) ?></td>
 				<td><?php echo $vo['update_time']? date('Y-m-d H:i:s',$vo['update_time']) : '未修改'; ?></td>
