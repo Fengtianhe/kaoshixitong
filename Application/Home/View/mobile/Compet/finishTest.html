@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+    .grade{
+        background: #fff;
+        width: 100%;
+        height: 100px;
+        margin-top:20px; 
+        line-height: 50px;
+    }
+    .grade font{
+        font-size: 18px;
+    }
+    .grade p{
+        color:#f00;
+    }
+    .error_box{
+        width: 100%;
+        padding: 10px;
+    }
+    .error_tit{
+        /*height: 20px;*/
+    }
+    /*.error_box,.error_box *{
+        border: 1px solid #000;
+    }*/
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    -->
+    <link rel="stylesheet" href="__MOBILE__/css/normalize.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.offcanvas.min.css">
+
+    <link rel="stylesheet" href="__MOBILE__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="__MOBILE__/css/style.css">
+    <title>考试系统</title>
+</head>
+<body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">您正在使用一个 <strong>老旧的</strong> 浏览器. 为了您能获取更好的互联网体验，请 <a href="http://browsehappy.com.cn/" target="_blank">升级</a> 您的浏览器.</p>
+            <![endif]-->
+
+    <!-- =========================================== mycode =====================================- -->
+<div class="container-fluid" style="padding: 0">
+    <div class="row clearfix center-block maxw">
+        <div class="col-md-12 column nopadding">
+            <div class="test">
+                <h3 class="testtitle text-center">导游考试答题系统</h3>
+                <div class="test-menus clearfix">
+                    <div class="test-menu"><a href="__ROOT__/" class="btn btn-test-menu">首页</a></div>
+                    <div class="test-menu"><a href="/home/user/center" class="btn btn-test-menu">个人中心</a></div>
+                    <!-- <div class="test-menu"><a href="" class="btn btn-test-menu"></a></div>
+                    <div class="test-menu"><a href="" class="btn btn-test-menu"></a></div> -->
+                    <div class="test-menu"><a href="/Home/User/logout" class="btn btn-test-menu">退出登录</a></div>
+                </div>
+                <div class="test" style="height:100%">
+                    <div class="question question-on clearfix" style="overflow-y:scroll;height:80%;">
+                        <volist id="error" name="error">
+                        <div class="error_box">
+                            <div class="error_tit">
+                                {$error.tid}、{$error.title}
+                            </div>
+                            <div>
+                                正确答案：<font color="#f00">{$error.true}</font>
+                            </div>
+                        </div> 
+                        </volist>         
+                    </div>
+
+                </div>
+                <div class="right">
+                    <div class="grade">
+                        <font color="#5850bf">{$level}</font>
+                        <p>本次得分：{$grade}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- ============================================ end =======================================- -->
+
+
+
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+    <script src="__MOBILE__/js/jquery-1.9.1.min.js" ></script>
+    <script src="__MOBILE__/js/bootstrap.min.js"></script>
+    <script src="__MOBILE__/js/bootstrap.offcanvas.min.js"></script>
+    <script src="__MOBILE__/js/jquery.cookie.js"></script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                var hashLocation = location.hash;
+                var hashSplit = hashLocation.split("#!/");
+                var hashName = hashSplit[1];
+                    if (hashName !== '') {
+                    var hash = window.location.hash;
+                        if (hash === '') {
+                            window.location.href="{:U('home/index/index')}";
+                        }
+                    }
+            });
+        window.history.pushState('finish', null, './#finish');
+        }
+    });
+</script>
+</body>
+</html>

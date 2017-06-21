@@ -49,7 +49,6 @@ class CompetController extends CommonController {
         $data['name']             = I('request.name','');
         $data['flag']             = I('request.flag',0);
         $data['desc']             = I('request.desc','');
-        $data['question']         = I('request.question','');
         $data['start_time']       = I('request.start_time',0);
         $data['over_time']        = I('request.over_time',0);
 
@@ -77,7 +76,7 @@ class CompetController extends CommonController {
     }
     public function del(){
         $id = I('get.id');
-        M('Compet')->where(array('id'=>$id))->delete();
+        M('Compet')->where(array('id'=>$id))->save(array('flag'=>-1));
         $result['statusCode'] = "200";
         $result['message']   = "删除成功";
         $result['navTabId'] = "compet";
@@ -88,5 +87,27 @@ class CompetController extends CommonController {
         $result['forwardUrl']   = "";
         $result['confirmMsg'] = "";
         $this->ajaxReturn($result);
+    }
+
+    public function saveQuestion() {
+        $id = I('request.id', 0);
+        if (!$id) {
+            die('error');
+        }
+        $data['question']       = D('Compet')->getTestQuestion();
+        $data['update_time']    = time();
+        D('Compet')->where(array('id'=>$id))->save($data);
+
+        $result['statusCode'] = "200";
+        $result['message']   = "出题成功";
+        $result['navTabId'] = "compet";
+        $result['rel']   = "compet";
+        if (I('close_dialog') == 1) {
+            $result['callbackType'] = "closeCurrent";
+        }
+        $result['forwardUrl']   = "";
+        $result['confirmMsg'] = "";
+        $this->ajaxReturn($result);
+
     }
 }

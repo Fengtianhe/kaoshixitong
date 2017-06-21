@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.num{
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	text-align: center;
+	color: #50267c;
+	border: 1px solid #ccc;
+	float: left;
+	margin: 2px;
+	margin-top:0px !important;
+	border-radius:3px;
+}
+.num_title {
+	clear:both;
+	height:20px;
+	line-height: 30px
+}
+.current{
+	background: #19B4ED;
+	color:#fff;
+}
+.text-right{
+	width: 120px;
+}
+.btn-next {background:#999 !important;}
+</style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+    <!-- <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    -->
+    <!-- <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    -->
+    <link rel="stylesheet" href="__MOBILE__/css/normalize.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__MOBILE__/css/bootstrap.offcanvas.min.css">
+
+    <link rel="stylesheet" href="__MOBILE__/css/font-awesome/font-awesome.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="__MOBILE__/css/style.css">
+    <title>考试系统</title>
+</head>
+<body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">您正在使用一个 <strong>老旧的</strong> 浏览器. 为了您能获取更好的互联网体验，请 <a href="http://browsehappy.com.cn/" target="_blank">升级</a> 您的浏览器.</p>
+            <![endif]-->
+
+    <!-- =========================================== mycode =====================================- -->
+<div class="container-fluid" style="padding: 0">
+    <div class="row clearfix center-block maxw">
+        <div class="col-md-12 column nopadding">
+            <div class="test">
+                <h3 class="testtitle text-center">导游考试答题系统</h3>
+                <div class="test-menus clearfix">
+                    <div class="test-menu"><a href="__ROOT__/" class="btn btn-test-menu">首页</a></div>
+                    <div class="test-menu"><a href="/home/user/center" class="btn btn-test-menu">个人中心</a></div>
+                    <!-- <div class="test-menu"><a href="" class="btn btn-test-menu"></a></div>
+                    <div class="test-menu"><a href="" class="btn btn-test-menu"></a></div> -->
+                    <div class="test-menu"><a href="/Home/User/logout" class="btn btn-test-menu">退出登录</a></div>
+                </div>
+                <div id="data" compet_id="{$info.id}" style="display:none"></div>
+                <div class="questions">
+                </div>
+                
+                <div class="all_num">
+					<p class="num_title"><b>单选</b></p>
+                    <volist id="vo" name="question['radio']">
+						<span class="num radio" rel="{$vo.id}">{$key+1}</span>
+					</volist>
+					<p class="num_title"><b>多选</b></p>
+					<volist id="vo" name="question['checkbox']">
+						<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
+					</volist>
+					<p class="num_title"><b>判断</b></p>
+					<volist id="vo" name="question['truefalse']">
+						<span class="num checkbox" rel="{$vo.id}">{$key+1}</span>
+					</volist>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- ============================================ end =======================================- -->
+
+
+
+<!--[if (gte IE 9)|!(IE)]>
+<!-->
+<!--<![endif]-->
+<!--[if lte IE 8 ]>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<![endif]-->
+    <script src="__MOBILE__/js/jquery-1.9.1.min.js" ></script>
+    <script src="__MOBILE__/js/bootstrap.min.js"></script>
+    <script src="__MOBILE__/js/bootstrap.offcanvas.min.js"></script>
+    <script src="__MOBILE__/js/jquery.cookie.js"></script>
+    <script>
+
+    </script>
+<script>
+			//初始化获取第一题
+			ajaxGetQuestion({id:{$first_question.id}});
+			$('.num:eq(0)').addClass('current');
+			$(function(){
+				//倒计时 自动交卷
+				var stop = window.setInterval("autoFinishTest()",1000);
+				//点击答题卡获取题
+				$('.num').click(function(){
+					$(this).closest('.all_num').find('.current').removeClass('current');
+					$(this).addClass('current');
+					var sn = $(this).html();
+					var id = $(this).attr('rel');
+					var data = {id:id,sn:sn};
+					ajaxGetQuestion(data);
+					return false;
+				});
+				$(document).on('click','.next',function(){
+					$('.num.current').addClass('btn-danger');
+					moveQuestion('next');
+				});
+				$(document).on('click','.prev',function(){
+					moveQuestion('prev');
+				});
+				$(document).on('click','.finish',function(){
+					var compet_id = $('#data').attr('compet_id');
+					submitQuestion();
+					window.location.href = "{:U('home/compet/finishtest')}?compet_id="+compet_id;
+				});
+				//提交处理
+				$(document).on('click','.push',function(){
+					var status = submitQuestion();
+					//if (status == 'ok') {
+						$('.num.current').addClass('btn-success');
+					//} else {
+					//	$('.num.current').addClass('btn-danger');
+					//}
+					moveQuestion('next');
+				});
+			});
+/**
+ * 倒计时自动交卷
+ * @return 
+ */
+function autoFinishTest(){
+	var i = $('.i').text();
+	var s = $('.s').text();
+	if (i == 10 && s == 0) {
+
+		var compet_id = $('#data').attr('compet_id');
+		window.location.href = "{:U('home/compet/finishtest')}?compet_id="+compet_id;
+		window.clearInterval();
+		return false;
+	}
+	if (s == 0) {
+		s = 59;
+		$('.i').text(i-1);
+	} else {
+		s = s-1;
+	}
+	$('.s').text(s);
+}
+/**
+ * 答题
+ * @return 
+ */
+function submitQuestion(){
+	var compet_id = $('#data').attr('compet_id');
+	var id = $('.question').attr('rel');
+	var type = $('.question').attr('type');
+	var input = $('.questions input[rel="1"]');
+	var checked = $('.questions input:checked');
+	var answer_true = false;
+	if (input.length == checked.length) {
+		answer_true = true;
+		for(var i =0;i<input.length;i++){
+			if ($(input[i]).val() != $(checked[i]).val()) {
+				answer_true = false;
+				break;
+			}	
+		}
+	} 
+	if (answer_true) {
+		var select = 'ok';
+	} else {
+		var select = 'error';
+	}
+	//获取 用户选择答案
+	var	selected = '';
+	checked.each(function(){
+		selected +=  $(this).val() + ',';
+	});
+	$.ajax({
+		type:'post',
+		url:'/home/compet/handletest',
+		dataType:'json',
+		async: false,
+		data:{'id':id,'select':select,'type':type,'selected':selected,'compet_id':compet_id}
+	});
+	return select;
+}
+/**
+ * 移动题目 主要用于上一题 下一题
+ * @param  string direction 方向 next prev
+ * @return 
+ */
+function moveQuestion(direction){
+	var current = $('.num.current');
+	switch (direction) {
+		case "prev":
+		var current_direction = current.prev('.num');
+			break;
+		case "next":
+		var current_direction = current.next('.num');
+			break;
+	}
+	if (!(current_direction.length > 0)) {
+		if (current.hasClass('radio') &&　direction == 'next') {
+			var current_direction = $('.num.checkbox:first');
+		} else if (current.hasClass('checkbox') &&　direction == 'prev') {
+			var current_direction = $('.num.radio:last');
+		} else {
+			alert('没有啦');
+			return false;
+		}
+	}
+	current_direction.addClass('current');
+	current.removeClass('current');
+	var id = current_direction.attr('rel');
+	var sn = current_direction.html();
+	var data = {id:id,sn:sn};
+	ajaxGetQuestion(data);
+}
+/**
+ * ajax 获取题目 并显示在页面上
+ * @param  json data post数据
+ * @return 
+ */
+function ajaxGetQuestion(data){
+	data.compet_id = $('#data').attr('compet_id');
+	$.ajax({
+		type:"post",
+		url:"/home/compet/ajaxGetQuestion",
+		data:data,
+		datatype:"json",
+		success:function(data){
+			switch (data.question_info.question_type) {
+				case '1':
+					var type = '单选';
+					var input_name = 'answer';
+					var input_type = 'radio';
+					break;
+				case '2':
+					var type = '多选';
+					var input_name = 'answer[]';
+					var input_type = 'checkbox';
+					break;
+				case '3':
+					var type = '判断';
+					var input_name = 'answer';
+					var input_type = 'radio';
+					break;
+			}
+			var str = '<p class="questions-text select_input_type question" rel="'+data.question_info.id+'" type="'+data.question_info.question_type+'">';
+			str += '<span class="questionstip">'+type+'</span>'+data.question_info.sn+'、'+data.question_info.title+'</p>';
+
+			
+			for(var i in data.question_info.question_stem){
+				switch(i){
+                    case '0':
+                        var serial = 'A';
+                        break;
+                    case '1':
+                        var serial = 'B';
+                        break;
+                    case '2':
+                        var serial = 'C';
+                        break;
+                    case '3':
+                        var serial = 'D';
+                        break;
+                    case '4':
+                        var serial = 'E';
+                        break;
+                }
+				str += '<div class="form-group"><div class="checkbox"><label><input type="'+input_type+'" name="'+input_name+'" value="'+data.question_info.question_stem[i].sn+'" rel="'+data.question_info.question_stem[i].is_true+'">'+serial+'、 '+data.question_info.question_stem[i].stem_content+'</label></div></div>';
+			}
+			str += '<div class="stem">';
+			//str += '<div class="question-menu cleafrfix center-block"><span class="btn btn-question-prev pull-left prev">←上一题</span><span class="btn btn-question-next pull-right next">标注</span><input type="submit" href="" class="btn btn-question-submit center-block push" value="提交"></div>';
+			str += '<div class="question-menu cleafrfix center-block"> <a  class="btn btn-question-submit push">提交</a> <a  class="btn btn-next next">标注</a> <a  class="btn finish">交卷</a></div>';
+			str += '</div>';
+			$('.questions').html(str);
+			var selected = data.question_answer.selected;
+
+			for (var i in selected) {
+				$('.questions input[value="'+selected[i]+'"]').prop('checked',true);
+			}
+		}
+	});
+}
+	</script>
+    		
+
+
+</body>
+</html>
