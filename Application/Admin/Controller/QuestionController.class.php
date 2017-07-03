@@ -37,7 +37,7 @@ class QuestionController extends CommonController {
         $lists = M('Question')->where($where)->order($orderField.' '.$orderDirection)->limit($offset.','.$numPerPage)->select();
         foreach ($lists as $key=>$value) {
             if ($value['question_type'] == 3) {
-                $lists[$key]['stem'] = $value['is_true'] ? "<b>是</b>|否":"是|<b>否</b>";
+                $lists[$key]['stem'] = $value['is_true'] ? "<b>A</b>|B":"A|<b>B</b>";
             } else {
                 $stem = M('question_stem')->where("question_id = {$value['id']}")->select();
                 $str = '';
@@ -222,7 +222,7 @@ class QuestionController extends CommonController {
                 $data['province_id'] = $value[12];
             } elseif ($question_type == 3) {
                 $stem_content = array();
-                $data['is_true'] = $value[7] ? 1 : 0;
+                $data['is_true'] = ($value[7]=='A') ? 1 : 0;
                 $data['explain'] = $value[8]?$value[8]:'';
                 $data['category'] = $value[9];
                 $data['chapter'] = $value[10];
