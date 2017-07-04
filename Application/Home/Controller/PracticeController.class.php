@@ -51,7 +51,7 @@ class PracticeController extends CommonController {
             }else{
                 $where['flog']=1;
                 $where['subject_id']=I('get.category');
-                $chapter=M('chapter')->where($where)->field('id,name')->select();
+                $chapter=M('chapter')->where($where)->field('id,name,sn')->select();
                 $this->assign('chapter',$chapter);
                 $this->assign('category',I('get.category'));
                 $this->display();
