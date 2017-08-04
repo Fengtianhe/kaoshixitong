@@ -222,6 +222,7 @@ class QuestionController extends CommonController {
                 $data['province_id'] = $value[12];
             } elseif ($question_type == 3) {
                 $stem_content = array();
+                $value[7] = strtoupper($value[7]);
                 $data['is_true'] = ($value[7]=='A') ? 1 : 0;
                 $data['explain'] = $value[8]?$value[8]:'';
                 $data['category'] = $value[9];
